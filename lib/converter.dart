@@ -1,4 +1,12 @@
+import 'package:calculator/converter/data.dart';
+import 'package:calculator/converter/length.dart';
+import 'package:calculator/converter/mass.dart';
+import 'package:calculator/converter/speed.dart';
+import 'package:calculator/converter/temp.dart';
+import 'package:calculator/converter/time.dart';
+import 'package:calculator/converter/volume.dart';
 import 'package:flutter/material.dart';
+import 'converter/area.dart';
 
 class Converter extends StatefulWidget {
   const Converter({super.key});
@@ -7,11 +15,10 @@ class Converter extends StatefulWidget {
   State<Converter> createState() => _ConverterState();
 }
 
-class _ConverterState extends State<Converter> {
+class _ConverterState extends State<Converter>
+    with SingleTickerProviderStateMixin {
   final form1 = TextEditingController();
   final form2 = TextEditingController();
-
-  // dynamic activeform;
 
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
@@ -26,6 +33,20 @@ class _ConverterState extends State<Converter> {
   num currentValue = 0;
   dynamic operator = '';
 
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 8, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -39,38 +60,37 @@ class _ConverterState extends State<Converter> {
         body: SingleChildScrollView(
           child: Column(children: [
             Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                height: size.height / 3,
-                child: Column(children: [
-                  TextFormField(
-                    controller: form1,
-                    maxLines: 1,
-                    style: const TextStyle(fontSize: 35),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "",
-                    ),
-                    enableInteractiveSelection: false,
-                    readOnly: true,
-                    showCursor: true,
-                    textAlign: TextAlign.right,
-                    keyboardType: TextInputType.none,
-                  ),
-                  TextFormField(
-                    controller: form2,
-                    maxLines: 1,
-                    style: const TextStyle(fontSize: 35),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "",
-                    ),
-                    enableInteractiveSelection: false,
-                    readOnly: true,
-                    showCursor: true,
-                    textAlign: TextAlign.right,
-                    keyboardType: TextInputType.none,
-                  ),
-                ])),
+              // color: Colors.redAccent,
+              child: TabBar(
+                controller: _tabController,
+                tabs: [
+                  Tab(text: 'Area'),
+                  Tab(text: 'Length'),
+                  Tab(text: 'Temperature'),
+                  Tab(text: 'Volume'),
+                  Tab(text: 'Mass'),
+                  Tab(text: 'Data'),
+                  Tab(text: 'Speed'),
+                  Tab(text: 'Time')
+                ],
+              ),
+            ),
+            Container(
+              height: size.height / 3,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  areacv(),
+                  length(),
+                  temp(),
+                  volume(),
+                  mass(),
+                  data(),
+                  speed(),
+                  time()
+                ],
+              ),
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               height: size.height / 2,
