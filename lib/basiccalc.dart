@@ -22,7 +22,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   List<List<dynamic>> calculator_varibles = [
     ['%', 'CE', 'C', '\u232B'],
     ['1/x', 'x²', '√x', '÷'],
-    ['7', '8', '9', '*'],
+    ['7', '8', '9', 'x'],
     ['4', '5', '6', '-'],
     ['1', '2', '3', '+'],
     ['±', '0', '.', '=']
@@ -43,6 +43,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   void emptyHistory() {
     history.clear();
   }
+
+  num nextValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -160,13 +162,13 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
 
   void calculate() {
     setState(() {
-      num nextValue = num.tryParse(eqn) ?? 0;
+      nextValue = num.tryParse(eqn) ?? 0;
       dynamic question = '$currentValue $operator $nextValue'.toString();
       if (operator == '+') {
         currentValue += nextValue;
       } else if (operator == '-') {
         currentValue -= nextValue;
-      } else if (operator == '*') {
+      } else if (operator == 'x') {
         currentValue *= nextValue;
       } else if (operator == '÷') {
         if (nextValue != 0) {
@@ -176,22 +178,36 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
           ques.text = ans;
           return;
         }
-      } else if (operator == '1/x') {
-        currentValue = 1 / nextValue;
-      } else if (operator == 'x²') {
-        currentValue = pow(nextValue, 2);
-      } else if (operator == '√x') {
-        currentValue = sqrt(nextValue);
-      } else if (operator == '±') {
-        currentValue = -1 * nextValue;
       }
       addHistory(question, currentValue.toString());
       ans = currentValue.toString();
       ques.text = ans;
       hisctrl.text = question;
-      eqn = '';
+      eqn = ans;
       operator = '';
       isNewOperation = true;
+    });
+  }
+
+  void evaluate() {
+    setState(() {
+      dynamic question = '$operator $currentValue'.toString();
+      if (operator == '±') {
+        currentValue = -1 * currentValue;
+      } else if (operator == '1/x') {
+        currentValue = 1 / currentValue;
+      } else if (operator == 'x²') {
+        currentValue = pow(currentValue, 2);
+      } else if (operator == '√x') {
+        currentValue = sqrt(currentValue);
+      }
+      addHistory(question, currentValue.toString());
+      ans = currentValue.toString();
+      ques.text = ans;
+      hisctrl.text = question;
+      eqn = ans;
+      operator = '';
+      isNewOperation = false;
     });
   }
 
@@ -276,7 +292,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                 if (operator.isNotEmpty && eqn.isNotEmpty) {
                   calculate();
                 }
-              } else if (['+', '-', '*', '÷'].contains(btnText)) {
+              } else if (['+', '-', 'x', '÷'].contains(btnText)) {
                 if (operator.isNotEmpty) {
                   calculate();
                 }
@@ -295,11 +311,11 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                 }
               } else if (['1/x', 'x²', '√x', '±'].contains(btnText)) {
                 operator = btnText;
-                num nextValue = num.tryParse(eqn) ?? 0;
-                hisctrl.text = '$operator $nextValue';
-                calculate();
-                eqn = '';
-                ques.text = eqn;
+                currentValue = num.tryParse(eqn) ?? 0;
+                hisctrl.text = '$operator $currentValue';
+                evaluate();
+                // eqn = '';
+                // ques.text = eqn;
               } else {
                 if (isNewOperation) {
                   eqn = '';
