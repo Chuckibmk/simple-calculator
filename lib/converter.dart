@@ -20,9 +20,6 @@ class _ConverterState extends State<Converter>
   final List<TextEditingController> forms =
       List.generate(16, (index) => TextEditingController());
 
-  // final form1 = TextEditingController();
-  // final form2 = TextEditingController();
-
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
     ['4', '5', '6', 'C'],
