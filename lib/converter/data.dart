@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class data extends StatefulWidget {
-  const data({super.key});
+class Data extends StatefulWidget {
+  final List<TextEditingController> data1;
+  // final TextEditingController data2;
+
+  const Data({super.key, required this.data1});
+  // const Data({super.key, required this.data1, required this.data2});
 
   @override
-  State<data> createState() => _dataState();
+  State<Data> createState() => _DataState();
 }
 
-class _dataState extends State<data> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _DataState extends State<Data> {
   // dynamic activeform;
   String dd1 = 'Kilobytes (KB)';
   var dd_1 = [
@@ -63,7 +64,7 @@ class _dataState extends State<data> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.data1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -96,7 +97,7 @@ class _dataState extends State<data> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.data1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(

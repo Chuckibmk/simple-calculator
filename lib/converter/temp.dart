@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class temp extends StatefulWidget {
-  const temp({super.key});
+class Temp extends StatefulWidget {
+  final List<TextEditingController> temp1;
+  // final TextEditingController temp2;
+
+  const Temp({super.key, required this.temp1});
+  // const Temp({super.key, required this.temp1, required this.temp2});
 
   @override
-  State<temp> createState() => _tempState();
+  State<Temp> createState() => _TempState();
 }
 
-class _tempState extends State<temp> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _TempState extends State<Temp> {
   // dynamic activeform;
   String dd1 = 'Fahrenheit (℉)';
   var dd_1 = ['Celsius (℃)', 'Fahrenheit (℉)', 'Kelvin (K)'];
@@ -41,7 +42,7 @@ class _tempState extends State<temp> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.temp1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -74,7 +75,7 @@ class _tempState extends State<temp> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.temp1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(

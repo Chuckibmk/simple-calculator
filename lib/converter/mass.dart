@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class mass extends StatefulWidget {
-  const mass({super.key});
+class Mass extends StatefulWidget {
+  final List<TextEditingController> mass1;
+  // final TextEditingController mass2;
+
+  const Mass({super.key, required this.mass1});
+  // const Mass({super.key, required this.mass1, required this.mass2});
 
   @override
-  State<mass> createState() => _massState();
+  State<Mass> createState() => _MassState();
 }
 
-class _massState extends State<mass> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _MassState extends State<Mass> {
   // dynamic activeform;
   String dd1 = 'Pounds (lb)';
   var dd_1 = [
@@ -57,7 +58,7 @@ class _massState extends State<mass> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.mass1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -90,7 +91,7 @@ class _massState extends State<mass> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.mass1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(

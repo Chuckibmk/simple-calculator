@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class volume extends StatefulWidget {
-  const volume({super.key});
+class Volume extends StatefulWidget {
+  final List<TextEditingController> vol1;
+  // final TextEditingController vol2;
+
+  const Volume({super.key, required this.vol1});
+  // const Volume({super.key, required this.vol1, required this.vol2});
 
   @override
-  State<volume> createState() => _volumeState();
+  State<Volume> createState() => _VolumeState();
 }
 
-class _volumeState extends State<volume> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _VolumeState extends State<Volume> {
   // dynamic activeform;
   String dd1 = 'US gallons (gal)';
   var dd_1 = [
@@ -59,7 +60,7 @@ class _volumeState extends State<volume> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.vol1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -92,7 +93,7 @@ class _volumeState extends State<volume> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.vol1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(

@@ -200,6 +200,11 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         currentValue = pow(currentValue, 2);
       } else if (operator == '√x') {
         currentValue = sqrt(currentValue);
+        if (currentValue.toString() == 'NaN') {
+          ans = 'Invalid Input';
+          ques.text = ans;
+          return;
+        }
       }
       addHistory(question, currentValue.toString());
       ans = currentValue.toString();

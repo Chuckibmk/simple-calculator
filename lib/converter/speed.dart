@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class speed extends StatefulWidget {
-  const speed({super.key});
+class Speed extends StatefulWidget {
+  final List<TextEditingController> spd1;
+  // final TextEditingController spd2;
+
+  const Speed({super.key, required this.spd1});
 
   @override
-  State<speed> createState() => _speedState();
+  State<Speed> createState() => _SpeedState();
 }
 
-class _speedState extends State<speed> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _SpeedState extends State<Speed> {
   // dynamic activeform;
   String dd1 = 'Meters per second (m/s)';
   var dd_1 = [
@@ -65,7 +65,7 @@ class _speedState extends State<speed> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.spd1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -98,7 +98,7 @@ class _speedState extends State<speed> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.spd1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(

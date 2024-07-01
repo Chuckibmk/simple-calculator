@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class time extends StatefulWidget {
-  const time({super.key});
+class Time extends StatefulWidget {
+  final List<TextEditingController> time1;
+  // final TextEditingController time2;
+
+  const Time({super.key, required this.time1});
+  // const Time({super.key, required this.time1, required this.time2});
 
   @override
-  State<time> createState() => _timeState();
+  State<Time> createState() => _TimeState();
 }
 
-class _timeState extends State<time> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _TimeState extends State<Time> {
   // dynamic activeform;
   String dd1 = 'Seconds (s)';
   var dd_1 = [
@@ -55,7 +56,7 @@ class _timeState extends State<time> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.time1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -88,7 +89,7 @@ class _timeState extends State<time> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.time1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(

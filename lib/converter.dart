@@ -17,8 +17,11 @@ class Converter extends StatefulWidget {
 
 class _ConverterState extends State<Converter>
     with SingleTickerProviderStateMixin {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
+  final List<TextEditingController> forms =
+      List.generate(16, (index) => TextEditingController());
+
+  // final form1 = TextEditingController();
+  // final form2 = TextEditingController();
 
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
@@ -39,11 +42,19 @@ class _ConverterState extends State<Converter>
   void initState() {
     super.initState();
     _tabController = TabController(length: 8, vsync: this);
+    _tabController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    // form1.dispose();
+    // form2.dispose();
+    for (var f in forms) {
+      f.dispose();
+    }
     super.dispose();
   }
 
@@ -59,35 +70,41 @@ class _ConverterState extends State<Converter>
         ),
         body: SingleChildScrollView(
           child: Column(children: [
-            Container(
-              // color: Colors.redAccent,
-              child: TabBar(
-                controller: _tabController,
-                tabs: [
-                  Tab(text: 'Area'),
-                  Tab(text: 'Length'),
-                  Tab(text: 'Temperature'),
-                  Tab(text: 'Volume'),
-                  Tab(text: 'Mass'),
-                  Tab(text: 'Data'),
-                  Tab(text: 'Speed'),
-                  Tab(text: 'Time')
-                ],
-              ),
+            TabBar(
+              isScrollable: true,
+              controller: _tabController,
+              tabs: const [
+                Tab(text: 'Area'),
+                Tab(text: 'Length'),
+                Tab(text: 'Temperature'),
+                Tab(text: 'Volume'),
+                Tab(text: 'Mass'),
+                Tab(text: 'Data'),
+                Tab(text: 'Speed'),
+                Tab(text: 'Time')
+              ],
             ),
-            Container(
+            SizedBox(
               height: size.height / 3,
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  areacv(),
-                  length(),
-                  temp(),
-                  volume(),
-                  mass(),
-                  data(),
-                  speed(),
-                  time()
+                  Area(area1: forms.sublist(0, 2)),
+                  Length(len1: forms.sublist(2, 4)),
+                  Temp(temp1: forms.sublist(4, 6)),
+                  Volume(vol1: forms.sublist(6, 8)),
+                  Mass(mass1: forms.sublist(8, 10)),
+                  Data(data1: forms.sublist(10, 12)),
+                  Speed(spd1: forms.sublist(12, 14)),
+                  Time(time1: forms.sublist(14, 16))
+                  // Area(area1: form1, area2: form2),
+                  // Length(len1: form1, len2: form2),
+                  // Temp(temp1: form1, temp2: form2),
+                  // Volume(vol1: form1, vol2: form2),
+                  // Mass(mass1: form1, mass2: form2),
+                  // Data(data1: form1, data2: form2),
+                  // Speed(spd1: form1, spd2: form2),
+                  // Time(time1: form1, time2: form2)
                 ],
               ),
             ),
@@ -100,7 +117,11 @@ class _ConverterState extends State<Converter>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        for (var n in nb) convbtn(n),
+                        for (var n in nb)
+                          convbtn(
+                              n,
+                              forms.sublist(_tabController.index * 2,
+                                  _tabController.index * 2 + 2)),
                       ],
                     )
                 ],
@@ -124,15 +145,7 @@ class _ConverterState extends State<Converter>
     );
   }
 
-  // void convert(){
-  //   setState(() {
-  //     if(operator == '±'){
-
-  //     }
-  //   });
-  // }
-
-  convbtn(dynamic btntext) {
+  convbtn(dynamic btntext, List<TextEditingController> form_entry) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       height: 50,
@@ -146,22 +159,24 @@ class _ConverterState extends State<Converter>
         onPressed: () {
           setState(() {
             if (btntext == 'C') {
-              val1 = '';
-              val2 = '';
-              form1.clear();
-              form2.clear();
+              // val1 = '';
+              // val2 = '';
+              form_entry[0].clear();
+              form_entry[1].clear();
             } else if (btntext == '\u232B') {
-              if (val1.isNotEmpty) {
-                val1 = val1.substring(0, val1.length - 1);
-                form1.text = val1;
+              if (form_entry[0].text.isNotEmpty) {
+                form_entry[0].text = form_entry[0]
+                    .text
+                    .substring(0, form_entry[0].text.length - 1);
+                // form_entry[0].text = val1;
               }
               // } else if (btntext == '±') {
               //   num ne = num.tryParse(val1) ?? 0;
               //   dynamic neg = -1 * ne;
               //   form1.text = neg.toString();
             } else {
-              val1 += btntext;
-              form1.text = val1;
+              form_entry[0].text += btntext;
+              // form_entry[0].text = val1;
             }
           });
         },

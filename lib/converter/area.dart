@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class areacv extends StatefulWidget {
-  const areacv({super.key});
+class Area extends StatefulWidget {
+  final List<TextEditingController> area1;
+  // final TextEditingController area2;
+
+  const Area({super.key, required this.area1});
+  // const Area({super.key, required this.area1, required this.area2});
 
   @override
-  State<areacv> createState() => _areacvState();
+  State<Area> createState() => _AreaState();
 }
 
-class _areacvState extends State<areacv> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _AreaState extends State<Area> {
   // dynamic activeform;
   String dd1 = 'Acres (ac)';
   var dd_1 = [
@@ -57,7 +58,7 @@ class _areacvState extends State<areacv> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.area1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -90,7 +91,7 @@ class _areacvState extends State<areacv> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.area1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(

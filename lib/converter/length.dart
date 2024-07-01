@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class length extends StatefulWidget {
-  const length({super.key});
+class Length extends StatefulWidget {
+  final List<TextEditingController> len1;
+  // final TextEditingController len2;
+
+  const Length({super.key, required this.len1});
+  // const Length({super.key, required this.len1, required this.len2});
 
   @override
-  State<length> createState() => _lengthState();
+  State<Length> createState() => _LengthState();
 }
 
-class _lengthState extends State<length> {
-  final form1 = TextEditingController();
-  final form2 = TextEditingController();
-
+class _LengthState extends State<Length> {
   // dynamic activeform;
   String dd1 = 'Inches (in)';
   var dd_1 = [
@@ -63,7 +64,7 @@ class _lengthState extends State<length> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.len1[0],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
@@ -96,7 +97,7 @@ class _lengthState extends State<length> {
                     });
                   }),
               TextFormField(
-                controller: form2,
+                controller: widget.len1[1],
                 maxLines: 1,
                 style: const TextStyle(fontSize: 35),
                 decoration: const InputDecoration(
