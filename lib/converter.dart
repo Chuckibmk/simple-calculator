@@ -6,6 +6,7 @@ import 'package:calculator/converter/temp.dart';
 import 'package:calculator/converter/time.dart';
 import 'package:calculator/converter/volume.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'converter/area.dart';
 
 class Converter extends StatefulWidget {
@@ -20,6 +21,8 @@ class _ConverterState extends State<Converter>
   final List<TextEditingController> forms =
       List.generate(16, (index) => TextEditingController());
 
+  List<String> dd1 = ['Acres (ac)', 'Square meters (m²)'];
+
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
     ['4', '5', '6', 'C'],
@@ -28,13 +31,19 @@ class _ConverterState extends State<Converter>
     // ['±', '0', '.', '↓']
   ];
 
-  dynamic val1 = '';
-  dynamic val2 = '';
+  // dynamic val1 = '';
+  // dynamic val2 = '';
 
-  num currentValue = 0;
-  dynamic operator = '';
+  // num currentValue = 0;
+  // dynamic operator = '';
 
   late TabController _tabController;
+
+  void _updateSelectedValues(List<String> values) {
+    setState(() {
+      dd1 = values;
+    });
+  }
 
   @override
   void initState() {
@@ -48,8 +57,6 @@ class _ConverterState extends State<Converter>
   @override
   void dispose() {
     _tabController.dispose();
-    // form1.dispose();
-    // form2.dispose();
     for (var f in forms) {
       f.dispose();
     }
@@ -87,7 +94,11 @@ class _ConverterState extends State<Converter>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  Area(area1: forms.sublist(0, 2)),
+                  Area(
+                    area1: forms.sublist(0, 2),
+                    dd1: dd1,
+                    ovc1: _updateSelectedValues,
+                  ),
                   Length(len1: forms.sublist(2, 4)),
                   Temp(temp1: forms.sublist(4, 6)),
                   Volume(vol1: forms.sublist(6, 8)),
