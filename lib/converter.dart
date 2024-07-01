@@ -23,8 +23,9 @@ class _ConverterState extends State<Converter>
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
     ['4', '5', '6', 'C'],
-    ['1', '2', '3', '↑'],
-    ['±', '0', '.', '↓']
+    ['1', '2', '3', ''],
+    ['', '0', '.', '']
+    // ['±', '0', '.', '↓']
   ];
 
   dynamic val1 = '';
@@ -129,6 +130,12 @@ class _ConverterState extends State<Converter>
       );
     });
   }
+
+  // void convert (){
+  //   if(){
+
+  //   }
+  // }
 
   Widget yspace() {
     return const SizedBox(
