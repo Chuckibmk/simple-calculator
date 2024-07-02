@@ -60,9 +60,6 @@ class _AreaState extends State<Area> {
                       newValues[0] = newValue;
                       widget.ovc(newValues);
                     }
-                    // setState(() {
-                    //   dd1 = value.toString();
-                    // });
                   }),
               TextFormField(
                 controller: widget.area1[0],

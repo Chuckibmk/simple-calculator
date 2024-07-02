@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 
 class Mass extends StatefulWidget {
   final List<TextEditingController> mass1;
-  // final TextEditingController mass2;
+  final List<String> mdd;
+  final Function(List<String>) movc;
 
-  const Mass({super.key, required this.mass1});
+  const Mass({
+    super.key,
+    required this.mass1,
+    required this.mdd,
+    required this.movc,
+  });
   // const Mass({super.key, required this.mass1, required this.mass2});
 
   @override
@@ -12,8 +18,6 @@ class Mass extends StatefulWidget {
 }
 
 class _MassState extends State<Mass> {
-  // dynamic activeform;
-  String dd1 = 'Pounds (lb)';
   var dd_1 = [
     'Tons (t)',
     'UK tons (t)',
@@ -24,7 +28,6 @@ class _MassState extends State<Mass> {
     'Grams (g)'
   ];
 
-  String dd2 = 'Kilograms (kg)';
   var dd_2 = [
     'Tons (t)',
     'UK tons (t)',
@@ -51,11 +54,13 @@ class _MassState extends State<Mass> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd1,
-                  onChanged: (value) {
-                    setState(() {
-                      dd1 = value.toString();
-                    });
+                  value: widget.mdd[0],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.mdd);
+                      newValues[0] = newValue;
+                      widget.movc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.mass1[0],
@@ -84,11 +89,13 @@ class _MassState extends State<Mass> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd2,
-                  onChanged: (value) {
-                    setState(() {
-                      dd2 = value.toString();
-                    });
+                  value: widget.mdd[1],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.mdd);
+                      newValues[1] = newValue;
+                      widget.movc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.mass1[1],
