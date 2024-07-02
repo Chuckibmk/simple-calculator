@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 
 class Time extends StatefulWidget {
   final List<TextEditingController> time1;
-  // final TextEditingController time2;
+  final List<String> tidd;
+  final Function(List<String>) tiovc;
 
-  const Time({super.key, required this.time1});
+  const Time({
+    super.key,
+    required this.time1,
+    required this.tidd,
+    required this.tiovc,
+  });
   // const Time({super.key, required this.time1, required this.time2});
 
   @override
@@ -12,8 +18,6 @@ class Time extends StatefulWidget {
 }
 
 class _TimeState extends State<Time> {
-  // dynamic activeform;
-  String dd1 = 'Seconds (s)';
   var dd_1 = [
     'Milliseconds (ms)',
     'Seconds (s)',
@@ -23,7 +27,6 @@ class _TimeState extends State<Time> {
     'Weeks (wk)'
   ];
 
-  String dd2 = 'Hours (h)';
   var dd_2 = [
     'Milliseconds (ms)',
     'Seconds (s)',
@@ -49,11 +52,13 @@ class _TimeState extends State<Time> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd1,
-                  onChanged: (value) {
-                    setState(() {
-                      dd1 = value.toString();
-                    });
+                  value: widget.tidd[0],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.tidd);
+                      newValues[0] = newValue;
+                      widget.tiovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.time1[0],
@@ -82,11 +87,13 @@ class _TimeState extends State<Time> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd2,
-                  onChanged: (value) {
-                    setState(() {
-                      dd2 = value.toString();
-                    });
+                  value: widget.tidd[1],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.tidd);
+                      newValues[1] = newValue;
+                      widget.tiovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.time1[1],

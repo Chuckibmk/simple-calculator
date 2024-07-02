@@ -29,6 +29,7 @@ class _ConverterState extends State<Converter>
     'Mass': ['Pounds (lb)', 'Kilograms (kg)'],
     'Data': ['Kilobytes (KB)', 'Megabytes (MB)'],
     'Speed': ['Meters per second (m/s)', 'Inches per second (in/s)'],
+    'Time': ['Seconds (s)', 'Hours (h)']
   };
 
   List<List<dynamic>> nmbrs = [
@@ -137,7 +138,11 @@ class _ConverterState extends State<Converter>
                     sdd: selectedValuesMap['Speed']!,
                     sovc: (values) => _updateSelectedValues('Speed', values),
                   ),
-                  Time(time1: forms.sublist(14, 16))
+                  Time(
+                    time1: forms.sublist(14, 16),
+                    tidd: selectedValuesMap['Time']!,
+                    tiovc: (values) => _updateSelectedValues('Time', values),
+                  )
                 ],
               ),
             ),
@@ -184,7 +189,7 @@ class _ConverterState extends State<Converter>
     );
   }
 
-  convbtn(dynamic btntext, List<TextEditingController> form_entry) {
+  convbtn(dynamic btntext, List<TextEditingController> formEntry) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       height: 50,
@@ -200,22 +205,22 @@ class _ConverterState extends State<Converter>
             if (btntext == 'C') {
               // val1 = '';
               // val2 = '';
-              form_entry[0].clear();
-              form_entry[1].clear();
+              formEntry[0].clear();
+              formEntry[1].clear();
             } else if (btntext == '\u232B') {
-              if (form_entry[0].text.isNotEmpty) {
-                form_entry[0].text = form_entry[0]
+              if (formEntry[0].text.isNotEmpty) {
+                formEntry[0].text = formEntry[0]
                     .text
-                    .substring(0, form_entry[0].text.length - 1);
-                // form_entry[0].text = val1;
+                    .substring(0, formEntry[0].text.length - 1);
+                // formEntry[0].text = val1;
               }
               // } else if (btntext == '±') {
               //   num ne = num.tryParse(val1) ?? 0;
               //   dynamic neg = -1 * ne;
               //   form1.text = neg.toString();
             } else {
-              form_entry[0].text += btntext;
-              // form_entry[0].text = val1;
+              formEntry[0].text += btntext;
+              // formEntry[0].text = val1;
             }
           });
         },
