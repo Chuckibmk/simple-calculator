@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 
 class Temp extends StatefulWidget {
   final List<TextEditingController> temp1;
-  // final TextEditingController temp2;
+  final List<String> tdd;
+  final Function(List<String>) tovc;
 
-  const Temp({super.key, required this.temp1});
-  // const Temp({super.key, required this.temp1, required this.temp2});
+  const Temp({
+    Key? key,
+    required this.temp1,
+    required this.tdd,
+    required this.tovc,
+  }) : super(key: key);
 
   @override
   State<Temp> createState() => _TempState();
 }
 
 class _TempState extends State<Temp> {
-  // dynamic activeform;
-  String dd1 = 'Fahrenheit (℉)';
   var dd_1 = ['Celsius (℃)', 'Fahrenheit (℉)', 'Kelvin (K)'];
 
-  String dd2 = 'Celsius (℃)';
   var dd_2 = ['Celsius (℃)', 'Fahrenheit (℉)', 'Kelvin (K)'];
 
   @override
@@ -35,11 +37,13 @@ class _TempState extends State<Temp> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd1,
-                  onChanged: (value) {
-                    setState(() {
-                      dd1 = value.toString();
-                    });
+                  value: widget.tdd[0],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.tdd);
+                      newValues[0] = newValue;
+                      widget.tovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.temp1[0],
@@ -68,11 +72,13 @@ class _TempState extends State<Temp> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd2,
-                  onChanged: (value) {
-                    setState(() {
-                      dd2 = value.toString();
-                    });
+                  value: widget.tdd[1],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.tdd);
+                      newValues[1] = newValue;
+                      widget.tovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.temp1[1],

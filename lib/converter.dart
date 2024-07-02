@@ -6,7 +6,7 @@ import 'package:calculator/converter/temp.dart';
 import 'package:calculator/converter/time.dart';
 import 'package:calculator/converter/volume.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/rendering.dart';
 import 'converter/area.dart';
 
 class Converter extends StatefulWidget {
@@ -24,6 +24,7 @@ class _ConverterState extends State<Converter>
   Map<String, List<String>> selectedValuesMap = {
     'Area': ['Acres (ac)', 'Square meters (m²)'],
     'Length': ['Inches (in)', 'Centimeters (cm)'],
+    'Temp': ['Fahrenheit (℉)', 'Celsius (℃)'],
   };
 
   List<List<dynamic>> nmbrs = [
@@ -107,7 +108,11 @@ class _ConverterState extends State<Converter>
                     ldd: selectedValuesMap['Length']!,
                     lovc: (values) => _updateSelectedValues('Area', values),
                   ),
-                  Temp(temp1: forms.sublist(4, 6)),
+                  Temp(
+                    temp1: forms.sublist(4, 6),
+                    tdd: selectedValuesMap['Temp']!,
+                    tovc: (values) => _updateSelectedValues('Temp', values),
+                  ),
                   Volume(vol1: forms.sublist(6, 8)),
                   Mass(mass1: forms.sublist(8, 10)),
                   Data(data1: forms.sublist(10, 12)),
