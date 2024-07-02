@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 
 class Data extends StatefulWidget {
   final List<TextEditingController> data1;
-  // final TextEditingController data2;
+  final List<String> dtdd;
+  final Function(List<String>) dovc;
 
-  const Data({super.key, required this.data1});
-  // const Data({super.key, required this.data1, required this.data2});
+  const Data({
+    super.key,
+    required this.data1,
+    required this.dtdd,
+    required this.dovc,
+  });
 
   @override
   State<Data> createState() => _DataState();
 }
 
 class _DataState extends State<Data> {
-  // dynamic activeform;
-  String dd1 = 'Kilobytes (KB)';
   var dd_1 = [
     'Bits (bit)',
     'Bytes (B)',
@@ -27,7 +30,6 @@ class _DataState extends State<Data> {
     'Tebibytes (TiB)'
   ];
 
-  String dd2 = 'Megabytes (MB)';
   var dd_2 = [
     'Bits (bit)',
     'Bytes (B)',
@@ -57,11 +59,13 @@ class _DataState extends State<Data> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd1,
-                  onChanged: (value) {
-                    setState(() {
-                      dd1 = value.toString();
-                    });
+                  value: widget.dtdd[0],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.dtdd);
+                      newValues[0] = newValue;
+                      widget.dovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.data1[0],
@@ -90,11 +94,13 @@ class _DataState extends State<Data> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd2,
-                  onChanged: (value) {
-                    setState(() {
-                      dd2 = value.toString();
-                    });
+                  value: widget.dtdd[1],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.dtdd);
+                      newValues[1] = newValue;
+                      widget.dovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.data1[1],

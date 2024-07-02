@@ -27,6 +27,7 @@ class _ConverterState extends State<Converter>
     'Temp': ['Fahrenheit (℉)', 'Celsius (℃)'],
     'Volume': ['US gallons (gal)', 'Liters (l)'],
     'Mass': ['Pounds (lb)', 'Kilograms (kg)'],
+    'Data': ['Kilobytes (KB)', 'Megabytes (MB)'],
   };
 
   List<List<dynamic>> nmbrs = [
@@ -125,7 +126,11 @@ class _ConverterState extends State<Converter>
                     mdd: selectedValuesMap['Mass']!,
                     movc: (values) => _updateSelectedValues('Mass', values),
                   ),
-                  Data(data1: forms.sublist(10, 12)),
+                  Data(
+                    data1: forms.sublist(10, 12),
+                    dtdd: selectedValuesMap['Data']!,
+                    dovc: (values) => _updateSelectedValues('Data', values),
+                  ),
                   Speed(spd1: forms.sublist(12, 14)),
                   Time(time1: forms.sublist(14, 16))
                 ],
