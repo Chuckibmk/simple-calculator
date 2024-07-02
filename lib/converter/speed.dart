@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 
 class Speed extends StatefulWidget {
   final List<TextEditingController> spd1;
-  // final TextEditingController spd2;
+  final List<String> sdd;
+  final Function(List<String>) sovc;
 
-  const Speed({super.key, required this.spd1});
+  const Speed({
+    super.key,
+    required this.spd1,
+    required this.sdd,
+    required this.sovc,
+  });
 
   @override
   State<Speed> createState() => _SpeedState();
 }
 
 class _SpeedState extends State<Speed> {
-  // dynamic activeform;
-  String dd1 = 'Meters per second (m/s)';
   var dd_1 = [
     'Meters per second (m/s)',
     'Meters per hour (m/h)',
@@ -27,7 +31,6 @@ class _SpeedState extends State<Speed> {
     'Knots (kn)'
   ];
 
-  String dd2 = 'Inches per second (in/s)';
   var dd_2 = [
     'Meters per second (m/s)',
     'Meters per hour (m/h)',
@@ -58,11 +61,13 @@ class _SpeedState extends State<Speed> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd1,
-                  onChanged: (value) {
-                    setState(() {
-                      dd1 = value.toString();
-                    });
+                  value: widget.sdd[0],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.sdd);
+                      newValues[0] = newValue;
+                      widget.sovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.spd1[0],
@@ -91,11 +96,13 @@ class _SpeedState extends State<Speed> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd2,
-                  onChanged: (value) {
-                    setState(() {
-                      dd2 = value.toString();
-                    });
+                  value: widget.sdd[1],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.sdd);
+                      newValues[1] = newValue;
+                      widget.sovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.spd1[1],

@@ -28,6 +28,7 @@ class _ConverterState extends State<Converter>
     'Volume': ['US gallons (gal)', 'Liters (l)'],
     'Mass': ['Pounds (lb)', 'Kilograms (kg)'],
     'Data': ['Kilobytes (KB)', 'Megabytes (MB)'],
+    'Speed': ['Meters per second (m/s)', 'Inches per second (in/s)'],
   };
 
   List<List<dynamic>> nmbrs = [
@@ -131,7 +132,11 @@ class _ConverterState extends State<Converter>
                     dtdd: selectedValuesMap['Data']!,
                     dovc: (values) => _updateSelectedValues('Data', values),
                   ),
-                  Speed(spd1: forms.sublist(12, 14)),
+                  Speed(
+                    spd1: forms.sublist(12, 14),
+                    sdd: selectedValuesMap['Speed']!,
+                    sovc: (values) => _updateSelectedValues('Speed', values),
+                  ),
                   Time(time1: forms.sublist(14, 16))
                 ],
               ),
