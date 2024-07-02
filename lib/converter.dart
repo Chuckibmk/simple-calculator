@@ -21,7 +21,10 @@ class _ConverterState extends State<Converter>
   final List<TextEditingController> forms =
       List.generate(16, (index) => TextEditingController());
 
-  List<String> dd1 = ['Acres (ac)', 'Square meters (m²)'];
+  Map<String, List<String>> selectedValuesMap = {
+    'Area': ['Acres (ac)', 'Square meters (m²)'],
+    'Length': ['Inches (in)', 'Centimeters (cm)'],
+  };
 
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
@@ -39,9 +42,9 @@ class _ConverterState extends State<Converter>
 
   late TabController _tabController;
 
-  void _updateSelectedValues(List<String> values) {
+  void _updateSelectedValues(String tabKey, List<String> values) {
     setState(() {
-      dd1 = values;
+      selectedValuesMap[tabKey] = values;
     });
   }
 
@@ -96,8 +99,8 @@ class _ConverterState extends State<Converter>
                 children: [
                   Area(
                     area1: forms.sublist(0, 2),
-                    dd1: dd1,
-                    ovc1: _updateSelectedValues,
+                    dd1: selectedValuesMap['Area']!,
+                    ovc: (values) => _updateSelectedValues('Area', values),
                   ),
                   Length(len1: forms.sublist(2, 4)),
                   Temp(temp1: forms.sublist(4, 6)),

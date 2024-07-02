@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class Area extends StatefulWidget {
   final List<TextEditingController> area1;
   final List<String> dd1;
-  final Function(List<String>) ovc1;
+  final Function(List<String>) ovc;
 
   const Area({
     super.key,
     required this.area1,
     required this.dd1,
-    required this.ovc1,
+    required this.ovc,
   });
 
   @override
@@ -17,7 +17,6 @@ class Area extends StatefulWidget {
 }
 
 class _AreaState extends State<Area> {
-  // String dd1 = 'Acres (ac)';
   var dd_1 = [
     'Acres (ac)',
     'Ares (a)',
@@ -28,7 +27,6 @@ class _AreaState extends State<Area> {
     'Square meters (m²)'
   ];
 
-  // String dd2 = 'Square meters (m²)';
   var dd_2 = [
     'Acres (ac)',
     'Ares (a)',
@@ -60,7 +58,7 @@ class _AreaState extends State<Area> {
                     if (newValue != null) {
                       List<String> newValues = List.from(widget.dd1);
                       newValues[0] = newValue;
-                      widget.ovc1(newValues);
+                      widget.ovc(newValues);
                     }
                     // setState(() {
                     //   dd1 = value.toString();
@@ -98,11 +96,8 @@ class _AreaState extends State<Area> {
                     if (newValue != null) {
                       List<String> newValues = List.from(widget.dd1);
                       newValues[1] = newValue;
-                      widget.ovc1(newValues);
+                      widget.ovc(newValues);
                     }
-                    // setState(() {
-                    //   dd2 = value.toString();
-                    // });
                   }),
               TextFormField(
                 controller: widget.area1[1],
