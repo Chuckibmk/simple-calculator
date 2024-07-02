@@ -6,11 +6,11 @@ class Area extends StatefulWidget {
   final Function(List<String>) ovc;
 
   const Area({
-    Key? key,
+    super.key,
     required this.area1,
     required this.dd1,
     required this.ovc,
-  }) : super(key: key);
+  });
 
   @override
   State<Area> createState() => _AreaState();

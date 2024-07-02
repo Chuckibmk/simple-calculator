@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 
 class Volume extends StatefulWidget {
   final List<TextEditingController> vol1;
-  // final TextEditingController vol2;
+  final List<String> vdd;
+  final Function(List<String>) vovc;
 
-  const Volume({super.key, required this.vol1});
-  // const Volume({super.key, required this.vol1, required this.vol2});
+  const Volume({
+    super.key,
+    required this.vol1,
+    required this.vdd,
+    required this.vovc,
+  });
 
   @override
   State<Volume> createState() => _VolumeState();
 }
 
 class _VolumeState extends State<Volume> {
-  // dynamic activeform;
-  String dd1 = 'US gallons (gal)';
   var dd_1 = [
     'UK gallons (gal)',
     'US gallons (gal)',
@@ -25,7 +28,6 @@ class _VolumeState extends State<Volume> {
     'Cubic feet (ft³)'
   ];
 
-  String dd2 = 'Liters (l)';
   var dd_2 = [
     'UK gallons (gal)',
     'US gallons (gal)',
@@ -53,11 +55,13 @@ class _VolumeState extends State<Volume> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd1,
-                  onChanged: (value) {
-                    setState(() {
-                      dd1 = value.toString();
-                    });
+                  value: widget.vdd[0],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.vdd);
+                      newValues[0] = newValue;
+                      widget.vovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.vol1[0],
@@ -86,11 +90,13 @@ class _VolumeState extends State<Volume> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd2,
-                  onChanged: (value) {
-                    setState(() {
-                      dd2 = value.toString();
-                    });
+                  value: widget.vdd[1],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.vdd);
+                      newValues[1] = newValue;
+                      widget.vovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.vol1[1],

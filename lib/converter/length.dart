@@ -6,11 +6,11 @@ class Length extends StatefulWidget {
   final Function(List<String>) lovc;
 
   const Length({
-    Key? key,
+    super.key,
     required this.len1,
     required this.ldd,
     required this.lovc,
-  }) : super(key: key);
+  });
 
   @override
   State<Length> createState() => _LengthState();

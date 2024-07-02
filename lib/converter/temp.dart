@@ -6,11 +6,11 @@ class Temp extends StatefulWidget {
   final Function(List<String>) tovc;
 
   const Temp({
-    Key? key,
+    super.key,
     required this.temp1,
     required this.tdd,
     required this.tovc,
-  }) : super(key: key);
+  });
 
   @override
   State<Temp> createState() => _TempState();

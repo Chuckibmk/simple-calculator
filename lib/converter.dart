@@ -25,6 +25,7 @@ class _ConverterState extends State<Converter>
     'Area': ['Acres (ac)', 'Square meters (m²)'],
     'Length': ['Inches (in)', 'Centimeters (cm)'],
     'Temp': ['Fahrenheit (℉)', 'Celsius (℃)'],
+    'Volume': ['US gallons (gal)', 'Liters (l)'],
   };
 
   List<List<dynamic>> nmbrs = [
@@ -113,7 +114,11 @@ class _ConverterState extends State<Converter>
                     tdd: selectedValuesMap['Temp']!,
                     tovc: (values) => _updateSelectedValues('Temp', values),
                   ),
-                  Volume(vol1: forms.sublist(6, 8)),
+                  Volume(
+                    vol1: forms.sublist(6, 8),
+                    vdd: selectedValuesMap['Volume']!,
+                    vovc: (values) => _updateSelectedValues('Volume', values),
+                  ),
                   Mass(mass1: forms.sublist(8, 10)),
                   Data(data1: forms.sublist(10, 12)),
                   Speed(spd1: forms.sublist(12, 14)),
