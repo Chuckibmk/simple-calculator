@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 
 class Length extends StatefulWidget {
   final List<TextEditingController> len1;
-  // final TextEditingController len2;
+  final List<String> ldd;
+  final Function(List<String>) lovc;
 
-  const Length({super.key, required this.len1});
-  // const Length({super.key, required this.len1, required this.len2});
+  const Length({
+    Key? key,
+    required this.len1,
+    required this.ldd,
+    required this.lovc,
+  }) : super(key: key);
 
   @override
   State<Length> createState() => _LengthState();
 }
 
 class _LengthState extends State<Length> {
-  // dynamic activeform;
-  String dd1 = 'Inches (in)';
   var dd_1 = [
     'Millimeters (mm)',
     'Centimeters (cm)',
@@ -27,7 +30,6 @@ class _LengthState extends State<Length> {
     'Mils (mil)'
   ];
 
-  String dd2 = 'Centimeters (cm)';
   var dd_2 = [
     'Millimeters (mm)',
     'Centimeters (cm)',
@@ -57,11 +59,13 @@ class _LengthState extends State<Length> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd1,
-                  onChanged: (value) {
-                    setState(() {
-                      dd1 = value.toString();
-                    });
+                  value: widget.ldd[0],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.ldd);
+                      newValues[0] = newValue;
+                      widget.lovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.len1[0],
@@ -90,11 +94,13 @@ class _LengthState extends State<Length> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  value: dd2,
-                  onChanged: (value) {
-                    setState(() {
-                      dd2 = value.toString();
-                    });
+                  value: widget.ldd[1],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      List<String> newValues = List.from(widget.ldd);
+                      newValues[1] = newValue;
+                      widget.lovc(newValues);
+                    }
                   }),
               TextFormField(
                 controller: widget.len1[1],
