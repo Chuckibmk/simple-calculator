@@ -616,8 +616,137 @@ class _ConverterState extends State<Converter>
           'Grams (g)': 1
         }
       };
+      if (massMap.containsKey(x) && massMap[x]!.containsKey(y)) {
+        return val1 * massMap[x]![y]!;
+      }
     }
-    if (tabin == 5) {}
+    if (tabin == 5) {
+      Map<String, Map<String, double>> dataMap = {
+        'Bits (bit)': {
+          'Bits (bit)': 1.0,
+          'Bytes (B)': 0.125,
+          'Kilobytes (KB)': 0.000125,
+          'Kibibytes (KiB)': 0.0001220703,
+          'Megabytes (MB)': 1.25e-7,
+          'Mebibytes (MiB)': 1.1920929e-7,
+          'Gigabytes (GB)': 1.25e-10,
+          'Gibibytes (GiB)': 1.1641532e-10,
+          'Terabytes (TB)': 1.25e-13,
+          'Tebibytes (TiB)': 1.1368684e-13
+        },
+        'Bytes (B)': {
+          'Bits (bit)': 8.0,
+          'Bytes (B)': 1.0,
+          'Kilobytes (KB)': 0.001,
+          'Kibibytes (KiB)': 0.0009765625,
+          'Megabytes (MB)': 1e-6,
+          'Mebibytes (MiB)': 9.5367432e-7,
+          'Gigabytes (GB)': 1e-9,
+          'Gibibytes (GiB)': 9.3132257e-10,
+          'Terabytes (TB)': 1e-12,
+          'Tebibytes (TiB)': 9.094947e-13
+        },
+        'Kilobytes (KB)': {
+          'Bits (bit)': 8000.0,
+          'Bytes (B)': 1000.0,
+          'Kilobytes (KB)': 1.0,
+          'Kibibytes (KiB)': 0.9765625,
+          'Megabytes (MB)': 0.001,
+          'Mebibytes (MiB)': 0.0009536743,
+          'Gigabytes (GB)': 1e-6,
+          'Gibibytes (GiB)': 9.3132257e-7,
+          'Terabytes (TB)': 1e-9,
+          'Tebibytes (TiB)': 9.094947e-10
+        },
+        'Kibibytes (KiB)': {
+          'Bits (bit)': 8192.0,
+          'Bytes (B)': 1024.0,
+          'Kilobytes (KB)': 1.024,
+          'Kibibytes (KiB)': 1.0,
+          'Megabytes (MB)': 0.001024,
+          'Mebibytes (MiB)': 0.0009765625,
+          'Gigabytes (GB)': 1.024e-6,
+          'Gibibytes (GiB)': 9.5367432e-7,
+          'Terabytes (TB)': 1.024e-9,
+          'Tebibytes (TiB)': 9.3132257e-10
+        },
+        'Megabytes (MB)': {
+          'Bits (bit)': 8e+6,
+          'Bytes (B)': 1e+6,
+          'Kilobytes (KB)': 1000.0,
+          'Kibibytes (KiB)': 976.5625,
+          'Megabytes (MB)': 1.0,
+          'Mebibytes (MiB)': 0.9536743,
+          'Gigabytes (GB)': 0.001,
+          'Gibibytes (GiB)': 0.0009313226,
+          'Terabytes (TB)': 1e-6,
+          'Tebibytes (TiB)': 9.094947e-7
+        },
+        'Mebibytes (MiB)': {
+          'Bits (bit)': 8.389e+6,
+          'Bytes (B)': 1.049e+6,
+          'Kilobytes (KB)': 1048.576,
+          'Kibibytes (KiB)': 1024.0,
+          'Megabytes (MB)': 1.048576,
+          'Mebibytes (MiB)': 1.0,
+          'Gigabytes (GB)': 0.001048576,
+          'Gibibytes (GiB)': 0.0009765625,
+          'Terabytes (TB)': 1.048576e-6,
+          'Tebibytes (TiB)': 9.5367432e-7
+        },
+        'Gigabytes (GB)': {
+          'Bits (bit)': 8e+9,
+          'Bytes (B)': 1e+9,
+          'Kilobytes (KB)': 1e+6,
+          'Kibibytes (KiB)': 976562.5,
+          'Megabytes (MB)': 1000.0,
+          'Mebibytes (MiB)': 953.6743,
+          'Gigabytes (GB)': 1.0,
+          'Gibibytes (GiB)': 0.9313226,
+          'Terabytes (TB)': 0.001,
+          'Tebibytes (TiB)': 0.0009094947
+        },
+        'Gibibytes (GiB)': {
+          'Bits (bit)': 8.59e+9,
+          'Bytes (B)': 1.074e+9,
+          'Kilobytes (KB)': 1.074e+6,
+          'Kibibytes (KiB)': 1048576.0,
+          'Megabytes (MB)': 1073.7418,
+          'Mebibytes (MiB)': 1024.0,
+          'Gigabytes (GB)': 1.0737418,
+          'Gibibytes (GiB)': 1.0,
+          'Terabytes (TB)': 0.0010737418,
+          'Tebibytes (TiB)': 0.0009765625
+        },
+        'Terabytes (TB)': {
+          'Bits (bit)': 8e+12,
+          'Bytes (B)': 1e+12,
+          'Kilobytes (KB)': 1e+9,
+          'Kibibytes (KiB)': 9.765625e+8,
+          'Megabytes (MB)': 1e+6,
+          'Mebibytes (MiB)': 953674.3,
+          'Gigabytes (GB)': 1000.0,
+          'Gibibytes (GiB)': 931.3226,
+          'Terabytes (TB)': 1.0,
+          'Tebibytes (TiB)': 0.9094947
+        },
+        'Tebibytes (TiB)': {
+          'Bits (bit)': 8.796e+12,
+          'Bytes (B)': 1.1e+12,
+          'Kilobytes (KB)': 1.1e+9,
+          'Kibibytes (KiB)': 1.0737418e+9,
+          'Megabytes (MB)': 1.1e+6,
+          'Mebibytes (MiB)': 1048576.0,
+          'Gigabytes (GB)': 1100.0,
+          'Gibibytes (GiB)': 1024.0,
+          'Terabytes (TB)': 1.1,
+          'Tebibytes (TiB)': 1.0
+        }
+      };
+      if (dataMap.containsKey(x) && dataMap[x]!.containsKey(y)) {
+        return val1 * dataMap[x]![y]!;
+      }
+    }
     if (tabin == 6) {}
     if (tabin == 7) {}
   }
