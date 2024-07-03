@@ -221,6 +221,11 @@ class _ConverterState extends State<Converter>
                 formEntry[0].text = formEntry[0]
                     .text
                     .substring(0, formEntry[0].text.length - 1);
+
+                num val1 = num.tryParse(formEntry[0].text) ?? 0;
+                formEntry[1].text =
+                    convert(tabin, val1, dropdownValues[0], dropdownValues[1])
+                        .toString();
               }
             } else {
               formEntry[0].text += btntext;
@@ -228,7 +233,6 @@ class _ConverterState extends State<Converter>
               formEntry[1].text =
                   convert(tabin, val1, dropdownValues[0], dropdownValues[1])
                       .toString();
-              // print(dropdownValues[0]);
             }
           });
         },
@@ -248,9 +252,8 @@ class _ConverterState extends State<Converter>
 
   convert(dynamic tabin, num val1, String x, String y) {
     if (tabin == 0) {
-      num ans;
-      if (x == 'Acres (ac)') {
-        Map<String, double> acres = {
+      final Map<String, Map<String, double>> areaMap = {
+        'Acres (ac)': {
           'Acres (ac)': 1,
           'Ares (a)': 40.468564224,
           'Hectares (ha)': 0.4046856422,
@@ -258,13 +261,8 @@ class _ConverterState extends State<Converter>
           'Square feet (ft²)': 43560,
           'Square inches (in²)': 6272640,
           'Square meters (m²)': 4046.856
-        };
-        if (acres.containsKey(y)) {
-          ans = val1 * acres[y]!;
-          return ans;
-        }
-      } else if (x == 'Ares (a)') {
-        Map<String, double> ares = {
+        },
+        'Ares (a)': {
           'Acres (ac)': 0.0247105,
           'Ares (a)': 1,
           'Hectares (ha)': 0.01,
@@ -272,13 +270,8 @@ class _ConverterState extends State<Converter>
           'Square feet (ft²)': 1076.39,
           'Square inches (in²)': 155000.31,
           'Square meters (m²)': 100
-        };
-        if (ares.containsKey(y)) {
-          ans = val1 * ares[y]!;
-          return ans;
-        }
-      } else if (x == 'Hectares (ha)') {
-        Map<String, double> hectares = {
+        },
+        'Hectares (ha)': {
           'Acres (ac)': 2.47105,
           'Ares (a)': 100,
           'Hectares (ha)': 1,
@@ -286,13 +279,8 @@ class _ConverterState extends State<Converter>
           'Square feet (ft²)': 107639,
           'Square inches (in²)': 1550003100,
           'Square meters (m²)': 10000
-        };
-        if (hectares.containsKey(y)) {
-          ans = val1 * hectares[y]!;
-          return ans;
-        }
-      } else if (x == 'Square centimeters (cm²)') {
-        Map<String, double> centimeters = {
+        },
+        'Square centimeters (cm²)': {
           'Acres (ac)': 0.0000000247,
           'Ares (a)': 0.000001,
           'Hectares (ha)': 0.00000001,
@@ -300,13 +288,8 @@ class _ConverterState extends State<Converter>
           'Square feet (ft²)': 0.00107639,
           'Square inches (in²)': 0.15500016,
           'Square meters (m²)': 0.0001
-        };
-        if (centimeters.containsKey(y)) {
-          ans = val1 * centimeters[y]!;
-          return ans;
-        }
-      } else if (x == 'Square feet (ft²)') {
-        Map<String, double> feet = {
+        },
+        'Square feet (ft²)': {
           'Acres (ac)': 0.0000229568,
           'Ares (a)': 0.000001,
           'Hectares (ha)': 0.00000929,
@@ -314,13 +297,8 @@ class _ConverterState extends State<Converter>
           'Square feet (ft²)': 1,
           'Square inches (in²)': 144,
           'Square meters (m²)': 0.092903
-        };
-        if (feet.containsKey(y)) {
-          ans = val1 * feet[y]!;
-          return ans;
-        }
-      } else if (x == 'Square inches (in²)') {
-        Map<String, double> inch = {
+        },
+        'Square inches (in²)': {
           'Acres (ac)': 1.59423e-7,
           'Ares (a)': 6.4516e-6,
           'Hectares (ha)': 6.4516e-8,
@@ -328,13 +306,8 @@ class _ConverterState extends State<Converter>
           'Square feet (ft²)': 0.00694444,
           'Square inches (in²)': 1,
           'Square meters (m²)': 0.00064516
-        };
-        if (inch.containsKey(y)) {
-          ans = val1 * inch[y]!;
-          return ans;
-        }
-      } else if (x == 'Square meters (m²)') {
-        Map<String, double> meters = {
+        },
+        'Square meters (m²)': {
           'Acres (ac)': 0.0002471208304956,
           'Ares (a)': 0.01,
           'Hectares (ha)': 0.000100006252,
@@ -342,19 +315,132 @@ class _ConverterState extends State<Converter>
           'Square feet (ft²)': 10.764,
           'Square inches (in²)': 1550.016,
           'Square meters (m²)': 1
-        };
-        if (meters.containsKey(y)) {
-          ans = val1 * meters[y]!;
-          return ans;
         }
+      };
+      if (areaMap.containsKey(x) && areaMap[x]!.containsKey(y)) {
+        return val1 * areaMap[x]![y]!;
       }
     }
-    if (tabin == '1') {}
-    if (tabin == '2') {}
-    if (tabin == '3') {}
-    if (tabin == '4') {}
-    if (tabin == '5') {}
-    if (tabin == '6') {}
-    if (tabin == '7') {}
+    if (tabin == 1) {
+      final Map<String, Map<String, double>> lengthMap = {
+        'Millimeters (mm)': {
+          'Millimeters (mm)': 1,
+          'Centimeters (cm)': 0.1,
+          'Meters (m)': 0.001,
+          'Kilometers (km)': 1e-6,
+          'Inches (in)': 0.0393701,
+          'Feet (ft)': 0.0032808399,
+          'Yards (yd)': 0.0010936133,
+          'Miles (mi)': 1.609e+6,
+          'Nautical miles (NM)': 5.39956803e-7,
+          'Mils (mil)': 39.3701
+        },
+        'Centimeters (cm)': {
+          'Millimeters (mm)': 10,
+          'Centimeters (cm)': 1,
+          'Meters (m)': 0.01,
+          'Kilometers (km)': 1e-5,
+          'Inches (in)': 0.393701,
+          'Feet (ft)': 0.032808399,
+          'Yards (yd)': 0.010936133,
+          'Miles (mi)': 6.2137e-6,
+          'Nautical miles (NM)': 5.399557e-6,
+          'Mils (mil)': 393.701
+        },
+        'Meters (m)': {
+          'Millimeters (mm)': 1000,
+          'Centimeters (cm)': 100,
+          'Meters (m)': 1,
+          'Kilometers (km)': 0.001,
+          'Inches (in)': 39.3701,
+          'Feet (ft)': 3.28084,
+          'Yards (yd)': 1.09361,
+          'Miles (mi)': 0.000621371,
+          'Nautical miles (NM)': 0.000539957,
+          'Mils (mil)': 39370.1
+        },
+        'Kilometers (km)': {
+          'Millimeters (mm)': 1e+6,
+          'Centimeters (cm)': 100000,
+          'Meters (m)': 1000,
+          'Kilometers (km)': 1,
+          'Inches (in)': 39370.1,
+          'Feet (ft)': 3280.84,
+          'Yards (yd)': 1093.61,
+          'Miles (mi)': 0.621371,
+          'Nautical miles (NM)': 0.539957,
+          'Mils (mil)': 39370078.7
+        },
+        'Inches (in)': {
+          'Millimeters (mm)': 25.4,
+          'Centimeters (cm)': 2.54,
+          'Meters (m)': 0.0254,
+          'Kilometers (km)': 2.54e-5,
+          'Inches (in)': 1,
+          'Feet (ft)': 0.0833333,
+          'Yards (yd)': 0.0277778,
+          'Miles (mi)': 1.5783e-5,
+          'Nautical miles (NM)': 1.3715e-5,
+          'Mils (mil)': 1000
+        },
+        'Feet (ft)': {
+          'Millimeters (mm)': 304.8,
+          'Centimeters (cm)': 30.48,
+          'Meters (m)': 0.3048,
+          'Kilometers (km)': 0.0003048,
+          'Inches (in)': 12,
+          'Feet (ft)': 1,
+          'Yards (yd)': 0.333333,
+          'Miles (mi)': 0.000189394,
+          'Nautical miles (NM)': 0.000164579,
+          'Mils (mil)': 12000
+        },
+        'Yards (yd)': {
+          'Millimeters (mm)': 914.4,
+          'Centimeters (cm)': 91.44,
+          'Meters (m)': 0.9144,
+          'Kilometers (km)': 0.0009144,
+          'Inches (in)': 36,
+          'Feet (ft)': 3,
+          'Yards (yd)': 1,
+          'Miles (mi)': 0.000568182,
+          'Nautical miles (NM)': 0.000493737,
+          'Mils (mil)': 36000
+        },
+        'Miles (mi)': {
+          'Millimeters (mm)': 1.609e+6,
+          'Centimeters (cm)': 160934,
+          'Meters (m)': 1609.34,
+          'Kilometers (km)': 1.60934,
+          'Inches (in)': 63360,
+          'Feet (ft)': 5280,
+          'Yards (yd)': 1760,
+          'Miles (mi)': 1,
+          'Nautical miles (NM)': 0.868976,
+          'Mils (mil)': 6.336e+7
+        },
+        'Nautical miles (NM)': {
+          'Millimeters (mm)': 1.852e+6,
+          'Centimeters (cm)': 185200,
+          'Meters (m)': 1852,
+          'Kilometers (km)': 1.852,
+          'Inches (in)': 72913.4,
+          'Feet (ft)': 6076.12,
+          'Yards (yd)': 2025.37,
+          'Miles (mi)': 1.15078,
+          'Nautical miles (NM)': 1,
+          'Mils (mil)': 7.291e+7
+        },
+      };
+      if (lengthMap.containsKey(x) && lengthMap[x]!.containsKey(y)) {
+        return val1 * lengthMap[x]![y]!;
+      }
+    }
+    if (tabin == 2) {}
+    if (tabin == 3) {}
+    if (tabin == 4) {}
+    if (tabin == 5) {}
+    if (tabin == 6) {}
+    if (tabin == 7) {}
   }
 }
