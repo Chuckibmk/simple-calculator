@@ -463,8 +463,160 @@ class _ConverterState extends State<Converter>
         }
       }
     }
-    if (tabin == 3) {}
-    if (tabin == 4) {}
+    if (tabin == 3) {
+      final Map<String, Map<String, double>> volMap = {
+        'UK gallons (gal)': {
+          'UK gallons (gal)': 1,
+          'US gallons (gal)': 1.20095,
+          'Liters (l)': 4.54609,
+          'Milliliters (ml)': 4546.09,
+          'Cubic Centimeters (cc) (cm³)': 4546.09,
+          'Cubic meters (m³)': 0.00454609,
+          'Cubic inches (in³)': 277.419,
+          'Cubic feet (ft³)': 0.160544
+        },
+        'US gallons (gal)': {
+          'UK gallons (gal)': 0.832674,
+          'US gallons (gal)': 1,
+          'Liters (l)': 3.78541,
+          'Milliliters (ml)': 3785.41,
+          'Cubic Centimeters (cc) (cm³)': 3785.41,
+          'Cubic meters (m³)': 0.00378541,
+          'Cubic inches (in³)': 231,
+          'Cubic feet (ft³)': 0.133681
+        },
+        'Liters (l)': {
+          'UK gallons (gal)': 0.219969,
+          'US gallons (gal)': 0.264172,
+          'Liters (l)': 1,
+          'Milliliters (ml)': 1000,
+          'Cubic Centimeters (cc) (cm³)': 1000,
+          'Cubic meters (m³)': 0.001,
+          'Cubic inches (in³)': 61.0237,
+          'Cubic feet (ft³)': 0.0353147
+        },
+        'Milliliters (ml)': {
+          'UK gallons (gal)': 0.000219969,
+          'US gallons (gal)': 0.000264172,
+          'Liters (l)': 0.001,
+          'Milliliters (ml)': 1,
+          'Cubic Centimeters (cc) (cm³)': 1,
+          'Cubic meters (m³)': 1e-6,
+          'Cubic inches (in³)': 0.0610237,
+          'Cubic feet (ft³)': 3.5315e-5
+        },
+        'Cubic Centimeters (cc) (cm³)': {
+          'UK gallons (gal)': 0.000219969,
+          'US gallons (gal)': 0.000264172,
+          'Liters (l)': 0.001,
+          'Milliliters (ml)': 1,
+          'Cubic Centimeters (cc) (cm³)': 1,
+          'Cubic meters (m³)': 1e-6,
+          'Cubic inches (in³)': 0.0610237,
+          'Cubic feet (ft³)': 3.5315e-5
+        },
+        'Cubic inches (in³)': {
+          'UK gallons (gal)': 0.00360465,
+          'US gallons (gal)': 0.004329,
+          'Liters (l)': 0.0163871,
+          'Milliliters (ml)': 16.3871,
+          'Cubic Centimeters (cc) (cm³)': 16.3871,
+          'Cubic meters (m³)': 1.6387e-5,
+          'Cubic inches (in³)': 1,
+          'Cubic feet (ft³)': 0.000578704
+        },
+        'Cubic meters (m³)': {
+          'UK gallons (gal)': 219.969,
+          'US gallons (gal)': 264.172,
+          'Liters (l)': 1000,
+          'Milliliters (ml)': 1e+6,
+          'Cubic Centimeters (cc) (cm³)': 1e+6,
+          'Cubic meters (m³)': 1,
+          'Cubic inches (in³)': 61023.7,
+          'Cubic feet (ft³)': 35.3147
+        },
+        'Cubic feet (ft³)': {
+          'UK gallons (gal)': 6.22884,
+          'US gallons (gal)': 7.48052,
+          'Liters (l)': 28.3168,
+          'Milliliters (ml)': 28316.8,
+          'Cubic Centimeters (cc) (cm³)': 28316.8,
+          'Cubic meters (m³)': 0.0283168,
+          'Cubic inches (in³)': 1728,
+          'Cubic feet (ft³)': 0.000578704
+        }
+      };
+      if (volMap.containsKey(x) && volMap[x]!.containsKey(y)) {
+        return val1 * volMap[x]![y]!;
+      }
+    }
+    if (tabin == 4) {
+      final Map<String, Map<String, double>> massMap = {
+        'Tons (t)': {
+          'Tons (t)': 1,
+          'UK tons (t)': 0.984207,
+          'US tons (t)': 1.10231,
+          'Pounds (lb)': 2204.62,
+          'Ounces (oz)': 35274,
+          'Kilograms (kg)': 1000,
+          'Grams (g)': 1e+6
+        },
+        'UK tons (t)': {
+          'Tons (t)': 1.01605,
+          'UK tons (t)': 1,
+          'US tons (t)': 1.12,
+          'Pounds (lb)': 2240,
+          'Ounces (oz)': 35840,
+          'Kilograms (kg)': 1016.05,
+          'Grams (g)': 1.016e+6
+        },
+        'US tons (t)': {
+          'Tons (t)': 0.907185,
+          'UK tons (t)': 0.892857,
+          'US tons (t)': 1,
+          'Pounds (lb)': 2000,
+          'Ounces (oz)': 32000,
+          'Kilograms (kg)': 907.185,
+          'Grams (g)': 907185
+        },
+        'Pounds (lb)': {
+          'Tons (t)': 0.000453592,
+          'UK tons (t)': 0.000446429,
+          'US tons (t)': 0.0005,
+          'Pounds (lb)': 1,
+          'Ounces (oz)': 16,
+          'Kilograms (kg)': 0.453592,
+          'Grams (g)': 453.592
+        },
+        'Ounces (oz)': {
+          'Tons (t)': 2.835e-5,
+          'UK tons (t)': 2.7902e-5,
+          'US tons (t)': 3.125e-5,
+          'Pounds (lb)': 0.0625,
+          'Ounces (oz)': 1,
+          'Kilograms (kg)': 0.0283495,
+          'Grams (g)': 28.3495
+        },
+        'Kilograms (kg)': {
+          'Tons (t)': 0.001,
+          'UK tons (t)': 0.000984207,
+          'US tons (t)': 0.00110231,
+          'Pounds (lb)': 2.20462,
+          'Ounces (oz)': 35.274,
+          'Kilograms (kg)': 1,
+          'Grams (g)': 1000
+        },
+        'Grams (g)': {
+          'Tons (t)': 1e-6,
+          'UK tons (t)': 9.8421e-7,
+          'US tons (t)': 1.1023e-6,
+          'Pounds (lb)': 0.00220462,
+          'Ounces (oz)': 0.035274,
+          'Kilograms (kg)': 0.001,
+          'Grams (g)': 1
+        }
+      };
+    }
     if (tabin == 5) {}
     if (tabin == 6) {}
     if (tabin == 7) {}
