@@ -32,6 +32,26 @@ class _ConverterState extends State<Converter>
     'Time': ['Seconds (s)', 'Hours (h)']
   };
 
+  final List<String> tabKeys = [
+    'Area',
+    'Length',
+    'Temp',
+    'Volume',
+    'Mass',
+    'Data',
+    'Speed',
+    'Time'
+  ];
+
+  String getKeyForIndex(int index) {
+    return tabKeys[index];
+  }
+
+  List<String> getSelectedValuesForIndex(int index) {
+    String key = getKeyForIndex(index);
+    return selectedValuesMap[key] ?? [];
+  }
+
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
     ['4', '5', '6', 'C'],
@@ -39,12 +59,6 @@ class _ConverterState extends State<Converter>
     ['', '0', '.', '']
     // ['±', '0', '.', '↓']
   ];
-
-  // dynamic val1 = '';
-  // dynamic val2 = '';
-
-  // num currentValue = 0;
-  // dynamic operator = '';
 
   late TabController _tabController;
 
@@ -111,7 +125,7 @@ class _ConverterState extends State<Converter>
                   Length(
                     len1: forms.sublist(2, 4),
                     ldd: selectedValuesMap['Length']!,
-                    lovc: (values) => _updateSelectedValues('Area', values),
+                    lovc: (values) => _updateSelectedValues('Length', values),
                   ),
                   Temp(
                     temp1: forms.sublist(4, 6),
@@ -157,9 +171,11 @@ class _ConverterState extends State<Converter>
                       children: [
                         for (var n in nb)
                           convbtn(
-                              n,
-                              forms.sublist(_tabController.index * 2,
-                                  _tabController.index * 2 + 2)),
+                            n,
+                            forms.sublist(_tabController.index * 2,
+                                _tabController.index * 2 + 2),
+                            getSelectedValuesForIndex(_tabController.index),
+                          ),
                       ],
                     )
                 ],
@@ -189,7 +205,8 @@ class _ConverterState extends State<Converter>
     );
   }
 
-  convbtn(dynamic btntext, List<TextEditingController> formEntry) {
+  convbtn(dynamic btntext, List<TextEditingController> formEntry,
+      List<String> dropdownValues) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       height: 50,
@@ -203,8 +220,6 @@ class _ConverterState extends State<Converter>
         onPressed: () {
           setState(() {
             if (btntext == 'C') {
-              // val1 = '';
-              // val2 = '';
               formEntry[0].clear();
               formEntry[1].clear();
             } else if (btntext == '\u232B') {
@@ -212,15 +227,10 @@ class _ConverterState extends State<Converter>
                 formEntry[0].text = formEntry[0]
                     .text
                     .substring(0, formEntry[0].text.length - 1);
-                // formEntry[0].text = val1;
               }
-              // } else if (btntext == '±') {
-              //   num ne = num.tryParse(val1) ?? 0;
-              //   dynamic neg = -1 * ne;
-              //   form1.text = neg.toString();
             } else {
               formEntry[0].text += btntext;
-              // formEntry[0].text = val1;
+              print(dropdownValues[0]);
             }
           });
         },
