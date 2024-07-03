@@ -436,7 +436,33 @@ class _ConverterState extends State<Converter>
         return val1 * lengthMap[x]![y]!;
       }
     }
-    if (tabin == 2) {}
+    if (tabin == 2) {
+      if (x == 'Celsius (℃)') {
+        if (y == 'Celsius (℃)') {
+          return val1;
+        } else if (y == 'Fahrenheit (℉)') {
+          return (val1 * 9 / 5) + 32;
+        } else if (y == 'Kelvin (K)') {
+          return val1 + 273.15;
+        }
+      } else if (x == 'Fahrenheit (℉)') {
+        if (y == 'Celsius (℃)') {
+          return (val1 - 32) * 5 / 9;
+        } else if (y == 'Fahrenheit (℉)') {
+          return val1;
+        } else if (y == 'Kelvin (K)') {
+          return (val1 - 32) * 5 / 9 + 273.15;
+        }
+      } else if (x == 'Kelvin (K)') {
+        if (y == 'Celsius (℃)') {
+          return val1 - 273.15;
+        } else if (y == 'Fahrenheit (℉)') {
+          return (val1 - 273.15) * 9 / 5 + 32;
+        } else if (y == 'Kelvin (K)') {
+          return val1;
+        }
+      }
+    }
     if (tabin == 3) {}
     if (tabin == 4) {}
     if (tabin == 5) {}
