@@ -171,11 +171,11 @@ class _ConverterState extends State<Converter>
                       children: [
                         for (var n in nb)
                           convbtn(
-                            n,
-                            forms.sublist(_tabController.index * 2,
-                                _tabController.index * 2 + 2),
-                            getSelectedValuesForIndex(_tabController.index),
-                          ),
+                              n,
+                              forms.sublist(_tabController.index * 2,
+                                  _tabController.index * 2 + 2),
+                              getSelectedValuesForIndex(_tabController.index),
+                              _tabController.index),
                       ],
                     )
                 ],
@@ -186,12 +186,6 @@ class _ConverterState extends State<Converter>
       );
     });
   }
-
-  // void convert (){
-  //   if(){
-
-  //   }
-  // }
 
   Widget yspace() {
     return const SizedBox(
@@ -206,7 +200,7 @@ class _ConverterState extends State<Converter>
   }
 
   convbtn(dynamic btntext, List<TextEditingController> formEntry,
-      List<String> dropdownValues) {
+      List<String> dropdownValues, dynamic tabin) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       height: 50,
@@ -230,7 +224,11 @@ class _ConverterState extends State<Converter>
               }
             } else {
               formEntry[0].text += btntext;
-              print(dropdownValues[0]);
+              num val1 = num.tryParse(formEntry[0].text) ?? 0;
+              formEntry[1].text =
+                  convert(tabin, val1, dropdownValues[0], dropdownValues[1])
+                      .toString();
+              // print(dropdownValues[0]);
             }
           });
         },
@@ -246,5 +244,117 @@ class _ConverterState extends State<Converter>
         ),
       ),
     );
+  }
+
+  convert(dynamic tabin, num val1, String x, String y) {
+    if (tabin == 0) {
+      num ans;
+      if (x == 'Acres (ac)') {
+        Map<String, double> acres = {
+          'Acres (ac)': 1,
+          'Ares (a)': 40.468564224,
+          'Hectares (ha)': 0.4046856422,
+          'Square Centimeters (cm²)': 40468564.224,
+          'Square feet (ft²)': 43560,
+          'Square inches (in²)': 6272640,
+          'Square meters (m²)': 4046.856
+        };
+        if (acres.containsKey(y)) {
+          ans = val1 * acres[y]!;
+          return ans;
+        }
+      } else if (x == 'Ares (a)') {
+        Map<String, double> ares = {
+          'Acres (ac)': 0.0247105,
+          'Ares (a)': 1,
+          'Hectares (ha)': 0.01,
+          'Square Centimeters (cm²)': 1000000,
+          'Square feet (ft²)': 1076.39,
+          'Square inches (in²)': 155000.31,
+          'Square meters (m²)': 100
+        };
+        if (ares.containsKey(y)) {
+          ans = val1 * ares[y]!;
+          return ans;
+        }
+      } else if (x == 'Hectares (ha)') {
+        Map<String, double> hectares = {
+          'Acres (ac)': 2.47105,
+          'Ares (a)': 100,
+          'Hectares (ha)': 1,
+          'Square Centimeters (cm²)': 100000000,
+          'Square feet (ft²)': 107639,
+          'Square inches (in²)': 1550003100,
+          'Square meters (m²)': 10000
+        };
+        if (hectares.containsKey(y)) {
+          ans = val1 * hectares[y]!;
+          return ans;
+        }
+      } else if (x == 'Square centimeters (cm²)') {
+        Map<String, double> centimeters = {
+          'Acres (ac)': 0.0000000247,
+          'Ares (a)': 0.000001,
+          'Hectares (ha)': 0.00000001,
+          'Square Centimeters (cm²)': 1,
+          'Square feet (ft²)': 0.00107639,
+          'Square inches (in²)': 0.15500016,
+          'Square meters (m²)': 0.0001
+        };
+        if (centimeters.containsKey(y)) {
+          ans = val1 * centimeters[y]!;
+          return ans;
+        }
+      } else if (x == 'Square feet (ft²)') {
+        Map<String, double> feet = {
+          'Acres (ac)': 0.0000229568,
+          'Ares (a)': 0.000001,
+          'Hectares (ha)': 0.00000929,
+          'Square Centimeters (cm²)': 929.03,
+          'Square feet (ft²)': 1,
+          'Square inches (in²)': 144,
+          'Square meters (m²)': 0.092903
+        };
+        if (feet.containsKey(y)) {
+          ans = val1 * feet[y]!;
+          return ans;
+        }
+      } else if (x == 'Square inches (in²)') {
+        Map<String, double> inch = {
+          'Acres (ac)': 1.59423e-7,
+          'Ares (a)': 6.4516e-6,
+          'Hectares (ha)': 6.4516e-8,
+          'Square Centimeters (cm²)': 6.4516,
+          'Square feet (ft²)': 0.00694444,
+          'Square inches (in²)': 1,
+          'Square meters (m²)': 0.00064516
+        };
+        if (inch.containsKey(y)) {
+          ans = val1 * inch[y]!;
+          return ans;
+        }
+      } else if (x == 'Square meters (m²)') {
+        Map<String, double> meters = {
+          'Acres (ac)': 0.0002471208304956,
+          'Ares (a)': 0.01,
+          'Hectares (ha)': 0.000100006252,
+          'Square Centimeters (cm²)': 10000,
+          'Square feet (ft²)': 10.764,
+          'Square inches (in²)': 1550.016,
+          'Square meters (m²)': 1
+        };
+        if (meters.containsKey(y)) {
+          ans = val1 * meters[y]!;
+          return ans;
+        }
+      }
+    }
+    if (tabin == '1') {}
+    if (tabin == '2') {}
+    if (tabin == '3') {}
+    if (tabin == '4') {}
+    if (tabin == '5') {}
+    if (tabin == '6') {}
+    if (tabin == '7') {}
   }
 }
