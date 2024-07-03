@@ -747,7 +747,210 @@ class _ConverterState extends State<Converter>
         return val1 * dataMap[x]![y]!;
       }
     }
-    if (tabin == 6) {}
-    if (tabin == 7) {}
+    if (tabin == 6) {
+      Map<String, Map<String, double>> speedMap = {
+        'Meters per second (m/s)': {
+          'Meters per second (m/s)': 1.0,
+          'Meters per hour (m/h)': 3600.0,
+          'Kilometers per second (km/s)': 0.001,
+          'Kilometers per hour (km/h)': 3.6,
+          'Inches per second (in/s)': 39.3701,
+          'Inches per hour (in/h)': 141732.283,
+          'Feet per second (ft/s)': 3.28084,
+          'Feet per hour (ft/h)': 11811.0236,
+          'Miles per second (mi/s)': 0.000621371,
+          'Miles per hour (mi/h)': 2.23694,
+          'Knots (kn)': 1.94384
+        },
+        'Meters per hour (m/h)': {
+          'Meters per second (m/s)': 0.000277778,
+          'Meters per hour (m/h)': 1.0,
+          'Kilometers per second (km/s)': 2.77778e-7,
+          'Kilometers per hour (km/h)': 0.001,
+          'Inches per second (in/s)': 0.0109361,
+          'Inches per hour (in/h)': 39.3701,
+          'Feet per second (ft/s)': 0.000911344,
+          'Feet per hour (ft/h)': 3.28084,
+          'Miles per second (mi/s)': 1.72603e-7,
+          'Miles per hour (mi/h)': 0.000621371,
+          'Knots (kn)': 0.000539957
+        },
+        'Kilometers per second (km/s)': {
+          'Meters per second (m/s)': 1000.0,
+          'Meters per hour (m/h)': 3600000.0,
+          'Kilometers per second (km/s)': 1.0,
+          'Kilometers per hour (km/h)': 3600.0,
+          'Inches per second (in/s)': 39370.1,
+          'Inches per hour (in/h)': 1.41732e+8,
+          'Feet per second (ft/s)': 3280.84,
+          'Feet per hour (ft/h)': 1.1811e+7,
+          'Miles per second (mi/s)': 0.621371,
+          'Miles per hour (mi/h)': 2236.94,
+          'Knots (kn)': 1943.84
+        },
+        'Kilometers per hour (km/h)': {
+          'Meters per second (m/s)': 0.277778,
+          'Meters per hour (m/h)': 1000.0,
+          'Kilometers per second (km/s)': 0.000277778,
+          'Kilometers per hour (km/h)': 1.0,
+          'Inches per second (in/s)': 10.9361,
+          'Inches per hour (in/h)': 39370.1,
+          'Feet per second (ft/s)': 0.911344,
+          'Feet per hour (ft/h)': 3280.84,
+          'Miles per second (mi/s)': 0.000172603,
+          'Miles per hour (mi/h)': 0.621371,
+          'Knots (kn)': 0.539957
+        },
+        'Inches per second (in/s)': {
+          'Meters per second (m/s)': 0.0254,
+          'Meters per hour (m/h)': 91.44,
+          'Kilometers per second (km/s)': 2.54e-5,
+          'Kilometers per hour (km/h)': 0.09144,
+          'Inches per second (in/s)': 1.0,
+          'Inches per hour (in/h)': 3600.0,
+          'Feet per second (ft/s)': 0.0833333,
+          'Feet per hour (ft/h)': 300.0,
+          'Miles per second (mi/s)': 1.5783e-5,
+          'Miles per hour (mi/h)': 0.0568182,
+          'Knots (kn)': 0.0493737
+        },
+        'Inches per hour (in/h)': {
+          'Meters per second (m/s)': 0.0000070556,
+          'Meters per hour (m/h)': 0.0254,
+          'Kilometers per second (km/s)': 7.0556e-9,
+          'Kilometers per hour (km/h)': 0.0000254,
+          'Inches per second (in/s)': 0.000277778,
+          'Inches per hour (in/h)': 1.0,
+          'Feet per second (ft/s)': 0.0000231481,
+          'Feet per hour (ft/h)': 0.0833333,
+          'Miles per second (mi/s)': 4.403e-9,
+          'Miles per hour (mi/h)': 0.0000157828,
+          'Knots (kn)': 0.0000137155
+        },
+        'Feet per second (ft/s)': {
+          'Meters per second (m/s)': 0.3048,
+          'Meters per hour (m/h)': 1097.28,
+          'Kilometers per second (km/s)': 0.0003048,
+          'Kilometers per hour (km/h)': 1.09728,
+          'Inches per second (in/s)': 12.0,
+          'Inches per hour (in/h)': 43200.0,
+          'Feet per second (ft/s)': 1.0,
+          'Feet per hour (ft/h)': 3600.0,
+          'Miles per second (mi/s)': 0.000189394,
+          'Miles per hour (mi/h)': 0.681818,
+          'Knots (kn)': 0.592484
+        },
+        'Feet per hour (ft/h)': {
+          'Meters per second (m/s)': 0.0000846667,
+          'Meters per hour (m/h)': 0.3048,
+          'Kilometers per second (km/s)': 8.4667e-8,
+          'Kilometers per hour (km/h)': 0.0003048,
+          'Inches per second (in/s)': 0.00333333,
+          'Inches per hour (in/h)': 12.0,
+          'Feet per second (ft/s)': 0.000277778,
+          'Feet per hour (ft/h)': 1.0,
+          'Miles per second (mi/s)': 5.2604e-8,
+          'Miles per hour (mi/h)': 0.000189394,
+          'Knots (kn)': 0.000164579
+        },
+        'Miles per second (mi/s)': {
+          'Meters per second (m/s)': 1609.34,
+          'Meters per hour (m/h)': 5.7923e+6,
+          'Kilometers per second (km/s)': 1.60934,
+          'Kilometers per hour (km/h)': 5792.34,
+          'Inches per second (in/s)': 63360.0,
+          'Inches per hour (in/h)': 2.2814e+8,
+          'Feet per second (ft/s)': 5280.0,
+          'Feet per hour (ft/h)': 1.9007e+7,
+          'Miles per second (mi/s)': 1.0,
+          'Miles per hour (mi/h)': 3600.0,
+          'Knots (kn)': 3128.31
+        },
+        'Miles per hour (mi/h)': {
+          'Meters per second (m/s)': 0.44704,
+          'Meters per hour (m/h)': 1609.34,
+          'Kilometers per second (km/s)': 0.00044704,
+          'Kilometers per hour (km/h)': 1.60934,
+          'Inches per second (in/s)': 17.6,
+          'Inches per hour (in/h)': 63360.0,
+          'Feet per second (ft/s)': 1.46667,
+          'Feet per hour (ft/h)': 5280.0,
+          'Miles per second (mi/s)': 0.000277778,
+          'Miles per hour (mi/h)': 1.0,
+          'Knots (kn)': 0.868976
+        },
+        'Knots (kn)': {
+          'Meters per second (m/s)': 0.514444,
+          'Meters per hour (m/h)': 1852.0,
+          'Kilometers per second (km/s)': 0.000514444,
+          'Kilometers per hour (km/h)': 1.852,
+          'Inches per second (in/s)': 20.2537,
+          'Inches per hour (in/h)': 7.1248e+7,
+          'Feet per second (ft/s)': 1.68781,
+          'Feet per hour (ft/h)': 6076.12,
+          'Miles per second (mi/s)': 0.000319661,
+          'Miles per hour (mi/h)': 1.15078,
+          'Knots (kn)': 1.0
+        }
+      };
+      if (speedMap.containsKey(x) && speedMap[x]!.containsKey(y)) {
+        return val1 * speedMap[x]![y]!;
+      }
+    }
+    if (tabin == 7) {
+      Map<String, Map<String, double>> timeMap = {
+        'Milliseconds (ms)': {
+          'Milliseconds (ms)': 1.0,
+          'Seconds (s)': 0.001,
+          'Minutes (min)': 0.0000166667,
+          'Hours (h)': 2.77778e-7,
+          'Days (d)': 1.15741e-8,
+          'Weeks (wk)': 1.65344e-9
+        },
+        'Seconds (s)': {
+          'Milliseconds (ms)': 1000.0,
+          'Seconds (s)': 1.0,
+          'Minutes (min)': 0.0166667,
+          'Hours (h)': 0.000277778,
+          'Days (d)': 0.0000115741,
+          'Weeks (wk)': 0.00000165344
+        },
+        'Minutes (min)': {
+          'Milliseconds (ms)': 60000.0,
+          'Seconds (s)': 60.0,
+          'Minutes (min)': 1.0,
+          'Hours (h)': 0.0166667,
+          'Days (d)': 0.000694444,
+          'Weeks (wk)': 0.0000992063
+        },
+        'Hours (h)': {
+          'Milliseconds (ms)': 3.6e+6,
+          'Seconds (s)': 3600.0,
+          'Minutes (min)': 60.0,
+          'Hours (h)': 1.0,
+          'Days (d)': 0.0416667,
+          'Weeks (wk)': 0.00595238
+        },
+        'Days (d)': {
+          'Milliseconds (ms)': 8.64e+7,
+          'Seconds (s)': 86400.0,
+          'Minutes (min)': 1440.0,
+          'Hours (h)': 24.0,
+          'Days (d)': 1.0,
+          'Weeks (wk)': 0.142857
+        },
+        'Weeks (wk)': {
+          'Milliseconds (ms)': 6.048e+8,
+          'Seconds (s)': 604800.0,
+          'Minutes (min)': 10080.0,
+          'Hours (h)': 168.0,
+          'Days (d)': 7.0,
+          'Weeks (wk)': 1.0
+        }
+      };
+      if (timeMap.containsKey(x) && timeMap[x]!.containsKey(y)) {
+        return val1 * timeMap[x]![y]!;
+      }
+    }
   }
 }
