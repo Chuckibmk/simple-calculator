@@ -1,5 +1,7 @@
 // import 'dart:ui';
 
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'dart:math';
@@ -14,11 +16,15 @@ class BasicCalcClass extends StatefulWidget {
 }
 
 class _BasicCalcClassState extends State<BasicCalcClass> {
+  //scaffold variable for drawer control, stores the state of the drawer
   var scaffoldkey = GlobalKey<ScaffoldState>();
 
+  //variables for question and History textcontroller
   final ques = TextEditingController();
   final hisctrl = TextEditingController();
 
+  //dynamic List containing calculator variables used for buttons,
+  // note there're Lists inside the main List
   List<List<dynamic>> calculator_varibles = [
     ['%', 'CE', 'C', '\u232B'],
     ['1/x', 'x²', '√x', '÷'],
@@ -28,23 +34,36 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     ['±', '0', '.', '=']
   ];
 
+  // List map used to store calculated history, where a map accepts two strings(equation and answer) and the map is arranged in a list
   List<Map<String, String>> history = [];
 
+  //variable containing current eqn
   dynamic eqn = '';
+
+  // variable containing current ans
   dynamic ans = '';
+
+  // variable to hold current value from textform
   num currentValue = 0;
+
+  // variable to hold next value from textform after operator click
+  num nextValue = 0;
+
+  // variable containing operator
   dynamic operator = '';
+
+  // bool variable to check if a new operation started
   bool isNewOperation = true;
 
+  // void method to add two strings(Map) to history List
   void addHistory(String question, String answer) {
     history.add({'question': question, 'answer': answer});
   }
 
+  // void method to clear history List
   void emptyHistory() {
     history.clear();
   }
-
-  num nextValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +79,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                   builder: (context) => IconButton(
                         icon: const Icon(Icons.history),
                         onPressed: () {
+                          // use of scaffold variable store state after openEndDrawer
                           scaffoldkey.currentState?.openEndDrawer();
                         },
                         tooltip: MaterialLocalizations.of(context)
@@ -70,6 +90,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
           child: Column(
             // padding: EdgeInsets.zero,
             children: [
+              // flexible container with child of History answer widget
               Flexible(child: anshis()),
               yspace(),
               history.isEmpty
@@ -132,10 +153,12 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               child: Column(
                 children: [
                   // yspace(),
+                  // loop through the Lists in the calculator_varibles List, in order to get the arrangement
                   for (var rw in calculator_varibles)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // loop through the Strings in each list and calling the calcbtn method to show each button
                         for (var label in rw) calcbtn(label),
                       ],
                     ),
@@ -160,6 +183,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     );
   }
 
+  //void calculate method that handles basic calculation logic
   void calculate() {
     setState(() {
       nextValue = num.tryParse(eqn) ?? 0;
@@ -189,6 +213,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     });
   }
 
+  //void evaluate method that handles basic evaluation Logic
   void evaluate() {
     setState(() {
       dynamic question = '$operator $currentValue'.toString();
@@ -216,13 +241,14 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     });
   }
 
+  // Answers history widget
   Widget anshis() {
     history.isEmpty
         ? const SizedBox(
-            height: 100,
+            height: 300,
             child: DrawerHeader(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                // decoration: BoxDecoration(color: Colors.blue),
+                decoration: BoxDecoration(color: Colors.blue),
                 child: Text("There's no history yet",
                     style: TextStyle(
                       color: Colors.black,
@@ -262,6 +288,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         });
   }
 
+  // method for the button and calculation logic after onpress
   calcbtn(dynamic btnText) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
