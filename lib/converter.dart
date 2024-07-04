@@ -18,9 +18,11 @@ class Converter extends StatefulWidget {
 
 class _ConverterState extends State<Converter>
     with SingleTickerProviderStateMixin {
+  // List containing the generated index for textcontroller
   final List<TextEditingController> forms =
       List.generate(16, (index) => TextEditingController());
 
+  // Map of selected values for individual dropdowns
   Map<String, List<String>> selectedValuesMap = {
     'Area': ['Acres (ac)', 'Square meters (m²)'],
     'Length': ['Inches (in)', 'Centimeters (cm)'],
@@ -32,6 +34,7 @@ class _ConverterState extends State<Converter>
     'Time': ['Seconds (s)', 'Hours (h)']
   };
 
+  // list of tabnames
   final List<String> tabKeys = [
     'Area',
     'Length',
@@ -43,15 +46,19 @@ class _ConverterState extends State<Converter>
     'Time'
   ];
 
+  // string method for getting the tabname of selected index
   String getKeyForIndex(int index) {
     return tabKeys[index];
   }
 
+  // list method to select String from selectedValuesMap based on the key provided by getkeyforindex
   List<String> getSelectedValuesForIndex(int index) {
     String key = getKeyForIndex(index);
     return selectedValuesMap[key] ?? [];
   }
 
+  //dynamic List containing symbols used for buttons,
+  // note there're Lists inside the main List
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
     ['4', '5', '6', 'C'],
@@ -60,8 +67,10 @@ class _ConverterState extends State<Converter>
     // ['±', '0', '.', '↓']
   ];
 
+  // tabcontroller that controls the conversion class tabs
   late TabController _tabController;
 
+  // void method to update List Strings in SelectedValuesMap by tabname after dropdown press
   void _updateSelectedValues(String tabKey, List<String> values) {
     setState(() {
       selectedValuesMap[tabKey] = values;
@@ -71,7 +80,9 @@ class _ConverterState extends State<Converter>
   @override
   void initState() {
     super.initState();
+    // intialize tabcontroller and assign number of expected tabs
     _tabController = TabController(length: 8, vsync: this);
+    // intialize addlistener to setstate after tabcontroller onpress
     _tabController.addListener(() {
       setState(() {});
     });
@@ -165,16 +176,21 @@ class _ConverterState extends State<Converter>
               height: size.height / 2,
               child: Column(
                 children: [
+                  // loop through the Lists in the nbmrs symbol List, in order to get the arrangement
                   for (var nb in nmbrs)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // loop through the Strings in each list and calling the convbtn method to show each button
                         for (var n in nb)
                           convbtn(
                               n,
+                              //get textcontroller value base on tabcontroller index provided
                               forms.sublist(_tabController.index * 2,
                                   _tabController.index * 2 + 2),
+                              // get values from SelectedValuesMap base on current tabcontroller index
                               getSelectedValuesForIndex(_tabController.index),
+                              // current tabcontroller index
                               _tabController.index),
                       ],
                     )
@@ -250,8 +266,11 @@ class _ConverterState extends State<Converter>
     );
   }
 
+  // convert val1 from x to y under tabin
+  // eg: convert 100 from kilogram to ton under index 4 (mass)
   convert(dynamic tabin, num val1, String x, String y) {
     if (tabin == 0) {
+      // map of containing conversion classes and their individual conversion rates
       final Map<String, Map<String, double>> areaMap = {
         'Acres (ac)': {
           'Acres (ac)': 1,
@@ -317,7 +336,9 @@ class _ConverterState extends State<Converter>
           'Square meters (m²)': 1
         }
       };
+      // check if x is in map and if x(that is not null) has y
       if (areaMap.containsKey(x) && areaMap[x]!.containsKey(y)) {
+        // return the multiplication of val1 and values of y found in x
         return val1 * areaMap[x]![y]!;
       }
     }

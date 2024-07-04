@@ -27,7 +27,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  PageController _controller = PageController();
+  final _controller = PageController();
   int currentIndex = 0;
 
   @override
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
       // appBar: AppBar(title: Text('Bottom '))
       body: PageView(
         controller: _controller,
-        children: [
+        children: const [
           BasicCalcClass(),
           Converter(),
         ],
@@ -47,12 +47,12 @@ class _HomeState extends State<Home> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        selectedItemColor: Color.fromARGB(255, 228, 222, 222),
-        unselectedItemColor: Color.fromARGB(255, 32, 30, 30),
+        selectedItemColor: const Color.fromARGB(255, 228, 222, 222),
+        unselectedItemColor: const Color.fromARGB(255, 32, 30, 30),
         onTap: (index) {
           _controller.jumpToPage(index);
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.calculate_outlined), label: 'Calculator'),
           BottomNavigationBarItem(

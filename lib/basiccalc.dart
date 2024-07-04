@@ -23,9 +23,9 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   final ques = TextEditingController();
   final hisctrl = TextEditingController();
 
-  //dynamic List containing calculator variables used for buttons,
+  //dynamic List containing calculator symbols used for buttons,
   // note there're Lists inside the main List
-  List<List<dynamic>> calculator_varibles = [
+  List<List<dynamic>> calculator_Varibles = [
     ['%', 'CE', 'C', '\u232B'],
     ['1/x', 'x²', '√x', '÷'],
     ['7', '8', '9', 'x'],
@@ -153,8 +153,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               child: Column(
                 children: [
                   // yspace(),
-                  // loop through the Lists in the calculator_varibles List, in order to get the arrangement
-                  for (var rw in calculator_varibles)
+                  // loop through the Lists in the calculator_Varibles List, in order to get the arrangement
+                  for (var rw in calculator_Varibles)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
