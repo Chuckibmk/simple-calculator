@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Data extends StatefulWidget {
+  // List of data textcontroller passed from parent page
   final List<TextEditingController> data1;
+
+  // List of dropdown strings passed from parent page
   final List<String> dtdd;
+
+  // function of dropdown OnValueChanged handling List of Strings
   final Function(List<String>) dovc;
 
   const Data({
@@ -17,6 +22,7 @@ class Data extends StatefulWidget {
 }
 
 class _DataState extends State<Data> {
+  // dropdown 1 Values
   var dd_1 = [
     'Bits (bit)',
     'Bytes (B)',
@@ -30,6 +36,7 @@ class _DataState extends State<Data> {
     'Tebibytes (TiB)'
   ];
 
+// dropdown 2 Values
   var dd_2 = [
     'Bits (bit)',
     'Bytes (B)',
@@ -52,6 +59,7 @@ class _DataState extends State<Data> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
+                  // interate between all items in dropdown 1
                   items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
@@ -59,13 +67,13 @@ class _DataState extends State<Data> {
                     );
                   }).toList(),
                   isExpanded: true,
+                  //display index 0 of dtdd widget
                   value: widget.dtdd[0],
+                  // onchange assign new selected value and pass thro ovc function
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.dtdd);
-                      newValues[0] = newValue;
-                      widget.dovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.dtdd);
+                    newValues[0] = newValue!;
+                    widget.dovc(newValues);
                   }),
               TextFormField(
                 controller: widget.data1[0],
@@ -96,11 +104,9 @@ class _DataState extends State<Data> {
                   isExpanded: true,
                   value: widget.dtdd[1],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.dtdd);
-                      newValues[1] = newValue;
-                      widget.dovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.dtdd);
+                    newValues[1] = newValue!;
+                    widget.dovc(newValues);
                   }),
               TextFormField(
                 controller: widget.data1[1],
