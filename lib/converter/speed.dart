@@ -31,20 +31,6 @@ class _SpeedState extends State<Speed> {
     'Knots (kn)'
   ];
 
-  var dd_2 = [
-    'Meters per second (m/s)',
-    'Meters per hour (m/h)',
-    'Kilometers per second (km/s)',
-    'Kilometers per hour (km/h)',
-    'Inches per second (in/s)',
-    'Inches per hour (in/h)',
-    'Feet per second (ft/s)',
-    'Feet per hour (ft/h)',
-    'Miles per second (mi/s)',
-    'Miles per hour (mi/h)',
-    'Knots (kn)'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,11 +49,9 @@ class _SpeedState extends State<Speed> {
                   isExpanded: true,
                   value: widget.sdd[0],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.sdd);
-                      newValues[0] = newValue;
-                      widget.sovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.sdd);
+                    newValues[0] = newValue!;
+                    widget.sovc(newValues);
                   }),
               TextFormField(
                 controller: widget.spd1[0],
@@ -89,7 +73,7 @@ class _SpeedState extends State<Speed> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
-                  items: dd_2.map((items) {
+                  items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -98,11 +82,9 @@ class _SpeedState extends State<Speed> {
                   isExpanded: true,
                   value: widget.sdd[1],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.sdd);
-                      newValues[1] = newValue;
-                      widget.sovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.sdd);
+                    newValues[1] = newValue!;
+                    widget.sovc(newValues);
                   }),
               TextFormField(
                 controller: widget.spd1[1],

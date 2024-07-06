@@ -112,15 +112,19 @@ class _ConverterState extends State<Converter>
             TabBar(
               isScrollable: true,
               controller: _tabController,
-              tabs: const [
-                Tab(text: 'Area'),
-                Tab(text: 'Length'),
-                Tab(text: 'Temperature'),
-                Tab(text: 'Volume'),
-                Tab(text: 'Mass'),
-                Tab(text: 'Data'),
-                Tab(text: 'Speed'),
-                Tab(text: 'Time')
+              tabs: [
+                for (var t in tabKeys)
+                  Tab(
+                    text: t,
+                  ),
+                // Tab(text: 'Area'),
+                // Tab(text: 'Length'),
+                // Tab(text: 'Temperature'),
+                // Tab(text: 'Volume'),
+                // Tab(text: 'Mass'),
+                // Tab(text: 'Data'),
+                // Tab(text: 'Speed'),
+                // Tab(text: 'Time')
               ],
             ),
             SizedBox(
@@ -128,11 +132,12 @@ class _ConverterState extends State<Converter>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  Area(
-                    area1: forms.sublist(0, 2),
-                    dd1: selectedValuesMap['Area']!,
-                    ovc: (values) => _updateSelectedValues('Area', values),
-                  ),
+                  for (var t in tabKeys)
+                    Area(
+                      area1: forms.sublist(0, 2),
+                      dd1: selectedValuesMap['Area']!,
+                      ovc: (values) => _updateSelectedValues('Area', values),
+                    ),
                   Length(
                     len1: forms.sublist(2, 4),
                     ldd: selectedValuesMap['Length']!,

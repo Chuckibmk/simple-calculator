@@ -36,20 +36,6 @@ class _DataState extends State<Data> {
     'Tebibytes (TiB)'
   ];
 
-// dropdown 2 Values
-  var dd_2 = [
-    'Bits (bit)',
-    'Bytes (B)',
-    'Kilobytes (KB)',
-    'Kibibytes (KiB)',
-    'Megabytes (MB)',
-    'Mebibytes (MiB)',
-    'Gigabytes (GB)',
-    'Gibibytes (GiB)',
-    'Terabytes (TB)',
-    'Tebibytes (TiB)'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -95,7 +81,7 @@ class _DataState extends State<Data> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
-                  items: dd_2.map((items) {
+                  items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),

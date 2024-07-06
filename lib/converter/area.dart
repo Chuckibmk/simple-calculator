@@ -33,17 +33,6 @@ class _AreaState extends State<Area> {
     'Square meters (m²)'
   ];
 
-  // dropdown 2 Values
-  var dd_2 = [
-    'Acres (ac)',
-    'Ares (a)',
-    'Hectares (ha)',
-    'Square Centimeters (cm²)',
-    'Square feet (ft²)',
-    'Square inches (in²)',
-    'Square meters (m²)'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,7 +78,7 @@ class _AreaState extends State<Area> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
-                  items: dd_2.map((items) {
+                  items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),

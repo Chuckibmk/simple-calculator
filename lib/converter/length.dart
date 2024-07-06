@@ -36,20 +36,6 @@ class _LengthState extends State<Length> {
     'Mils (mil)'
   ];
 
-  // dropdown 2 Values
-  var dd_2 = [
-    'Millimeters (mm)',
-    'Centimeters (cm)',
-    'Meters (m)',
-    'Kilometers (km)',
-    'Inches (in)',
-    'Feet (ft)',
-    'Yards (yd)',
-    'Miles (mi)',
-    'Nautical miles (NM)',
-    'Mils (mil)'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -96,7 +82,7 @@ class _LengthState extends State<Length> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
-                  items: dd_2.map((items) {
+                  items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),

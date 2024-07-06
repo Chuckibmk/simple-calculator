@@ -19,8 +19,6 @@ class Temp extends StatefulWidget {
 class _TempState extends State<Temp> {
   var dd_1 = ['Celsius (℃)', 'Fahrenheit (℉)', 'Kelvin (K)'];
 
-  var dd_2 = ['Celsius (℃)', 'Fahrenheit (℉)', 'Kelvin (K)'];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,11 +37,9 @@ class _TempState extends State<Temp> {
                   isExpanded: true,
                   value: widget.tdd[0],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.tdd);
-                      newValues[0] = newValue;
-                      widget.tovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.tdd);
+                    newValues[0] = newValue!;
+                    widget.tovc(newValues);
                   }),
               TextFormField(
                 controller: widget.temp1[0],
@@ -65,7 +61,7 @@ class _TempState extends State<Temp> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
-                  items: dd_2.map((items) {
+                  items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -74,11 +70,9 @@ class _TempState extends State<Temp> {
                   isExpanded: true,
                   value: widget.tdd[1],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.tdd);
-                      newValues[1] = newValue;
-                      widget.tovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.tdd);
+                    newValues[1] = newValue!;
+                    widget.tovc(newValues);
                   }),
               TextFormField(
                 controller: widget.temp1[1],

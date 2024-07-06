@@ -28,16 +28,6 @@ class _MassState extends State<Mass> {
     'Grams (g)'
   ];
 
-  var dd_2 = [
-    'Tons (t)',
-    'UK tons (t)',
-    'US tons (t)',
-    'Pounds (lb)',
-    'Ounces (oz)',
-    'Kilograms (kg)',
-    'Grams (g)'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,11 +46,9 @@ class _MassState extends State<Mass> {
                   isExpanded: true,
                   value: widget.mdd[0],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.mdd);
-                      newValues[0] = newValue;
-                      widget.movc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.mdd);
+                    newValues[0] = newValue!;
+                    widget.movc(newValues);
                   }),
               TextFormField(
                 controller: widget.mass1[0],
@@ -82,7 +70,7 @@ class _MassState extends State<Mass> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
-                  items: dd_2.map((items) {
+                  items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -91,11 +79,9 @@ class _MassState extends State<Mass> {
                   isExpanded: true,
                   value: widget.mdd[1],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.mdd);
-                      newValues[1] = newValue;
-                      widget.movc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.mdd);
+                    newValues[1] = newValue!;
+                    widget.movc(newValues);
                   }),
               TextFormField(
                 controller: widget.mass1[1],

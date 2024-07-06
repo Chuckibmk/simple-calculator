@@ -27,15 +27,6 @@ class _TimeState extends State<Time> {
     'Weeks (wk)'
   ];
 
-  var dd_2 = [
-    'Milliseconds (ms)',
-    'Seconds (s)',
-    'Minutes (min)',
-    'Hours (h)',
-    'Days (d)',
-    'Weeks (wk)'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,11 +45,9 @@ class _TimeState extends State<Time> {
                   isExpanded: true,
                   value: widget.tidd[0],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.tidd);
-                      newValues[0] = newValue;
-                      widget.tiovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.tidd);
+                    newValues[0] = newValue!;
+                    widget.tiovc(newValues);
                   }),
               TextFormField(
                 controller: widget.time1[0],
@@ -80,7 +69,7 @@ class _TimeState extends State<Time> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
-                  items: dd_2.map((items) {
+                  items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -89,11 +78,9 @@ class _TimeState extends State<Time> {
                   isExpanded: true,
                   value: widget.tidd[1],
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.tidd);
-                      newValues[1] = newValue;
-                      widget.tiovc(newValues);
-                    }
+                    List<String> newValues = List.from(widget.tidd);
+                    newValues[1] = newValue!;
+                    widget.tiovc(newValues);
                   }),
               TextFormField(
                 controller: widget.time1[1],
