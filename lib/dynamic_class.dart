@@ -120,9 +120,9 @@ class _DynaState extends State<Dyna> {
         Container(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(children: [
-              // DropdownButtonFormField(
-              DropdownButton<String>(
-                  // decoration: const InputDecoration(border: InputBorder.none),
+              DropdownButtonFormField(
+                  // DropdownButton<String>(
+                  decoration: const InputDecoration(border: InputBorder.none),
                   // interate between all items in dropdown 1
                   items: getDropdownItemsForKey(widget.currentP),
                   isExpanded: true,
@@ -152,8 +152,9 @@ class _DynaState extends State<Dyna> {
         Container(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(children: [
-              DropdownButton<String>(
-                  // decoration: const InputDecoration(border: InputBorder.none),
+              // DropdownButton<String>(
+              DropdownButtonFormField(
+                  decoration: const InputDecoration(border: InputBorder.none),
                   // interate between all items in dropdown 1
                   items: getDropdownItemsForKey(widget.currentP),
                   isExpanded: true,
