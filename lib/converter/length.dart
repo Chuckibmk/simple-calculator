@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Length extends StatefulWidget {
+  // List of length textcontroller passed from parent page
   final List<TextEditingController> len1;
+
+  // List of dropdown strings passed from parent page
   final List<String> ldd;
+
+  // function of dropdown OnValueChanged handling List of Strings
   final Function(List<String>) lovc;
 
   const Length({
@@ -17,6 +22,7 @@ class Length extends StatefulWidget {
 }
 
 class _LengthState extends State<Length> {
+  // dropdown 1 Values
   var dd_1 = [
     'Millimeters (mm)',
     'Centimeters (cm)',
@@ -30,6 +36,7 @@ class _LengthState extends State<Length> {
     'Mils (mil)'
   ];
 
+  // dropdown 2 Values
   var dd_2 = [
     'Millimeters (mm)',
     'Centimeters (cm)',
@@ -52,6 +59,7 @@ class _LengthState extends State<Length> {
             child: Column(children: [
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
+                  // interate between all items in dropdown 1
                   items: dd_1.map((items) {
                     return DropdownMenuItem(
                       value: items,
@@ -59,13 +67,14 @@ class _LengthState extends State<Length> {
                     );
                   }).toList(),
                   isExpanded: true,
+                  //display index 0 of dd1 widget
                   value: widget.ldd[0],
+                  //display index 0 of dd1 widget
                   onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      List<String> newValues = List.from(widget.ldd);
-                      newValues[0] = newValue;
-                      widget.lovc(newValues);
-                    }
+                    // onchange assign new selected value and pass thro ovc function
+                    List<String> newValues = List.from(widget.ldd);
+                    newValues[0] = newValue!;
+                    widget.lovc(newValues);
                   }),
               TextFormField(
                 controller: widget.len1[0],
