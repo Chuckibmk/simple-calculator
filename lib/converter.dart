@@ -1,13 +1,6 @@
-import 'package:calculator/converter/data.dart';
-import 'package:calculator/converter/length.dart';
-import 'package:calculator/converter/mass.dart';
-import 'package:calculator/converter/speed.dart';
-import 'package:calculator/converter/temp.dart';
-import 'package:calculator/converter/time.dart';
-import 'package:calculator/converter/volume.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
-import 'converter/area.dart';
+import 'dynamic_class.dart';
 
 class Converter extends StatefulWidget {
   const Converter({super.key});
@@ -113,18 +106,11 @@ class _ConverterState extends State<Converter>
               isScrollable: true,
               controller: _tabController,
               tabs: [
+                // loop to create tabs for all tabkeys
                 for (var t in tabKeys)
                   Tab(
                     text: t,
                   ),
-                // Tab(text: 'Area'),
-                // Tab(text: 'Length'),
-                // Tab(text: 'Temperature'),
-                // Tab(text: 'Volume'),
-                // Tab(text: 'Mass'),
-                // Tab(text: 'Data'),
-                // Tab(text: 'Speed'),
-                // Tab(text: 'Time')
               ],
             ),
             SizedBox(
@@ -132,47 +118,14 @@ class _ConverterState extends State<Converter>
               child: TabBarView(
                 controller: _tabController,
                 children: [
+                  //loop to use dynamic page dyna to generate pages for each tab
                   for (var t in tabKeys)
-                    Area(
-                      area1: forms.sublist(0, 2),
-                      dd1: selectedValuesMap['Area']!,
-                      ovc: (values) => _updateSelectedValues('Area', values),
-                    ),
-                  Length(
-                    len1: forms.sublist(2, 4),
-                    ldd: selectedValuesMap['Length']!,
-                    lovc: (values) => _updateSelectedValues('Length', values),
-                  ),
-                  Temp(
-                    temp1: forms.sublist(4, 6),
-                    tdd: selectedValuesMap['Temp']!,
-                    tovc: (values) => _updateSelectedValues('Temp', values),
-                  ),
-                  Volume(
-                    vol1: forms.sublist(6, 8),
-                    vdd: selectedValuesMap['Volume']!,
-                    vovc: (values) => _updateSelectedValues('Volume', values),
-                  ),
-                  Mass(
-                    mass1: forms.sublist(8, 10),
-                    mdd: selectedValuesMap['Mass']!,
-                    movc: (values) => _updateSelectedValues('Mass', values),
-                  ),
-                  Data(
-                    data1: forms.sublist(10, 12),
-                    dtdd: selectedValuesMap['Data']!,
-                    dovc: (values) => _updateSelectedValues('Data', values),
-                  ),
-                  Speed(
-                    spd1: forms.sublist(12, 14),
-                    sdd: selectedValuesMap['Speed']!,
-                    sovc: (values) => _updateSelectedValues('Speed', values),
-                  ),
-                  Time(
-                    time1: forms.sublist(14, 16),
-                    tidd: selectedValuesMap['Time']!,
-                    tiovc: (values) => _updateSelectedValues('Time', values),
-                  )
+                    Dyna(
+                        currentP: t,
+                        dyna1: forms.sublist(_tabController.index * 2,
+                            _tabController.index * 2 + 2),
+                        dd1: selectedValuesMap[t]!,
+                        ovc: (values) => _updateSelectedValues(t, values)),
                 ],
               ),
             ),

@@ -125,12 +125,6 @@ class _DynaState extends State<Dyna> {
                   // decoration: const InputDecoration(border: InputBorder.none),
                   // interate between all items in dropdown 1
                   items: getDropdownItemsForKey(widget.currentP),
-                  // items: dd_1.map((items) {
-                  //   return DropdownMenuItem(
-                  //     value: items,
-                  //     child: Text(items),
-                  //   );
-                  // }).toList(),
                   isExpanded: true,
                   //display index 0 of dd1 widget
                   value: widget.dd1[0],
