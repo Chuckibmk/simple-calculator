@@ -65,8 +65,18 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     history.clear();
   }
 
+  ThemeMode _themeMode = ThemeMode.system;
+
+  void _toggkeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return LayoutBuilder(builder: (context, constraints) {
       Size size = MediaQuery.of(context).size;
       return Scaffold(
@@ -74,6 +84,19 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         appBar: AppBar(
             title: const Text('Calculator'),
             centerTitle: true,
+            leading: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Switch(
+                  value: isDarkMode,
+                  onChanged: (isOn) {
+                    isOn
+                        ? _toggkeTheme(ThemeMode.dark)
+                        : _toggkeTheme(ThemeMode.light);
+                  },
+                );
+              },
+            ),
             actions: [
               Builder(
                   builder: (context) => IconButton(
@@ -92,9 +115,18 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             children: [
               // flexible container with child of History answer widget
               Flexible(child: anshis()),
-              yspace(),
+              // yspace(),
               history.isEmpty
-                  ? SizedBox()
+                  ? const SizedBox(
+                      child: DrawerHeader(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          child: Text("There's no history yet",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                              ))),
+                    )
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -243,20 +275,6 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
 
   // Answers history widget
   Widget anshis() {
-    history.isEmpty
-        ? const SizedBox(
-            height: 300,
-            child: DrawerHeader(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                decoration: BoxDecoration(color: Colors.blue),
-                child: Text("There's no history yet",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
-                    ))),
-          )
-        : null;
-
     return ListView.builder(
         shrinkWrap: true,
         // physics: const NeverScrollableScrollPhysics(),
