@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'dynamic_class.dart';
 
 class Converter extends StatefulWidget {
-  const Converter({super.key});
+  final VoidCallback toggleTheme;
+  const Converter({super.key, required this.toggleTheme});
 
   @override
   State<Converter> createState() => _ConverterState();
@@ -96,10 +97,15 @@ class _ConverterState extends State<Converter>
       Size size = MediaQuery.of(context).size;
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Converter'),
-          centerTitle: true,
-          // actions: [],
-        ),
+            title: const Text('Converter'),
+            centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.toggle_on),
+              onPressed: () {
+                widget.toggleTheme();
+              },
+              // actions: [],
+            )),
         body: SingleChildScrollView(
           child: Column(children: [
             TabBar(
@@ -184,7 +190,8 @@ class _ConverterState extends State<Converter>
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
-                    side: const BorderSide(color: Colors.black)))),
+                    side: BorderSide(
+                        color: Theme.of(context).colorScheme.onSurface)))),
         onPressed: () {
           setState(() {
             if (btntext == 'C') {
@@ -214,8 +221,8 @@ class _ConverterState extends State<Converter>
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: Text(
             btntext,
-            style: const TextStyle(
-              color: Colors.black,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface,
               fontSize: 25,
             ),
           ),

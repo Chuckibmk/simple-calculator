@@ -1,15 +1,9 @@
-// import 'dart:ui';
-
-// import 'dart:html';
-
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
 import 'dart:math';
 
-// import 'package:flutter/widgets.dart';
-
 class BasicCalcClass extends StatefulWidget {
-  const BasicCalcClass({super.key});
+  final VoidCallback toggleTheme;
+  const BasicCalcClass({super.key, required this.toggleTheme});
 
   @override
   State<BasicCalcClass> createState() => _BasicCalcClassState();
@@ -65,18 +59,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     history.clear();
   }
 
-  ThemeMode _themeMode = ThemeMode.system;
-
-  void _toggkeTheme(ThemeMode themeMode) {
-    setState(() {
-      _themeMode = themeMode;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
     return LayoutBuilder(builder: (context, constraints) {
       Size size = MediaQuery.of(context).size;
       return Scaffold(
@@ -85,16 +69,9 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             title: const Text('Calculator'),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.toggle_on),
               onPressed: () {
-                Switch(
-                  value: isDarkMode,
-                  onChanged: (isOn) {
-                    isOn
-                        ? _toggkeTheme(ThemeMode.dark)
-                        : _toggkeTheme(ThemeMode.light);
-                  },
-                );
+                widget.toggleTheme();
               },
             ),
             actions: [
@@ -117,13 +94,13 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               Flexible(child: anshis()),
               // yspace(),
               history.isEmpty
-                  ? const SizedBox(
+                  ? SizedBox(
                       child: DrawerHeader(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 10.0),
                           child: Text("There's no history yet",
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Theme.of(context).colorScheme.onSurface,
                                 fontSize: 25,
                               ))),
                     )
@@ -318,7 +295,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
-                    side: const BorderSide(color: Colors.black))),
+                    side: BorderSide(
+                        color: Theme.of(context).colorScheme.onSurface))),
           ),
           onPressed: () {
             setState(() {
@@ -380,8 +358,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Text(
                 btnText,
-                style: const TextStyle(
-                  color: Colors.black,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 25,
                 ),
               ))),
