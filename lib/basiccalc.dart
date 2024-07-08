@@ -74,20 +74,19 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             leading: IconButton(
               icon: const Icon(Icons.toggle_on),
               onPressed: () {
-                // widget.toggleTheme();
-                bc.open();
+                widget.toggleTheme();
               },
             ),
             actions: [
-              // Builder(
-              //     builder: (context) => IconButton(
-              //           onPressed: () {
-              //             bc.open();
-              //           },
-              //           icon: const Icon(Icons.history),
-              //           tooltip: MaterialLocalizations.of(context)
-              //               .openAppDrawerTooltip,
-              //         )),
+              Builder(
+                  builder: (context) => IconButton(
+                        onPressed: () {
+                          bc.open();
+                        },
+                        icon: const Icon(Icons.history),
+                        tooltip: MaterialLocalizations.of(context)
+                            .openAppDrawerTooltip,
+                      )),
               Builder(
                   builder: (context) => IconButton(
                         icon: const Icon(Icons.history),
