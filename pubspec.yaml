@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
     # provider: ^6.0.0
+  bottom_drawer: ^0.0.5
 
 dev_dependencies:
   flutter_test:

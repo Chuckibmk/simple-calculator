@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:bottom_drawer/bottom_drawer.dart';
 
 class BasicCalcClass extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -59,6 +60,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     history.clear();
   }
 
+  BottomDrawerController bc = BottomDrawerController();
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -71,10 +74,20 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             leading: IconButton(
               icon: const Icon(Icons.toggle_on),
               onPressed: () {
-                widget.toggleTheme();
+                // widget.toggleTheme();
+                bc.open();
               },
             ),
             actions: [
+              // Builder(
+              //     builder: (context) => IconButton(
+              //           onPressed: () {
+              //             bc.open();
+              //           },
+              //           icon: const Icon(Icons.history),
+              //           tooltip: MaterialLocalizations.of(context)
+              //               .openAppDrawerTooltip,
+              //         )),
               Builder(
                   builder: (context) => IconButton(
                         icon: const Icon(Icons.history),
@@ -87,6 +100,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                       ))
             ]),
         endDrawer: Drawer(
+          // shape: ,
           child: Column(
             // padding: EdgeInsets.zero,
             children: [
@@ -178,6 +192,16 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         ),
       );
     });
+  }
+
+  Widget btmdrw(BuildContext context) {
+    return BottomDrawer(
+      header: Placeholder(),
+      body: Placeholder(),
+      headerHeight: 10.0,
+      drawerHeight: 80.0,
+      color: Theme.of(context).colorScheme.onSurface,
+    );
   }
 
   Widget yspace() {
