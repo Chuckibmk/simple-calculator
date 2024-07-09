@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:bottom_drawer/bottom_drawer.dart';
+import 'package:flutter/widgets.dart';
 
 class BasicCalcClass extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -61,6 +62,18 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   }
 
   BottomDrawerController bc = BottomDrawerController();
+  bool isBcopen = false;
+
+  void toggleDrawer() {
+    setState(() {
+      if (isBcopen) {
+        bc.close();
+      } else {
+        bc.open();
+      }
+      isBcopen = !isBcopen;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +94,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               Builder(
                   builder: (context) => IconButton(
                         onPressed: () {
-                          bc.open();
+                          toggleDrawer();
                         },
                         icon: const Icon(Icons.history),
                         tooltip: MaterialLocalizations.of(context)
@@ -99,7 +112,11 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                       ))
             ]),
         endDrawer: Drawer(
-          // shape: ,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+            topLeft: Radius.zero,
+            bottomLeft: Radius.zero,
+          )),
           child: Column(
             // padding: EdgeInsets.zero,
             children: [
@@ -134,72 +151,94 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             ],
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(children: [
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                height: size.height / 3,
-                child: Column(children: [
-                  TextFormField(
-                    controller: hisctrl,
-                    maxLines: 1,
-                    style: const TextStyle(fontSize: 35),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "",
-                    ),
-                    enableInteractiveSelection: false,
-                    readOnly: true,
-                    showCursor: false,
-                    textAlign: TextAlign.right,
-                    keyboardType: TextInputType.none,
+        body: Stack(children: [
+          GestureDetector(
+            onTap: () {
+              toggleDrawer();
+            },
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: Column(children: [
+                      TextFormField(
+                        controller: hisctrl,
+                        maxLines: 1,
+                        style: const TextStyle(fontSize: 35),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "",
+                        ),
+                        enableInteractiveSelection: false,
+                        readOnly: true,
+                        showCursor: false,
+                        textAlign: TextAlign.right,
+                        keyboardType: TextInputType.none,
+                      ),
+                      TextFormField(
+                        controller: ques,
+                        maxLines: 1,
+                        style: const TextStyle(fontSize: 40),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          // hintText: "0",
+                        ),
+                        enableInteractiveSelection: false,
+                        readOnly: true,
+                        showCursor: false,
+                        textAlign: TextAlign.right,
+                        keyboardType: TextInputType.none,
+                      ),
+                    ])),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  height: size.height / 2,
+                  child: Column(
+                    children: [
+                      // yspace(),
+                      // loop through the Lists in the calculator_Varibles List, in order to get the arrangement
+                      for (var rw in calculator_Varibles)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // loop through the Strings in each list and calling the calcbtn method to show each button
+                            for (var label in rw) calcbtn(label),
+                          ],
+                        ),
+                    ],
                   ),
-                  TextFormField(
-                    controller: ques,
-                    maxLines: 1,
-                    style: const TextStyle(fontSize: 40),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      // hintText: "0",
-                    ),
-                    enableInteractiveSelection: false,
-                    readOnly: true,
-                    showCursor: false,
-                    textAlign: TextAlign.right,
-                    keyboardType: TextInputType.none,
-                  ),
-                ])),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              height: size.height / 2,
-              child: Column(
-                children: [
-                  // yspace(),
-                  // loop through the Lists in the calculator_Varibles List, in order to get the arrangement
-                  for (var rw in calculator_Varibles)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // loop through the Strings in each list and calling the calcbtn method to show each button
-                        for (var label in rw) calcbtn(label),
-                      ],
-                    ),
-                ],
-              ),
-            )
-          ]),
-        ),
+                )
+              ]),
+            ),
+          ),
+          btmdrw(context)
+        ]),
       );
     });
   }
 
   Widget btmdrw(BuildContext context) {
     return BottomDrawer(
-      header: Placeholder(),
-      body: Placeholder(),
-      headerHeight: 10.0,
-      drawerHeight: 80.0,
-      color: Theme.of(context).colorScheme.onSurface,
+      controller: bc,
+      header: Container(
+        color: Theme.of(context).colorScheme.surface,
+        height: 50,
+        child: Center(
+          child: Text(
+            'History',
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface, fontSize: 20),
+          ),
+        ),
+      ),
+      body: Container(
+        color: Theme.of(context).colorScheme.surface,
+        child: anshis(),
+      ),
+      headerHeight: 50.0,
+      drawerHeight: MediaQuery.of(context).size.height / 2,
+      // color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
