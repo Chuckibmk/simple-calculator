@@ -6,23 +6,6 @@ void main() {
   runApp(const MainApp());
 }
 
-// class Appcolors {
-//   static const darkBlue = Color.fromARGB(255, 12, 12, 41);
-//   static const lightBlue = Color.fromARGB(255, 76, 76, 104);
-// }
-
-// class Apptheme {
-//   static final lightTheme = ThemeData(
-//     primaryColor: Appcolors.lightBlue,
-//     brightness: Brightness.light,
-//   );
-
-//   static final darkTheme = ThemeData(
-//     primaryColor: Appcolors.darkBlue,
-//     brightness: Brightness.dark,
-//   );
-// }
-
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
 

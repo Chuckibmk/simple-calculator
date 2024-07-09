@@ -97,12 +97,13 @@ class _ConverterState extends State<Converter>
       Size size = MediaQuery.of(context).size;
       return Scaffold(
         appBar: AppBar(
-            title: const Text('Converter'),
+            title: const Text('Unit Converter'),
             centerTitle: true,
             leading: IconButton(
               icon: const Icon(Icons.toggle_on),
               onPressed: () {
                 widget.toggleTheme();
+                print(2);
               },
               // actions: [],
             )),
