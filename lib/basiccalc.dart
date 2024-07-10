@@ -73,7 +73,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             icon: const Icon(Icons.toggle_on),
             onPressed: () {
               widget.toggleTheme();
-              print(1);
+              // print(1);
             },
           ),
           actions: [

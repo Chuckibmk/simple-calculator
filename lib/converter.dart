@@ -106,7 +106,7 @@ class _ConverterState extends State<Converter>
               icon: const Icon(Icons.toggle_on),
               onPressed: () {
                 widget.toggleTheme();
-                print(2);
+                // print(2);
               },
               // actions: [],
             )),
