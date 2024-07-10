@@ -66,7 +66,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
       return Scaffold(
         key: scaffoldkey,
         appBar: AppBar(
-          title: const Text('Calculator'),
+          title: const Text('Calculator',
+              style: TextStyle(fontFamily: 'Trajan Pro', fontSize: 20)),
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.toggle_on),
