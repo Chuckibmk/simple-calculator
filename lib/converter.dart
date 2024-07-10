@@ -223,9 +223,9 @@ class _ConverterState extends State<Converter>
           child: Text(
             btntext,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontSize: 25,
-            ),
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 25,
+                fontFamily: 'Trajan Pro'),
           ),
         ),
       ),

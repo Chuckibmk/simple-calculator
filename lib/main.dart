@@ -1,5 +1,5 @@
-import 'package:calculator/basiccalc.dart';
-import 'package:calculator/converter.dart';
+import 'basiccalc.dart';
+import 'converter.dart';
 import 'package:flutter/material.dart';
 
 void main() {

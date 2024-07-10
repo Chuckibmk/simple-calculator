@@ -66,49 +66,56 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
       return Scaffold(
         key: scaffoldkey,
         appBar: AppBar(
-            title: const Text('Calculator'),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.toggle_on),
-              onPressed: () {
-                widget.toggleTheme();
-                print(1);
-              },
-            ),
-            actions: [
-              Builder(
-                  builder: (context) => IconButton(
-                        icon: const Icon(Icons.history),
-                        onPressed: () {
-                          // use of scaffold variable store state after openEndDrawer
-                          scaffoldkey.currentState?.openEndDrawer();
-                        },
-                        tooltip: MaterialLocalizations.of(context)
-                            .openAppDrawerTooltip,
-                      ))
-            ]),
+          title: const Text('Calculator'),
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.toggle_on),
+            onPressed: () {
+              widget.toggleTheme();
+              print(1);
+            },
+          ),
+          actions: [
+            Builder(
+              builder: (context) => IconButton(
+                icon: const Icon(Icons.history),
+                onPressed: () {
+                  // use of scaffold variable store state after openEndDrawer
+                  scaffoldkey.currentState?.openEndDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              ),
+            )
+          ],
+        ),
         endDrawer: Drawer(
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-            topLeft: Radius.zero,
-            bottomLeft: Radius.zero,
-          )),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.zero,
+              bottomLeft: Radius.zero,
+            ),
+          ),
           child: Column(
             // padding: EdgeInsets.zero,
             children: [
               // flexible container with child of History answer widget
-              Flexible(child: anshis()),
+              Flexible(
+                child: anshis(),
+              ),
 
               history.isEmpty
                   ? SizedBox(
                       child: DrawerHeader(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          child: Text("There's no history yet",
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontSize: 25,
-                              ))),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
+                        child: Text(
+                          "There's no history yet",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontSize: 25,
+                              fontFamily: 'Trajan Pro'),
+                        ),
+                      ),
                     )
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,7 +144,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                     TextFormField(
                       controller: hisctrl,
                       maxLines: 1,
-                      style: const TextStyle(fontSize: 35),
+                      style: const TextStyle(
+                          fontSize: 35, fontFamily: 'Trajan Pro'),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "",
@@ -151,7 +159,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                     TextFormField(
                       controller: ques,
                       maxLines: 1,
-                      style: const TextStyle(fontSize: 40),
+                      style: const TextStyle(
+                          fontSize: 40, fontFamily: 'Trajan Pro'),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         // hintText: "0",
@@ -278,14 +287,13 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             title: Text(
               entry['question'] ?? '',
               style: const TextStyle(
+                fontFamily: 'Trajan Pro',
                 fontSize: 30,
               ),
             ),
             subtitle: Text(
               entry['answer'] ?? '',
-              style: const TextStyle(
-                fontSize: 40,
-              ),
+              style: const TextStyle(fontSize: 40, fontFamily: 'Trajan Pro'),
             ),
           );
         });
@@ -367,9 +375,9 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               child: Text(
                 btnText,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontSize: 25,
-                ),
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontSize: 25,
+                    fontFamily: 'Trajan Pro'),
               ))),
     );
   }

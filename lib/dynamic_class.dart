@@ -137,7 +137,7 @@ class _DynaState extends State<Dyna> {
               TextFormField(
                 controller: widget.dyna1[0],
                 maxLines: 1,
-                style: const TextStyle(fontSize: 35),
+                style: const TextStyle(fontSize: 35, fontFamily: 'Trajan Pro'),
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: "",
@@ -167,7 +167,7 @@ class _DynaState extends State<Dyna> {
               TextFormField(
                 controller: widget.dyna1[1],
                 maxLines: 1,
-                style: const TextStyle(fontSize: 35),
+                style: const TextStyle(fontSize: 35, fontFamily: 'Trajan Pro'),
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: "",
