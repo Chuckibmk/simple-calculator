@@ -317,7 +317,6 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
         child: ElevatedButton(
-          // child: InkWell(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(

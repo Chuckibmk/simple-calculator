@@ -140,7 +140,6 @@ class _DynaState extends State<Dyna> {
                 style: const TextStyle(
                   fontSize: 30,
                   fontFamily: 'Trajan Pro',
-                  fontWeight: FontWeight.bold,
                 ),
                 decoration: const InputDecoration(
                   border: InputBorder.none,
@@ -174,7 +173,6 @@ class _DynaState extends State<Dyna> {
                 style: const TextStyle(
                   fontSize: 30,
                   fontFamily: 'Trajan Pro',
-                  fontWeight: FontWeight.bold,
                 ),
                 decoration: const InputDecoration(
                   border: InputBorder.none,

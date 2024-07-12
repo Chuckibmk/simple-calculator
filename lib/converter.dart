@@ -127,7 +127,6 @@ class _ConverterState extends State<Converter>
             ],
           ),
           Expanded(
-            // height: size.height / 4,
             flex: 1,
             child: TabBarView(
               controller: _tabController,
@@ -144,8 +143,6 @@ class _ConverterState extends State<Converter>
             ),
           ),
           Expanded(
-            // padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            // height: size.height / 3,
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.all(5),
@@ -194,12 +191,9 @@ class _ConverterState extends State<Converter>
   convbtn(dynamic btntext, List<TextEditingController> formEntry,
       List<String> dropdownValues, dynamic tabin) {
     return Expanded(
-      // margin: const EdgeInsets.symmetric(vertical: 5.0),
-      // height: 50,
-      // width: 95,
       flex: 1,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 0.5),
         child: ElevatedButton(
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
