@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Dyna extends StatefulWidget {
   final String currentP;
@@ -117,7 +118,9 @@ class _DynaState extends State<Dyna> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        Expanded(
+          flex: 1,
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(children: [
               DropdownButtonFormField(
@@ -151,11 +154,13 @@ class _DynaState extends State<Dyna> {
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.none,
               ),
-            ])),
-        Container(
+            ]),
+          ),
+        ),
+        Expanded(
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(children: [
-              // DropdownButton<String>(
               DropdownButtonFormField(
                   decoration: const InputDecoration(border: InputBorder.none),
                   // interate between all items in dropdown 1
@@ -184,7 +189,9 @@ class _DynaState extends State<Dyna> {
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.none,
               ),
-            ])),
+            ]),
+          ),
+        ),
       ],
     );
   }
