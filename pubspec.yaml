@@ -1,7 +1,7 @@
 name: calculator_converter
 description: "Calculator and Converter is a comprehensive application designed to provide users with both basic and advanced arithmetic functionalities, as well as a variety of conversion tools. This app aims to simplify everyday calculations and conversions, making it a handy tool for students, professionals, and anyone in need of quick mathematical assistance."
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.1
 
 environment:
   sdk: '>=3.3.2 <4.0.0'

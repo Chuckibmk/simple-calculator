@@ -94,12 +94,16 @@ class _ConverterState extends State<Converter>
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      Size size = MediaQuery.of(context).size;
+      // Size size = MediaQuery.of(context).size;
       return Scaffold(
         appBar: AppBar(
             title: const Text(
               'Unit Converter',
-              style: TextStyle(fontFamily: 'Trajan Pro', fontSize: 20),
+              style: TextStyle(
+                fontFamily: 'Trajan Pro',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             centerTitle: true,
             leading: IconButton(
@@ -110,38 +114,41 @@ class _ConverterState extends State<Converter>
               },
               // actions: [],
             )),
-        body: SingleChildScrollView(
-          child: Column(children: [
-            TabBar(
-              isScrollable: true,
+        body: Column(children: [
+          TabBar(
+            isScrollable: true,
+            controller: _tabController,
+            tabs: [
+              // loop to create tabs for all tabkeys
+              for (var t in tabKeys)
+                Tab(
+                  text: t,
+                ),
+            ],
+          ),
+          Expanded(
+            // height: size.height / 4,
+            flex: 1,
+            child: TabBarView(
               controller: _tabController,
-              tabs: [
-                // loop to create tabs for all tabkeys
+              children: [
+                //loop to use dynamic page dyna to generate pages for each tab
                 for (var t in tabKeys)
-                  Tab(
-                    text: t,
-                  ),
+                  Dyna(
+                      currentP: t,
+                      dyna1: forms.sublist(_tabController.index * 2,
+                          _tabController.index * 2 + 2),
+                      dd1: selectedValuesMap[t]!,
+                      ovc: (values) => _updateSelectedValues(t, values)),
               ],
             ),
-            SizedBox(
-              height: size.height / 3,
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  //loop to use dynamic page dyna to generate pages for each tab
-                  for (var t in tabKeys)
-                    Dyna(
-                        currentP: t,
-                        dyna1: forms.sublist(_tabController.index * 2,
-                            _tabController.index * 2 + 2),
-                        dd1: selectedValuesMap[t]!,
-                        ovc: (values) => _updateSelectedValues(t, values)),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              height: size.height / 2,
+          ),
+          Expanded(
+            // padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            // height: size.height / 3,
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(5),
               child: Column(
                 children: [
                   // loop through the Lists in the nbmrs symbol List, in order to get the arrangement
@@ -165,8 +172,9 @@ class _ConverterState extends State<Converter>
                 ],
               ),
             ),
-          ]),
-        ),
+          ),
+        ]),
+        // ),
       );
     });
   }
@@ -185,50 +193,55 @@ class _ConverterState extends State<Converter>
 
   convbtn(dynamic btntext, List<TextEditingController> formEntry,
       List<String> dropdownValues, dynamic tabin) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      height: 50,
-      width: 95,
-      child: ElevatedButton(
-        style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                    side: BorderSide(
-                        color: Theme.of(context).colorScheme.onSurface)))),
-        onPressed: () {
-          setState(() {
-            if (btntext == 'C') {
-              formEntry[0].clear();
-              formEntry[1].clear();
-            } else if (btntext == '\u232B') {
-              if (formEntry[0].text.isNotEmpty) {
-                formEntry[0].text = formEntry[0]
-                    .text
-                    .substring(0, formEntry[0].text.length - 1);
+    return Expanded(
+      // margin: const EdgeInsets.symmetric(vertical: 5.0),
+      // height: 50,
+      // width: 95,
+      flex: 1,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
+        child: ElevatedButton(
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: BorderSide(
+                          color: Theme.of(context).colorScheme.onSurface)))),
+          onPressed: () {
+            setState(() {
+              if (btntext == 'C') {
+                formEntry[0].clear();
+                formEntry[1].clear();
+              } else if (btntext == '\u232B') {
+                if (formEntry[0].text.isNotEmpty) {
+                  formEntry[0].text = formEntry[0]
+                      .text
+                      .substring(0, formEntry[0].text.length - 1);
 
+                  num val1 = num.tryParse(formEntry[0].text) ?? 0;
+                  formEntry[1].text =
+                      convert(tabin, val1, dropdownValues[0], dropdownValues[1])
+                          .toString();
+                }
+              } else {
+                formEntry[0].text += btntext;
                 num val1 = num.tryParse(formEntry[0].text) ?? 0;
                 formEntry[1].text =
                     convert(tabin, val1, dropdownValues[0], dropdownValues[1])
                         .toString();
               }
-            } else {
-              formEntry[0].text += btntext;
-              num val1 = num.tryParse(formEntry[0].text) ?? 0;
-              formEntry[1].text =
-                  convert(tabin, val1, dropdownValues[0], dropdownValues[1])
-                      .toString();
-            }
-          });
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: Text(
-            btntext,
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface,
-                fontSize: 25,
-                fontFamily: 'Trajan Pro'),
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            child: Text(
+              btntext,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Trajan Pro'),
+            ),
           ),
         ),
       ),

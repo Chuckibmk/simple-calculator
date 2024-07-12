@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:flutter/widgets.dart';
+
 class BasicCalcClass extends StatefulWidget {
   final VoidCallback toggleTheme;
   const BasicCalcClass({super.key, required this.toggleTheme});
@@ -62,18 +64,20 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      Size size = MediaQuery.of(context).size;
+      // Size size = MediaQuery.of(context).size;
       return Scaffold(
         key: scaffoldkey,
         appBar: AppBar(
           title: const Text('Calculator',
-              style: TextStyle(fontFamily: 'Trajan Pro', fontSize: 20)),
+              style: TextStyle(
+                  fontFamily: 'Trajan Pro',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.toggle_on),
             onPressed: () {
               widget.toggleTheme();
-              // print(1);
             },
           ),
           actions: [
@@ -106,15 +110,18 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
 
               history.isEmpty
                   ? SizedBox(
-                      child: DrawerHeader(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        child: Text(
-                          "There's no history yet",
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.onSurface,
-                              fontSize: 25,
-                              fontFamily: 'Trajan Pro'),
+                      child: Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          child: Text(
+                            "There's no history yet",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Trajan Pro'),
+                          ),
                         ),
                       ),
                     )
@@ -136,12 +143,13 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
           ),
         ),
         body: Stack(children: [
-          SingleChildScrollView(
-            child: Column(children: [
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  height: MediaQuery.of(context).size.height / 3,
-                  child: Column(children: [
+          Column(children: [
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Column(
+                  children: [
                     TextFormField(
                       controller: hisctrl,
                       maxLines: 1,
@@ -172,10 +180,14 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                       textAlign: TextAlign.right,
                       keyboardType: TextInputType.none,
                     ),
-                  ])),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                height: size.height / 2,
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
                 child: Column(
                   children: [
                     // yspace(),
@@ -190,9 +202,9 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                       ),
                   ],
                 ),
-              )
-            ]),
-          ),
+              ),
+            ),
+          ]),
         ]),
       );
     });
@@ -302,16 +314,16 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
 
   // method for the button and calculation logic after onpress
   calcbtn(dynamic btnText) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      height: 50,
-      width: 95,
-      child: ElevatedButton(
+    return Expanded(
+      flex: 2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
+        child: ElevatedButton(
           // child: InkWell(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     side: BorderSide(
                         color: Theme.of(context).colorScheme.onSurface))),
           ),
@@ -372,14 +384,17 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             });
           },
           child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: Text(
-                btnText,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontSize: 25,
-                    fontFamily: 'Trajan Pro'),
-              ))),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            child: Text(
+              btnText,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontSize: 25,
+                  fontFamily: 'Trajan Pro'),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
