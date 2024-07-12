@@ -109,19 +109,17 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               ),
 
               history.isEmpty
-                  ? SizedBox(
-                      child: Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          child: Text(
-                            "There's no history yet",
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Trajan Pro'),
-                          ),
+                  ? Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
+                        child: Text(
+                          "There's no history yet",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Trajan Pro'),
                         ),
                       ),
                     )
