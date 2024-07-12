@@ -232,16 +232,13 @@ class _ConverterState extends State<Converter>
               }
             });
           },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            child: Text(
-              btntext,
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Trajan Pro'),
-            ),
+          child: Text(
+            btntext,
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Trajan Pro'),
           ),
         ),
       ),

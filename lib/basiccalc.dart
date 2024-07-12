@@ -183,7 +183,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Padding(
                 padding: const EdgeInsets.all(5),
                 child: Column(
@@ -315,7 +315,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     return Expanded(
       flex: 1,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
         child: ElevatedButton(
           // child: InkWell(
           style: ButtonStyle(
@@ -381,15 +381,13 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               }
             });
           },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            child: Text(
-              btnText,
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontSize: 20,
-                  fontFamily: 'Trajan Pro'),
-            ),
+          child: Text(
+            btnText,
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 15,
+                fontFamily: 'Trajan Pro',
+                fontWeight: FontWeight.bold),
           ),
         ),
       ),
