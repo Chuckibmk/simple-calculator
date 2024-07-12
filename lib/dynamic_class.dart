@@ -138,7 +138,7 @@ class _DynaState extends State<Dyna> {
                 controller: widget.dyna1[0],
                 maxLines: 1,
                 style: const TextStyle(
-                  fontSize: 35,
+                  fontSize: 30,
                   fontFamily: 'Trajan Pro',
                   fontWeight: FontWeight.bold,
                 ),
@@ -172,7 +172,7 @@ class _DynaState extends State<Dyna> {
                 controller: widget.dyna1[1],
                 maxLines: 1,
                 style: const TextStyle(
-                  fontSize: 35,
+                  fontSize: 30,
                   fontFamily: 'Trajan Pro',
                   fontWeight: FontWeight.bold,
                 ),

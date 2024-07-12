@@ -152,7 +152,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                       controller: hisctrl,
                       maxLines: 1,
                       style: const TextStyle(
-                          fontSize: 35, fontFamily: 'Trajan Pro'),
+                          fontSize: 30, fontFamily: 'Trajan Pro'),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "",
@@ -167,7 +167,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                       controller: ques,
                       maxLines: 1,
                       style: const TextStyle(
-                          fontSize: 40, fontFamily: 'Trajan Pro'),
+                          fontSize: 30, fontFamily: 'Trajan Pro'),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         // hintText: "0",
@@ -299,12 +299,12 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               entry['question'] ?? '',
               style: const TextStyle(
                 fontFamily: 'Trajan Pro',
-                fontSize: 30,
+                fontSize: 20,
               ),
             ),
             subtitle: Text(
               entry['answer'] ?? '',
-              style: const TextStyle(fontSize: 40, fontFamily: 'Trajan Pro'),
+              style: const TextStyle(fontSize: 30, fontFamily: 'Trajan Pro'),
             ),
           );
         });
@@ -313,7 +313,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   // method for the button and calculation logic after onpress
   calcbtn(dynamic btnText) {
     return Expanded(
-      flex: 2,
+      flex: 1,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
         child: ElevatedButton(
@@ -387,7 +387,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               btnText,
               style: TextStyle(
                   color: Theme.of(context).colorScheme.onSurface,
-                  fontSize: 25,
+                  fontSize: 20,
                   fontFamily: 'Trajan Pro'),
             ),
           ),
