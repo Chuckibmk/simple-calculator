@@ -56,9 +56,8 @@ class _ConverterState extends State<Converter>
   List<List<dynamic>> nmbrs = [
     ['7', '8', '9', '\u232B'],
     ['4', '5', '6', 'C'],
-    ['1', '2', '3', ''],
-    ['', '0', '.', '']
-    // ['±', '0', '.', '↓']
+    ['1', '2', '3', '↑'],
+    ['±', '0', '.', '↓']
   ];
 
   // tabcontroller that controls the conversion class tabs
@@ -91,10 +90,18 @@ class _ConverterState extends State<Converter>
     super.dispose();
   }
 
+  // these variables control present active TextFormField
+  int a = 0;
+  int b = 1;
+
   @override
   Widget build(BuildContext context) {
+    //bool conditions for disabling buttons
+    bool disableUpButton = a == 0;
+    bool disableDownButton = a != 0;
+    bool disablePMbutton = _tabController.index != 2;
+
     return LayoutBuilder(builder: (context, constraints) {
-      // Size size = MediaQuery.of(context).size;
       return Scaffold(
         appBar: AppBar(
             title: const Text(
@@ -157,13 +164,25 @@ class _ConverterState extends State<Converter>
                         for (var n in nb)
                           convbtn(
                               n,
+
                               //get textcontroller value base on tabcontroller index provided
                               forms.sublist(_tabController.index * 2,
                                   _tabController.index * 2 + 2),
+
                               // get values from SelectedValuesMap base on current tabcontroller index
                               getSelectedValuesForIndex(_tabController.index),
+
                               // current tabcontroller index
-                              _tabController.index),
+                              _tabController.index,
+
+                              // disable button logic if above bool conditions is met
+                              n == '↑'
+                                  ? disableUpButton
+                                  : n == '↓'
+                                      ? disableDownButton
+                                      : n == '±'
+                                          ? disablePMbutton
+                                          : false),
                       ],
                     )
                 ],
@@ -189,7 +208,7 @@ class _ConverterState extends State<Converter>
   }
 
   convbtn(dynamic btntext, List<TextEditingController> formEntry,
-      List<String> dropdownValues, dynamic tabin) {
+      List<String> dropdownValues, dynamic tabin, bool isButtonDisabled) {
     return Expanded(
       flex: 1,
       child: Padding(
@@ -201,31 +220,49 @@ class _ConverterState extends State<Converter>
                       borderRadius: BorderRadius.circular(5.0),
                       side: BorderSide(
                           color: Theme.of(context).colorScheme.onSurface)))),
-          onPressed: () {
-            setState(() {
-              if (btntext == 'C') {
-                formEntry[0].clear();
-                formEntry[1].clear();
-              } else if (btntext == '\u232B') {
-                if (formEntry[0].text.isNotEmpty) {
-                  formEntry[0].text = formEntry[0]
-                      .text
-                      .substring(0, formEntry[0].text.length - 1);
+          onPressed: isButtonDisabled
+              ? null
+              : () {
+                  setState(() {
+                    if (btntext == 'C') {
+                      formEntry[a].clear();
+                      formEntry[b].clear();
+                    } else if (btntext == '\u232B') {
+                      if (formEntry[a].text.isNotEmpty) {
+                        formEntry[a].text = formEntry[a]
+                            .text
+                            .substring(0, formEntry[a].text.length - 1);
 
-                  num val1 = num.tryParse(formEntry[0].text) ?? 0;
-                  formEntry[1].text =
-                      convert(tabin, val1, dropdownValues[0], dropdownValues[1])
+                        num val1 = num.tryParse(formEntry[a].text) ?? 0;
+                        formEntry[b].text = convert(tabin, val1,
+                                dropdownValues[a], dropdownValues[b])
+                            .toString();
+                      }
+                    } else if (['↑', '↓'].contains(btntext)) {
+                      if (a != 0) {
+                        a = 0;
+                        b = 1;
+                      } else {
+                        a = 1;
+                        b = 0;
+                      }
+                    } else if (btntext == '±') {
+                      num val1 = num.tryParse(formEntry[a].text) ?? 0;
+                      // Toggle the sign
+                      val1 = -val1;
+                      formEntry[a].text = val1.toString();
+                      formEntry[b].text = convert(
+                              tabin, val1, dropdownValues[a], dropdownValues[b])
                           .toString();
-                }
-              } else {
-                formEntry[0].text += btntext;
-                num val1 = num.tryParse(formEntry[0].text) ?? 0;
-                formEntry[1].text =
-                    convert(tabin, val1, dropdownValues[0], dropdownValues[1])
-                        .toString();
-              }
-            });
-          },
+                    } else {
+                      formEntry[a].text += btntext;
+                      num val1 = num.tryParse(formEntry[a].text) ?? 0;
+                      formEntry[b].text = convert(
+                              tabin, val1, dropdownValues[a], dropdownValues[b])
+                          .toString();
+                    }
+                  });
+                },
           child: Text(
             btntext,
             style: TextStyle(

@@ -18,8 +18,16 @@ class _MainAppState extends State<MainApp> {
 
   void _toggleTheme() {
     setState(() {
-      _themeMode =
-          _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+      // if (Brightness.light == Brightness) {
+      //   _themeMode = ThemeMode.dark;
+      // } else {
+      //   _themeMode = ThemeMode.light;
+      // }
+      if (_themeMode == ThemeMode.light) {
+        _themeMode = ThemeMode.dark;
+      } else {
+        _themeMode = ThemeMode.light;
+      }
     });
   }
 

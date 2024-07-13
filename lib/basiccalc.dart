@@ -1,7 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'dart:math';
-
-import 'package:flutter/widgets.dart';
 
 class BasicCalcClass extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -64,7 +64,6 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      // Size size = MediaQuery.of(context).size;
       return Scaffold(
         key: scaffoldkey,
         appBar: AppBar(
@@ -251,11 +250,10 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   }
 
   //void evaluate method that handles basic evaluation Logic
-  void evaluate() {
+  void evaluate(question) {
     setState(() {
-      dynamic question = '$operator $currentValue'.toString();
       if (operator == '±') {
-        currentValue = -1 * currentValue;
+        currentValue = -currentValue;
       } else if (operator == '1/x') {
         currentValue = 1 / currentValue;
       } else if (operator == 'x²') {
@@ -271,7 +269,6 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
       addHistory(question, currentValue.toString());
       ans = currentValue.toString();
       ques.text = ans;
-      hisctrl.text = question;
       eqn = ans;
       operator = '';
       isNewOperation = false;
@@ -363,13 +360,30 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                   eqn = '';
                   ques.clear();
                 }
-              } else if (['1/x', 'x²', '√x', '±'].contains(btnText)) {
+              } else if (btnText == '1/x') {
                 operator = btnText;
                 currentValue = num.tryParse(eqn) ?? 0;
-                hisctrl.text = '$operator $currentValue';
-                evaluate();
-                // eqn = '';
-                // ques.text = eqn;
+                hisctrl.text = '1/ $currentValue';
+                dynamic question = '1/ $currentValue'.toString();
+                evaluate(question);
+              } else if (btnText == 'x²') {
+                operator = btnText;
+                currentValue = num.tryParse(eqn) ?? 0;
+                hisctrl.text = '$currentValue ²';
+                dynamic question = '$currentValue ²'.toString();
+                evaluate(question);
+              } else if (btnText == '±') {
+                operator = btnText;
+                currentValue = num.tryParse(eqn) ?? 0;
+                hisctrl.text = '- $currentValue';
+                dynamic question = '(- $currentValue)'.toString();
+                evaluate(question);
+              } else if (btnText == '√x') {
+                operator = btnText;
+                currentValue = num.tryParse(eqn) ?? 0;
+                hisctrl.text = '√ $currentValue';
+                dynamic question = '√ $currentValue'.toString();
+                evaluate(question);
               } else {
                 if (isNewOperation) {
                   eqn = '';

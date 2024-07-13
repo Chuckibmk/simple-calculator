@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Dyna extends StatefulWidget {
   final String currentP;
@@ -104,10 +103,15 @@ class _DynaState extends State<Dyna> {
     ]
   };
 
+  // list fxn that extracts dropdownitems based on key
   List<DropdownMenuItem<String>> getDropdownItemsForKey(String key) {
+    //creates an empty list for the DD items
     List<DropdownMenuItem<String>> items = [];
+    // check the dropdown map dd_1 for a key
     if (dd_1.containsKey(key)) {
+      // loop thru the list under the key
       for (var item in dd_1[key]!) {
+        // and add them to items list
         items.add(DropdownMenuItem(value: item, child: Text(item)));
       }
     }
