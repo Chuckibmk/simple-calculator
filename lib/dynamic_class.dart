@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class Dyna extends StatefulWidget {
@@ -12,13 +14,21 @@ class Dyna extends StatefulWidget {
   // function of dropdown OnValueChanged handling List of Strings
   final Function(List<String>) ovc;
 
-  const Dyna({
-    super.key,
-    required this.currentP,
-    required this.dyna1,
-    required this.dd1,
-    required this.ovc,
-  });
+  // function of dropdown OnValueChanged handling List of Strings
+  final Function(int, int) updateTFF;
+
+  final int a1;
+  final int b1;
+
+  const Dyna(
+      {super.key,
+      required this.currentP,
+      required this.dyna1,
+      required this.dd1,
+      required this.ovc,
+      required this.a1,
+      required this.b1,
+      required this.updateTFF});
 
   @override
   State<Dyna> createState() => _DynaState();
@@ -142,6 +152,9 @@ class _DynaState extends State<Dyna> {
                     widget.ovc(newValues);
                   }),
               TextFormField(
+                onTap: () {
+                  widget.updateTFF(0, 1);
+                },
                 controller: widget.dyna1[0],
                 maxLines: 1,
                 style: const TextStyle(
@@ -149,7 +162,7 @@ class _DynaState extends State<Dyna> {
                   fontFamily: 'Trajan Pro',
                 ),
                 decoration: const InputDecoration(
-                  border: InputBorder.none,
+                  // border: InputBorder.none,
                   hintText: "",
                 ),
                 enableInteractiveSelection: false,
@@ -177,6 +190,9 @@ class _DynaState extends State<Dyna> {
                     widget.ovc(newValues);
                   }),
               TextFormField(
+                onTap: () {
+                  widget.updateTFF(1, 0);
+                },
                 controller: widget.dyna1[1],
                 maxLines: 1,
                 style: const TextStyle(
@@ -184,7 +200,7 @@ class _DynaState extends State<Dyna> {
                   fontFamily: 'Trajan Pro',
                 ),
                 decoration: const InputDecoration(
-                  border: InputBorder.none,
+                  // border: InputBorder.none,
                   hintText: "",
                 ),
                 enableInteractiveSelection: false,

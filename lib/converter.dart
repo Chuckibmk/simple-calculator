@@ -94,6 +94,13 @@ class _ConverterState extends State<Converter>
   int a = 0;
   int b = 1;
 
+  void updateTFF(int a1, int b1) {
+    setState(() {
+      a = a1;
+      b = b1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //bool conditions for disabling buttons
@@ -141,11 +148,15 @@ class _ConverterState extends State<Converter>
                 //loop to use dynamic page dyna to generate pages for each tab
                 for (var t in tabKeys)
                   Dyna(
-                      currentP: t,
-                      dyna1: forms.sublist(_tabController.index * 2,
-                          _tabController.index * 2 + 2),
-                      dd1: selectedValuesMap[t]!,
-                      ovc: (values) => _updateSelectedValues(t, values)),
+                    currentP: t,
+                    dyna1: forms.sublist(
+                        _tabController.index * 2, _tabController.index * 2 + 2),
+                    dd1: selectedValuesMap[t]!,
+                    ovc: (values) => _updateSelectedValues(t, values),
+                    a1: a,
+                    b1: b,
+                    updateTFF: updateTFF,
+                  ),
               ],
             ),
           ),
