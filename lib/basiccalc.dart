@@ -250,21 +250,39 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   }
 
   //void evaluate method that handles basic evaluation Logic
-  void evaluate(question) {
+  void evaluate(operator) {
     setState(() {
+      dynamic question;
       if (operator == '±') {
+        hisctrl.text = '- $currentValue';
+        question = '(- $currentValue)'.toString();
+
         currentValue = -currentValue;
       } else if (operator == '1/x') {
+        hisctrl.text = '1/ $currentValue';
+        question = '1/ $currentValue'.toString();
+
         currentValue = 1 / currentValue;
       } else if (operator == 'x²') {
+        hisctrl.text = '$currentValue ²';
+        question = '$currentValue ²'.toString();
+
         currentValue = pow(currentValue, 2);
       } else if (operator == '√x') {
+        hisctrl.text = '√ $currentValue';
+        question = '√ $currentValue'.toString();
+
         currentValue = sqrt(currentValue);
         if (currentValue.toString() == 'NaN') {
           ans = 'Invalid Input';
           ques.text = ans;
           return;
         }
+      } else if (operator == '%') {
+        hisctrl.text = '$currentValue %';
+        question = '$currentValue %'.toString();
+
+        currentValue = currentValue / 100;
       }
       addHistory(question, currentValue.toString());
       ans = currentValue.toString();
@@ -360,30 +378,10 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                   eqn = '';
                   ques.clear();
                 }
-              } else if (btnText == '1/x') {
+              } else if (['√x', '1/x', 'x²', '±', '%'].contains(btnText)) {
                 operator = btnText;
                 currentValue = num.tryParse(eqn) ?? 0;
-                hisctrl.text = '1/ $currentValue';
-                dynamic question = '1/ $currentValue'.toString();
-                evaluate(question);
-              } else if (btnText == 'x²') {
-                operator = btnText;
-                currentValue = num.tryParse(eqn) ?? 0;
-                hisctrl.text = '$currentValue ²';
-                dynamic question = '$currentValue ²'.toString();
-                evaluate(question);
-              } else if (btnText == '±') {
-                operator = btnText;
-                currentValue = num.tryParse(eqn) ?? 0;
-                hisctrl.text = '- $currentValue';
-                dynamic question = '(- $currentValue)'.toString();
-                evaluate(question);
-              } else if (btnText == '√x') {
-                operator = btnText;
-                currentValue = num.tryParse(eqn) ?? 0;
-                hisctrl.text = '√ $currentValue';
-                dynamic question = '√ $currentValue'.toString();
-                evaluate(question);
+                evaluate(operator);
               } else {
                 if (isNewOperation) {
                   eqn = '';
