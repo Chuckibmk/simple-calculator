@@ -223,14 +223,18 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   void calculate() {
     setState(() {
       nextValue = num.tryParse(eqn) ?? 0;
-      dynamic question = '$currentValue $operator $nextValue'.toString();
+      dynamic question;
       if (operator == '+') {
+        question = '$currentValue $operator $nextValue'.toString();
         currentValue += nextValue;
       } else if (operator == '-') {
+        question = '$currentValue $operator $nextValue'.toString();
         currentValue -= nextValue;
       } else if (operator == 'x') {
+        question = '$currentValue $operator $nextValue'.toString();
         currentValue *= nextValue;
       } else if (operator == '÷') {
+        question = '$currentValue $operator $nextValue'.toString();
         if (nextValue != 0) {
           currentValue /= nextValue;
         } else {
@@ -238,6 +242,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
           ques.text = ans;
           return;
         }
+      } else {
+        question = '$currentValue'.toString();
       }
       addHistory(question, currentValue.toString());
       ans = currentValue.toString();
@@ -358,7 +364,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                   ques.text = eqn;
                 }
               } else if (btnText == '=') {
-                if (operator.isNotEmpty && eqn.isNotEmpty) {
+                if (eqn.isNotEmpty) {
+                  // if (operator.isNotEmpty && eqn.isNotEmpty) {
                   calculate();
                 }
               } else if (['+', '-', 'x', '÷'].contains(btnText)) {
