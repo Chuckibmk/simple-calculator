@@ -338,13 +338,19 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
         child: ElevatedButton(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    side: BorderSide(
-                        color: Theme.of(context).colorScheme.onSurface))),
-          ),
+          style: ElevatedButton.styleFrom(
+              shape: CircleBorder(
+                side:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              padding: const EdgeInsets.all(25)),
+          // style: ButtonStyle(
+          //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          //       RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(10.0),
+          //           side: BorderSide(
+          //               color: Theme.of(context).colorScheme.onSurface))),
+          // ),
           onPressed: () {
             setState(() {
               if (btnText == 'C') {
