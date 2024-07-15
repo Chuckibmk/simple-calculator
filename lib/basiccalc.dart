@@ -336,21 +336,22 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     return Expanded(
       flex: 1,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+        padding: const EdgeInsets.symmetric(vertical: 1),
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              shape: CircleBorder(
-                side:
-                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
-              ),
-              padding: const EdgeInsets.all(25)),
-          // style: ButtonStyle(
-          //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          //       RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(10.0),
-          //           side: BorderSide(
-          //               color: Theme.of(context).colorScheme.onSurface))),
-          // ),
+          // style: ElevatedButton.styleFrom(
+          //     shape: CircleBorder(
+          //       // eccentricity: 0.7,
+          //       side:
+          //           BorderSide(color: Theme.of(context).colorScheme.onSurface),
+          //     ),
+          //     padding: const EdgeInsets.all(25)),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    side: BorderSide(
+                        color: Theme.of(context).colorScheme.onSurface))),
+          ),
           onPressed: () {
             setState(() {
               if (btnText == 'C') {
