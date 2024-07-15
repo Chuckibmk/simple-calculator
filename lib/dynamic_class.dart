@@ -160,7 +160,7 @@ class _DynaState extends State<Dyna> {
                   fontFamily: 'Trajan Pro',
                 ),
                 decoration: const InputDecoration(
-                  // border: InputBorder.none,
+                  border: InputBorder.none,
                   hintText: "",
                 ),
                 enableInteractiveSelection: false,
@@ -198,7 +198,7 @@ class _DynaState extends State<Dyna> {
                   fontFamily: 'Trajan Pro',
                 ),
                 decoration: const InputDecoration(
-                  // border: InputBorder.none,
+                  border: InputBorder.none,
                   hintText: "",
                 ),
                 enableInteractiveSelection: false,

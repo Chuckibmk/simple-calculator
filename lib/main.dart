@@ -1,3 +1,5 @@
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'basiccalc.dart';
 import 'converter.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,11 @@ class MainApp extends StatefulWidget {
 
   @override
   State<MainApp> createState() => _MainAppState();
+
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    //TODO : // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
+  }
 }
 
 class _MainAppState extends State<MainApp> {
