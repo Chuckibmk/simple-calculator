@@ -125,25 +125,29 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(title: Text('Bottom '))
-      body: PageView(
-        controller: _controller,
+      body: Column(
         children: [
           if (_bannerAd != null)
             Align(
               alignment: Alignment.topCenter,
-              child: Container(
+              child: SizedBox(
                 width: _bannerAd!.size.width.toDouble(),
                 height: _bannerAd!.size.height.toDouble(),
                 child: AdWidget(ad: _bannerAd!),
               ),
             ),
-          BasicCalcClass(toggleTheme: widget.toggleTheme),
-          Converter(toggleTheme: widget.toggleTheme),
+          PageView(
+            controller: _controller,
+            children: [
+              BasicCalcClass(toggleTheme: widget.toggleTheme),
+              Converter(toggleTheme: widget.toggleTheme),
+            ],
+            onPageChanged: (index) {
+              currentIndex = index;
+              setState(() {});
+            },
+          ),
         ],
-        onPageChanged: (index) {
-          currentIndex = index;
-          setState(() {});
-        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
