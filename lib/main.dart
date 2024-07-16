@@ -127,15 +127,15 @@ class _HomeState extends State<Home> {
       // appBar: AppBar(title: Text('Bottom '))
       body: Column(
         children: [
-          if (_bannerAd != null)
-            Align(
-              alignment: Alignment.topCenter,
-              child: SizedBox(
-                width: _bannerAd!.size.width.toDouble(),
-                height: _bannerAd!.size.height.toDouble(),
-                child: AdWidget(ad: _bannerAd!),
-              ),
-            ),
+          // if (_bannerAd != null)
+          //   Align(
+          //     alignment: Alignment.topCenter,
+          //     child: SizedBox(
+          //       width: _bannerAd!.size.width.toDouble(),
+          //       height: _bannerAd!.size.height.toDouble(),
+          //       child: AdWidget(ad: _bannerAd!),
+          //     ),
+          //   ),
           PageView(
             controller: _controller,
             children: [
