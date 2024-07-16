@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'ad_helper.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 class BasicCalcClass extends StatefulWidget {
   final VoidCallback toggleTheme;
   const BasicCalcClass({super.key, required this.toggleTheme});
@@ -15,35 +12,6 @@ class BasicCalcClass extends StatefulWidget {
 }
 
 class _BasicCalcClassState extends State<BasicCalcClass> {
-  // add banner ad
-  BannerAd? _bannerAd;
-
-  @override
-  void initState() {
-    super.initState();
-    // load banner ad
-
-    BannerAd(
-        adUnitId: Adhelper.bannerAdUnitId,
-        request: AdRequest(),
-        size: AdSize.banner,
-        listener: BannerAdListener(onAdLoaded: (ad) {
-          setState(() {
-            _bannerAd = ad as BannerAd;
-          });
-        }, onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
-          ad.dispose();
-        })).load();
-  }
-
-  @override
-  void dispose() {
-    //todo dispose banner object
-    _bannerAd?.dispose();
-    super.dispose();
-  }
-
   //scaffold variable for drawer control, stores the state of the drawer
   var scaffoldkey = GlobalKey<ScaffoldState>();
 
@@ -171,9 +139,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             ],
           ),
         ),
-        body: SafeArea(
-          child: Stack(children: [
-            // Column(children: [
+        body: Stack(children: [
+          Column(children: [
             Expanded(
               flex: 1,
               child: Padding(
@@ -234,18 +201,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                 ),
               ),
             ),
-            if (_bannerAd != null)
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: _bannerAd!.size.width.toDouble(),
-                  height: _bannerAd!.size.height.toDouble(),
-                  child: AdWidget(ad: _bannerAd!),
-                ),
-              ),
-            // ]),
           ]),
-        ),
+        ]),
       );
     });
   }
