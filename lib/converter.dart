@@ -110,24 +110,27 @@ class _ConverterState extends State<Converter>
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
-        appBar: AppBar(
-            title: const Text(
-              'Unit Converter',
-              style: TextStyle(
-                fontFamily: 'Trajan Pro',
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(40),
+          child: AppBar(
+              title: const Text(
+                'Unit Converter',
+                style: TextStyle(
+                  fontFamily: 'Trajan Pro',
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.toggle_on),
-              onPressed: () {
-                widget.toggleTheme();
-                // print(2);
-              },
-              // actions: [],
-            )),
+              centerTitle: true,
+              leading: IconButton(
+                icon: const Icon(Icons.toggle_on),
+                onPressed: () {
+                  widget.toggleTheme();
+                  // print(2);
+                },
+                // actions: [],
+              )),
+        ),
         body: Column(children: [
           TabBar(
             isScrollable: true,

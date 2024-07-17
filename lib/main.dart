@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
 
     BannerAd(
       adUnitId: Adhelper.bannerAdUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       size: AdSize.banner,
       listener: BannerAdListener(onAdLoaded: (ad) {
         setState(() {

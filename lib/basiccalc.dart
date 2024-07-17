@@ -72,31 +72,35 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         key: scaffoldkey,
-        appBar: AppBar(
-          title: const Text('Calculator',
-              style: TextStyle(
-                  fontFamily: 'Trajan Pro',
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold)),
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.toggle_on),
-            onPressed: () {
-              widget.toggleTheme();
-            },
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(40),
+          child: AppBar(
+            title: const Text('Calculator',
+                style: TextStyle(
+                    fontFamily: 'Trajan Pro',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold)),
+            centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.toggle_on),
+              onPressed: () {
+                widget.toggleTheme();
+              },
+            ),
+            actions: [
+              Builder(
+                builder: (context) => IconButton(
+                  icon: const Icon(Icons.history),
+                  onPressed: () {
+                    // use of scaffold variable store state after openEndDrawer
+                    scaffoldkey.currentState?.openEndDrawer();
+                  },
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                ),
+              )
+            ],
           ),
-          actions: [
-            Builder(
-              builder: (context) => IconButton(
-                icon: const Icon(Icons.history),
-                onPressed: () {
-                  // use of scaffold variable store state after openEndDrawer
-                  scaffoldkey.currentState?.openEndDrawer();
-                },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              ),
-            )
-          ],
         ),
         endDrawer: Drawer(
           shape: const RoundedRectangleBorder(
@@ -122,7 +126,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                           "There's no history yet",
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onSurface,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Trajan Pro'),
                         ),
