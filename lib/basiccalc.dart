@@ -2,10 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'dart:math';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class BasicCalcClass extends StatefulWidget {
   final VoidCallback toggleTheme;
-  const BasicCalcClass({super.key, required this.toggleTheme});
+  // final BannerAd bannerAd;
+  const BasicCalcClass({
+    super.key,
+    required this.toggleTheme,
+    // required this.bannerAd
+  });
 
   @override
   State<BasicCalcClass> createState() => _BasicCalcClassState();
@@ -141,6 +147,15 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         ),
         body: Stack(children: [
           Column(children: [
+            // if (widget.bannerAd != null)
+            //   Align(
+            //     alignment: Alignment.topCenter,
+            //     child: SizedBox(
+            //       width: widget.bannerAd.size.width.toDouble(),
+            //       height: widget.bannerAd.size.height.toDouble(),
+            //       child: AdWidget(ad: widget.bannerAd),
+            //     ),
+            //   ),
             Expanded(
               flex: 1,
               child: Padding(
