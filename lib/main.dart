@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: Adhelper.interstitialAdUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
         ad.fullScreenContentCallback = FullScreenContentCallback(
           onAdDismissedFullScreenContent: (ad) {
@@ -156,7 +156,14 @@ class _HomeState extends State<Home> {
         selectedItemColor: Theme.of(context).colorScheme.surface,
         unselectedItemColor: Theme.of(context).colorScheme.onSurface,
         onTap: (index) {
-          _controller.jumpToPage(index);
+          if (_interstitialAd != null) {
+            _interstitialAd?.show();
+          } else if (_interstitialAd == null) {
+            _loadInterstitialAd();
+          } else {
+            _controller.jumpToPage(index);
+          }
+          // _controller.jumpToPage(index);
         },
         items: const [
           BottomNavigationBarItem(
