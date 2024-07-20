@@ -16,25 +16,3 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
-
-buildscript {
-    ext.kotlin_version = '1.8.21'
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
-
-// buildscript{
-//     repositories{
-//         google()
-//         mavenCentral()
-//     }
-    // dependencies{
-    //     // classpath 'com.android.tools.build:gradle:8.7'
-    //     classpath 'com.google.gms:google-services:4.4.2'
-    // }
-// }

@@ -16,7 +16,7 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 
   Future<InitializationStatus> _initGoogleMobileAds() {
-    //TODO : // TODO: Initialize Google Mobile Ads SDK
+    // Initialize Google Mobile Ads SDK
     return MobileAds.instance.initialize();
   }
 }
