@@ -156,14 +156,14 @@ class _HomeState extends State<Home> {
         selectedItemColor: Theme.of(context).colorScheme.surface,
         unselectedItemColor: Theme.of(context).colorScheme.onSurface,
         onTap: (index) {
-          if (_interstitialAd != null) {
-            _interstitialAd?.show();
-          } else if (_interstitialAd == null) {
-            _loadInterstitialAd();
-          } else {
-            _controller.jumpToPage(index);
-          }
-          // _controller.jumpToPage(index);
+          // if (_interstitialAd != null) {
+          //   _interstitialAd?.show();
+          // } else if (_interstitialAd == null) {
+          //   _loadInterstitialAd();
+          // } else {
+          //   _controller.jumpToPage(index);
+          // }
+          _controller.jumpToPage(index);
         },
         items: const [
           BottomNavigationBarItem(

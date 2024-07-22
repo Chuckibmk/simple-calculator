@@ -149,8 +149,10 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             ],
           ),
         ),
-        body: Stack(children: [
-          Column(children: [
+        // use SafeArea
+        body: SafeArea(
+          // children: [
+          child: Column(children: [
             // if (widget.bannerAd != null)
             //   Align(
             //     alignment: Alignment.topCenter,
@@ -201,12 +203,12 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Padding(
                 padding: const EdgeInsets.all(5),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    // yspace(),
                     // loop through the Lists in the calculator_Varibles List, in order to get the arrangement
                     for (var rw in calculator_Varibles)
                       Row(
@@ -221,7 +223,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               ),
             ),
           ]),
-        ]),
+          // ],
+        ),
       );
     });
   }
@@ -284,10 +287,16 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
 
         currentValue = -currentValue;
       } else if (operator == '1/x') {
-        hisctrl.text = '1/ $currentValue';
-        question = '1/ $currentValue'.toString();
+        if (currentValue != 0) {
+          hisctrl.text = '1/ $currentValue';
+          question = '1/ $currentValue'.toString();
 
-        currentValue = 1 / currentValue;
+          currentValue = 1 / currentValue;
+        } else {
+          ans = 'Cannot Divide by Zero';
+          ques.text = ans;
+          return;
+        }
       } else if (operator == 'x²') {
         hisctrl.text = '$currentValue ²';
         question = '$currentValue ²'.toString();

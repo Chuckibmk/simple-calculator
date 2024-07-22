@@ -131,79 +131,82 @@ class _ConverterState extends State<Converter>
                 // actions: [],
               )),
         ),
-        body: Column(children: [
-          TabBar(
-            isScrollable: true,
-            controller: _tabController,
-            tabs: [
-              // loop to create tabs for all tabkeys
-              for (var t in tabKeys)
-                Tab(
-                  text: t,
-                ),
-            ],
-          ),
-          Expanded(
-            flex: 1,
-            child: TabBarView(
+        body: SafeArea(
+          child: Column(children: [
+            TabBar(
+              isScrollable: true,
               controller: _tabController,
-              children: [
-                //loop to use dynamic page dyna to generate pages for each tab
+              tabs: [
+                // loop to create tabs for all tabkeys
                 for (var t in tabKeys)
-                  Dyna(
-                    currentP: t,
-                    dyna1: forms.sublist(
-                        _tabController.index * 2, _tabController.index * 2 + 2),
-                    dd1: selectedValuesMap[t]!,
-                    ovc: (values) => _updateSelectedValues(t, values),
-                    a1: a,
-                    b1: b,
-                    updateTFF: updateTFF,
+                  Tab(
+                    text: t,
                   ),
               ],
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(5),
-              child: Column(
+            Expanded(
+              flex: 1,
+              child: TabBarView(
+                controller: _tabController,
                 children: [
-                  // loop through the Lists in the nbmrs symbol List, in order to get the arrangement
-                  for (var nb in nmbrs)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // loop through the Strings in each list and calling the convbtn method to show each button
-                        for (var n in nb)
-                          convbtn(
-                              n,
-
-                              //get textcontroller value base on tabcontroller index provided
-                              forms.sublist(_tabController.index * 2,
-                                  _tabController.index * 2 + 2),
-
-                              // get values from SelectedValuesMap base on current tabcontroller index
-                              getSelectedValuesForIndex(_tabController.index),
-
-                              // current tabcontroller index
-                              _tabController.index,
-
-                              // disable button logic if above bool conditions is met
-                              n == '↑'
-                                  ? disableUpButton
-                                  : n == '↓'
-                                      ? disableDownButton
-                                      : n == '±'
-                                          ? disablePMbutton
-                                          : false),
-                      ],
-                    )
+                  //loop to use dynamic page dyna to generate pages for each tab
+                  for (var t in tabKeys)
+                    Dyna(
+                      currentP: t,
+                      dyna1: forms.sublist(_tabController.index * 2,
+                          _tabController.index * 2 + 2),
+                      dd1: selectedValuesMap[t]!,
+                      ovc: (values) => _updateSelectedValues(t, values),
+                      a1: a,
+                      b1: b,
+                      updateTFF: updateTFF,
+                    ),
                 ],
               ),
             ),
-          ),
-        ]),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // loop through the Lists in the nbmrs symbol List, in order to get the arrangement
+                    for (var nb in nmbrs)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // loop through the Strings in each list and calling the convbtn method to show each button
+                          for (var n in nb)
+                            convbtn(
+                                n,
+
+                                //get textcontroller value base on tabcontroller index provided
+                                forms.sublist(_tabController.index * 2,
+                                    _tabController.index * 2 + 2),
+
+                                // get values from SelectedValuesMap base on current tabcontroller index
+                                getSelectedValuesForIndex(_tabController.index),
+
+                                // current tabcontroller index
+                                _tabController.index,
+
+                                // disable button logic if above bool conditions is met
+                                n == '↑'
+                                    ? disableUpButton
+                                    : n == '↓'
+                                        ? disableDownButton
+                                        : n == '±'
+                                            ? disablePMbutton
+                                            : false),
+                        ],
+                      )
+                  ],
+                ),
+              ),
+            ),
+          ]),
+        ),
         // ),
       );
     });
