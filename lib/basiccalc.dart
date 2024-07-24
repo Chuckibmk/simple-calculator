@@ -382,8 +382,16 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   calcbtn(dynamic btnText) {
     return Expanded(
       flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 1),
+      child: Container(
+        // padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.all(10),
+        // decoration: BoxDecoration(
+        //     color: Theme.of(context).colorScheme.onSecondary,
+        //     shape: BoxShape.circle),
+        // ),
+        // child: IconButton(
+        //   icon: Text(btnText),
+        // ),
         child: ElevatedButton(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
