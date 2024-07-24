@@ -72,36 +72,6 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         key: scaffoldkey,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(40),
-          child: AppBar(
-            title: const Text('Calculator',
-                style: TextStyle(
-                    fontFamily: 'Trajan Pro',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold)),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.toggle_on),
-              onPressed: () {
-                widget.toggleTheme();
-              },
-            ),
-            actions: [
-              Builder(
-                builder: (context) => IconButton(
-                  icon: const Icon(Icons.history),
-                  onPressed: () {
-                    // use of scaffold variable store state after openEndDrawer
-                    scaffoldkey.currentState?.openEndDrawer();
-                  },
-                  tooltip:
-                      MaterialLocalizations.of(context).openAppDrawerTooltip,
-                ),
-              )
-            ],
-          ),
-        ),
         endDrawer: Drawer(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -151,7 +121,6 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         ),
         // use SafeArea
         body: SafeArea(
-          // children: [
           child: Column(children: [
             // if (widget.bannerAd != null)
             //   Align(
@@ -162,6 +131,57 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             //       child: AdWidget(ad: widget.bannerAd),
             //     ),
             //   ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        // color: Color(0xffF8FAFB),
+                        color: Theme.of(context).colorScheme.surface,
+                        shape: BoxShape.circle),
+                    child: IconButton(
+                      icon: const Icon(Icons.toggle_on),
+                      onPressed: () {
+                        widget.toggleTheme();
+                      },
+                    ),
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: "Calculator",
+                      style: TextStyle(
+                          fontFamily: 'Trajan Pro',
+                          color: Theme.of(context).colorScheme.onSurface,
+                          // color: Color(0xff7C797A),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        // color: Color(0xffF8FAFB),
+                        shape: BoxShape.circle),
+                    child: Builder(
+                      builder: (context) => IconButton(
+                        icon: const Icon(Icons.history),
+                        onPressed: () {
+                          // use of scaffold variable store state after openEndDrawer
+                          scaffoldkey.currentState?.openEndDrawer();
+                        },
+                        tooltip: MaterialLocalizations.of(context)
+                            .openAppDrawerTooltip,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
             Expanded(
               flex: 1,
               child: Padding(
@@ -223,7 +243,6 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
               ),
             ),
           ]),
-          // ],
         ),
       );
     });

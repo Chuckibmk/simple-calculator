@@ -110,29 +110,62 @@ class _ConverterState extends State<Converter>
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(40),
-          child: AppBar(
-              title: const Text(
-                'Unit Converter',
-                style: TextStyle(
-                  fontFamily: 'Trajan Pro',
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              centerTitle: true,
-              leading: IconButton(
-                icon: const Icon(Icons.toggle_on),
-                onPressed: () {
-                  widget.toggleTheme();
-                  // print(2);
-                },
-                // actions: [],
-              )),
-        ),
         body: SafeArea(
           child: Column(children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        // color: Color(0xffF8FAFB),
+                        color: Theme.of(context).colorScheme.surface,
+                        shape: BoxShape.circle),
+                    child: IconButton(
+                      icon: const Icon(Icons.toggle_on),
+                      onPressed: () {
+                        widget.toggleTheme();
+                      },
+                    ),
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: "Unit Converter",
+                      style: TextStyle(
+                          fontFamily: 'Trajan Pro',
+                          color: Theme.of(context).colorScheme.onSurface,
+                          // color: Color(0xff7C797A),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  // Container(
+                  //   padding: const EdgeInsets.all(10),
+                  //   decoration: BoxDecoration(
+                  //       color: Theme.of(context).colorScheme.surface,
+                  //       // color: Color(0xffF8FAFB),
+                  //       shape: BoxShape.circle),
+                  //   child: Builder(
+                  //     builder: (context) => IconButton(
+                  //       icon: const Icon(Icons.history),
+                  //       onPressed: () {
+                  //         // use of scaffold variable store state after openEndDrawer
+                  //         // scaffoldkey.currentState?.openEndDrawer();
+                  //       },
+                  //       tooltip: MaterialLocalizations.of(context)
+                  //           .openAppDrawerTooltip,
+                  //     ),
+                  //   ),
+                  // )
+                ],
+              ),
+            ),
             TabBar(
               isScrollable: true,
               controller: _tabController,
