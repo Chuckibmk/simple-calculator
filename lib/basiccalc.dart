@@ -122,17 +122,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         // use SafeArea
         body: SafeArea(
           child: Column(children: [
-            // if (widget.bannerAd != null)
-            //   Align(
-            //     alignment: Alignment.topCenter,
-            //     child: SizedBox(
-            //       width: widget.bannerAd.size.width.toDouble(),
-            //       height: widget.bannerAd.size.height.toDouble(),
-            //       child: AdWidget(ad: widget.bannerAd),
-            //     ),
-            //   ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -383,8 +374,8 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
     return Expanded(
       flex: 1,
       child: Container(
-        // padding: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.all(10),
+        // padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        // padding: const EdgeInsets.all(10),
         // decoration: BoxDecoration(
         //     color: Theme.of(context).colorScheme.onSecondary,
         //     shape: BoxShape.circle),
@@ -395,10 +386,15 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
         child: ElevatedButton(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    side: BorderSide(
-                        color: Theme.of(context).colorScheme.onSurface))),
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+              ),
+            ),
+            minimumSize: MaterialStateProperty.all<Size>(
+              const Size(150, 60), // width, height
+            ),
           ),
           onPressed: () {
             setState(() {
@@ -458,7 +454,7 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
             btnText,
             style: TextStyle(
                 color: Theme.of(context).colorScheme.onSurface,
-                fontSize: 15,
+                fontSize: 20,
                 fontFamily: 'Trajan Pro',
                 fontWeight: FontWeight.bold),
           ),

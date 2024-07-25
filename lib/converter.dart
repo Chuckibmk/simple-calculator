@@ -265,11 +265,17 @@ class _ConverterState extends State<Converter>
         padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 0.5),
         child: ElevatedButton(
           style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      side: BorderSide(
-                          color: Theme.of(context).colorScheme.onSurface)))),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                side:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+              ),
+            ),
+            minimumSize: MaterialStateProperty.all<Size>(
+              const Size(150, 60), // width, height
+            ),
+          ),
           onPressed: isButtonDisabled
               ? null
               : () {
@@ -317,7 +323,7 @@ class _ConverterState extends State<Converter>
             btntext,
             style: TextStyle(
                 color: Theme.of(context).colorScheme.onSurface,
-                fontSize: 15,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Trajan Pro'),
           ),

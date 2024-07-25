@@ -72,19 +72,25 @@ class _HomeState extends State<Home> {
     InterstitialAd.load(
       adUnitId: Adhelper.interstitialAdUnitId,
       request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
-        ad.fullScreenContentCallback = FullScreenContentCallback(
-          onAdDismissedFullScreenContent: (ad) {
-            BasicCalcClass(toggleTheme: widget.toggleTheme);
-          },
-        );
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              ad.dispose();
+              _interstitialAd = null;
+              BasicCalcClass(toggleTheme: widget.toggleTheme);
+            },
+          );
 
-        setState(() {
-          _interstitialAd = ad;
-        });
-      }, onAdFailedToLoad: (err) {
-        print('Failed to load an interstitial ad: ${err.message}');
-      }),
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+          _interstitialAd = null;
+        },
+      ),
     );
   }
 
@@ -163,7 +169,13 @@ class _HomeState extends State<Home> {
           // } else {
           //   _controller.jumpToPage(index);
           // }
-          _controller.jumpToPage(index);
+          if (_interstitialAd != null) {
+            _interstitialAd?.show();
+          } else {
+            _loadInterstitialAd();
+            _controller.jumpToPage(index);
+          }
+          // _controller.jumpToPage(index);
         },
         items: const [
           BottomNavigationBarItem(
