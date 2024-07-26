@@ -108,63 +108,47 @@ class _ConverterState extends State<Converter>
     bool disableDownButton = a != 0;
     bool disablePMbutton = _tabController.index != 2;
 
+    // Get the insets from MediaQuery
+    EdgeInsets padding = MediaQuery.of(context).viewPadding;
+    // Remove the top padding
+    padding = padding.copyWith(top: 0);
+
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
-        body: SafeArea(
+        body: Padding(
+          padding: padding,
           child: Column(children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        // color: Color(0xffF8FAFB),
-                        color: Theme.of(context).colorScheme.surface,
-                        shape: BoxShape.circle),
-                    child: IconButton(
-                      icon: const Icon(Icons.toggle_on),
-                      onPressed: () {
-                        widget.toggleTheme();
-                      },
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      // color: Color(0xffF8FAFB),
+                      color: Theme.of(context).colorScheme.surface,
+                      shape: BoxShape.circle),
+                  child: IconButton(
+                    icon: const Icon(Icons.toggle_on),
+                    onPressed: () {
+                      widget.toggleTheme();
+                    },
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: "Unit Converter",
-                      style: TextStyle(
-                          fontFamily: 'Trajan Pro',
-                          color: Theme.of(context).colorScheme.onSurface,
-                          // color: Color(0xff7C797A),
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
+                ),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: "Unit Converter",
+                    style: TextStyle(
+                        fontFamily: 'Trajan Pro',
+                        color: Theme.of(context).colorScheme.onSurface,
+                        // color: Color(0xff7C797A),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  // Container(
-                  //   padding: const EdgeInsets.all(10),
-                  //   decoration: BoxDecoration(
-                  //       color: Theme.of(context).colorScheme.surface,
-                  //       // color: Color(0xffF8FAFB),
-                  //       shape: BoxShape.circle),
-                  //   child: Builder(
-                  //     builder: (context) => IconButton(
-                  //       icon: const Icon(Icons.history),
-                  //       onPressed: () {
-                  //         // use of scaffold variable store state after openEndDrawer
-                  //         // scaffoldkey.currentState?.openEndDrawer();
-                  //       },
-                  //       tooltip: MaterialLocalizations.of(context)
-                  //           .openAppDrawerTooltip,
-                  //     ),
-                  //   ),
-                  // )
-                ],
-              ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+              ],
             ),
             TabBar(
               isScrollable: true,
@@ -200,7 +184,7 @@ class _ConverterState extends State<Converter>
             Expanded(
               flex: 1,
               child: Padding(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(1),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -259,10 +243,15 @@ class _ConverterState extends State<Converter>
 
   convbtn(dynamic btntext, List<TextEditingController> formEntry,
       List<String> dropdownValues, dynamic tabin, bool isButtonDisabled) {
+    // Get the screen width and height
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    // Calculate the button size based on screen size
+    double buttonHeight = screenHeight * 0.08;
     return Expanded(
       flex: 1,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 0.5),
+        padding: const EdgeInsets.symmetric(horizontal: 1),
         child: ElevatedButton(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -273,7 +262,7 @@ class _ConverterState extends State<Converter>
               ),
             ),
             minimumSize: MaterialStateProperty.all<Size>(
-              const Size(150, 60), // width, height
+              Size(150, buttonHeight), // width, height
             ),
           ),
           onPressed: isButtonDisabled

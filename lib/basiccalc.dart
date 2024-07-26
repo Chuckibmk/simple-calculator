@@ -69,6 +69,10 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the insets from MediaQuery
+    EdgeInsets padding = MediaQuery.of(context).viewPadding;
+    // Remove the top padding
+    padding = padding.copyWith(top: 0);
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         key: scaffoldkey,
@@ -120,103 +124,102 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
           ),
         ),
         // use SafeArea
-        body: SafeArea(
+        body: Padding(
+          padding: padding,
           child: Column(children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        // color: Color(0xffF8FAFB),
-                        color: Theme.of(context).colorScheme.surface,
-                        shape: BoxShape.circle),
-                    child: IconButton(
-                      icon: const Icon(Icons.toggle_on),
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+            // child:
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      shape: BoxShape.circle),
+                  child: IconButton(
+                    icon: const Icon(Icons.toggle_on),
+                    onPressed: () {
+                      widget.toggleTheme();
+                    },
+                  ),
+                ),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: "Calculator",
+                    style: TextStyle(
+                        fontFamily: 'Trajan Pro',
+                        color: Theme.of(context).colorScheme.onSurface,
+                        // color: Color(0xff7C797A),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      // color: Color(0xffF8FAFB),
+                      shape: BoxShape.circle),
+                  child: Builder(
+                    builder: (context) => IconButton(
+                      icon: const Icon(Icons.history),
                       onPressed: () {
-                        widget.toggleTheme();
+                        // use of scaffold variable store state after openEndDrawer
+                        scaffoldkey.currentState?.openEndDrawer();
                       },
+                      tooltip: MaterialLocalizations.of(context)
+                          .openAppDrawerTooltip,
                     ),
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: "Calculator",
-                      style: TextStyle(
-                          fontFamily: 'Trajan Pro',
-                          color: Theme.of(context).colorScheme.onSurface,
-                          // color: Color(0xff7C797A),
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        // color: Color(0xffF8FAFB),
-                        shape: BoxShape.circle),
-                    child: Builder(
-                      builder: (context) => IconButton(
-                        icon: const Icon(Icons.history),
-                        onPressed: () {
-                          // use of scaffold variable store state after openEndDrawer
-                          scaffoldkey.currentState?.openEndDrawer();
-                        },
-                        tooltip: MaterialLocalizations.of(context)
-                            .openAppDrawerTooltip,
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
+            // ),
             Expanded(
               flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: hisctrl,
-                      maxLines: 1,
-                      style: const TextStyle(
-                          fontSize: 30, fontFamily: 'Trajan Pro'),
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "",
-                      ),
-                      enableInteractiveSelection: false,
-                      readOnly: true,
-                      showCursor: false,
-                      textAlign: TextAlign.right,
-                      keyboardType: TextInputType.none,
+              // child: Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 1.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: hisctrl,
+                    maxLines: 1,
+                    style:
+                        const TextStyle(fontSize: 30, fontFamily: 'Trajan Pro'),
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "",
                     ),
-                    TextFormField(
-                      controller: ques,
-                      maxLines: 1,
-                      style: const TextStyle(
-                          fontSize: 30, fontFamily: 'Trajan Pro'),
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        // hintText: "0",
-                      ),
-                      enableInteractiveSelection: false,
-                      readOnly: true,
-                      showCursor: false,
-                      textAlign: TextAlign.right,
-                      keyboardType: TextInputType.none,
+                    enableInteractiveSelection: false,
+                    readOnly: true,
+                    showCursor: false,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.none,
+                  ),
+                  TextFormField(
+                    controller: ques,
+                    maxLines: 1,
+                    style:
+                        const TextStyle(fontSize: 30, fontFamily: 'Trajan Pro'),
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      // hintText: "0",
                     ),
-                  ],
-                ),
+                    enableInteractiveSelection: false,
+                    readOnly: true,
+                    showCursor: false,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.none,
+                  ),
+                ],
               ),
+              // ),
             ),
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(1),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -371,93 +374,87 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
 
   // method for the button and calculation logic after onpress
   calcbtn(dynamic btnText) {
+    // Get the screen width and height
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    // Calculate the button size based on screen size
+    double buttonHeight = screenHeight * 0.08; // 10% of screen height
+
     return Expanded(
       flex: 1,
-      child: Container(
-        // padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        // padding: const EdgeInsets.all(10),
-        // decoration: BoxDecoration(
-        //     color: Theme.of(context).colorScheme.onSecondary,
-        //     shape: BoxShape.circle),
-        // ),
-        // child: IconButton(
-        //   icon: Text(btnText),
-        // ),
-        child: ElevatedButton(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                side:
-                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
-              ),
-            ),
-            minimumSize: MaterialStateProperty.all<Size>(
-              const Size(150, 60), // width, height
+      child: ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              side: BorderSide(color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
-          onPressed: () {
-            setState(() {
-              if (btnText == 'C') {
-                eqn = '';
-                ans = '';
-                currentValue = 0;
-                operator = '';
-                ques.clear();
-                hisctrl.clear();
-                isNewOperation = true;
-              } else if (btnText == 'CE') {
-                eqn = '';
-                ques.clear();
-              } else if (btnText == '\u232B') {
-                if (eqn.isNotEmpty) {
-                  eqn = eqn.substring(0, eqn.length - 1);
-                  ques.text = eqn;
-                }
-              } else if (btnText == '=') {
-                if (eqn.isNotEmpty) {
-                  // if (operator.isNotEmpty && eqn.isNotEmpty) {
-                  calculate();
-                }
-              } else if (['+', '-', 'x', '÷'].contains(btnText)) {
-                if (operator.isNotEmpty) {
-                  calculate();
-                }
-                if (eqn.isNotEmpty) {
-                  currentValue = num.tryParse(eqn) ?? 0;
-                  operator = btnText;
-                  hisctrl.text = '$currentValue $operator';
-                  eqn = '';
-                  ques.clear();
-                } else if (ans.isNotEmpty) {
-                  currentValue = num.tryParse(ans) ?? 0;
-                  operator = btnText;
-                  hisctrl.text = '$currentValue $operator';
-                  eqn = '';
-                  ques.clear();
-                }
-              } else if (['√x', '1/x', 'x²', '±', '%'].contains(btnText)) {
-                operator = btnText;
-                currentValue = num.tryParse(eqn) ?? 0;
-                evaluate(operator);
-              } else {
-                if (isNewOperation) {
-                  eqn = '';
-                  isNewOperation = false;
-                }
-                eqn += btnText;
+          minimumSize: MaterialStateProperty.all<Size>(
+            Size(150, buttonHeight), // width, height
+          ),
+        ),
+        onPressed: () {
+          setState(() {
+            if (btnText == 'C') {
+              eqn = '';
+              ans = '';
+              currentValue = 0;
+              operator = '';
+              ques.clear();
+              hisctrl.clear();
+              isNewOperation = true;
+            } else if (btnText == 'CE') {
+              eqn = '';
+              ques.clear();
+            } else if (btnText == '\u232B') {
+              if (eqn.isNotEmpty) {
+                eqn = eqn.substring(0, eqn.length - 1);
                 ques.text = eqn;
               }
-            });
-          },
-          child: Text(
-            btnText,
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface,
-                fontSize: 20,
-                fontFamily: 'Trajan Pro',
-                fontWeight: FontWeight.bold),
-          ),
+            } else if (btnText == '=') {
+              if (eqn.isNotEmpty) {
+                // if (operator.isNotEmpty && eqn.isNotEmpty) {
+                calculate();
+              }
+            } else if (['+', '-', 'x', '÷'].contains(btnText)) {
+              if (operator.isNotEmpty) {
+                calculate();
+              }
+              if (eqn.isNotEmpty) {
+                currentValue = num.tryParse(eqn) ?? 0;
+                operator = btnText;
+                hisctrl.text = '$currentValue $operator';
+                eqn = '';
+                ques.clear();
+              } else if (ans.isNotEmpty) {
+                currentValue = num.tryParse(ans) ?? 0;
+                operator = btnText;
+                hisctrl.text = '$currentValue $operator';
+                eqn = '';
+                ques.clear();
+              }
+            } else if (['√x', '1/x', 'x²', '±', '%'].contains(btnText)) {
+              operator = btnText;
+              currentValue = num.tryParse(eqn) ?? 0;
+              evaluate(operator);
+            } else {
+              if (isNewOperation) {
+                eqn = '';
+                isNewOperation = false;
+              }
+              eqn += btnText;
+              ques.text = eqn;
+            }
+          });
+        },
+        child: Text(
+          btnText,
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface,
+              fontSize: 15,
+              fontFamily: 'Trajan Pro',
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

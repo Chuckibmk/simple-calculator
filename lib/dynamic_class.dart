@@ -156,7 +156,7 @@ class _DynaState extends State<Dyna> {
                 controller: widget.dyna1[0],
                 maxLines: 1,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontFamily: 'Trajan Pro',
                 ),
                 decoration: const InputDecoration(
@@ -194,7 +194,7 @@ class _DynaState extends State<Dyna> {
                 controller: widget.dyna1[1],
                 maxLines: 1,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontFamily: 'Trajan Pro',
                 ),
                 decoration: const InputDecoration(

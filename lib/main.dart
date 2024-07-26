@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
   // Todo: add _interstitalAd
   InterstitialAd? _interstitialAd;
 
-  void _loadInterstitialAd() {
+  void _loadInterstitialAd(index) {
     InterstitialAd.load(
       adUnitId: Adhelper.interstitialAdUnitId,
       request: const AdRequest(),
@@ -77,8 +77,8 @@ class _HomeState extends State<Home> {
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdDismissedFullScreenContent: (ad) {
               ad.dispose();
+              _navigateToNextPage(index);
               _interstitialAd = null;
-              BasicCalcClass(toggleTheme: widget.toggleTheme);
             },
           );
 
@@ -87,6 +87,7 @@ class _HomeState extends State<Home> {
           });
         },
         onAdFailedToLoad: (err) {
+          _navigateToNextPage(index);
           print('Failed to load an interstitial ad: ${err.message}');
           _interstitialAd = null;
         },
@@ -115,6 +116,11 @@ class _HomeState extends State<Home> {
         ad.dispose();
       }),
     ).load();
+  }
+
+  void _navigateToNextPage(index) {
+    // Replace with your actual navigation logic
+    _controller.jumpToPage(index);
   }
 
   @override
@@ -162,20 +168,12 @@ class _HomeState extends State<Home> {
         selectedItemColor: Theme.of(context).colorScheme.surface,
         unselectedItemColor: Theme.of(context).colorScheme.onSurface,
         onTap: (index) {
-          // if (_interstitialAd != null) {
-          //   _interstitialAd?.show();
-          // } else if (_interstitialAd == null) {
-          //   _loadInterstitialAd();
-          // } else {
-          //   _controller.jumpToPage(index);
-          // }
           if (_interstitialAd != null) {
             _interstitialAd?.show();
           } else {
-            _loadInterstitialAd();
+            //   _loadInterstitialAd(index);
             _controller.jumpToPage(index);
           }
-          // _controller.jumpToPage(index);
         },
         items: const [
           BottomNavigationBarItem(
