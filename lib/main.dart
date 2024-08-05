@@ -171,8 +171,8 @@ class _HomeState extends State<Home> {
           if (_interstitialAd != null) {
             _interstitialAd?.show();
           } else {
-            //   _loadInterstitialAd(index);
-            _controller.jumpToPage(index);
+            _loadInterstitialAd(index);
+            // _controller.jumpToPage(index);
           }
         },
         items: const [
