@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 // import 'package:flutter/rendering.dart';
 import 'dynamic_class.dart';
 
 class Converter extends StatefulWidget {
   final VoidCallback toggleTheme;
-  const Converter({super.key, required this.toggleTheme});
+  final BannerAd? ads;
+  const Converter({super.key, required this.toggleTheme, required this.ads});
 
   @override
   State<Converter> createState() => _ConverterState();
@@ -109,14 +111,15 @@ class _ConverterState extends State<Converter>
     bool disablePMbutton = _tabController.index != 2;
 
     // Get the insets from MediaQuery
-    EdgeInsets padding = MediaQuery.of(context).viewPadding;
-    // Remove the top padding
-    padding = padding.copyWith(top: 0);
+    // EdgeInsets padding = MediaQuery.of(context).viewPadding;
+    // // Remove the top padding
+    // padding = padding.copyWith(top: 0);
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
-        body: Padding(
-          padding: padding,
+        body: SafeArea(
+          // body: Padding(
+          //   padding: padding,
           child: Column(children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,18 +136,27 @@ class _ConverterState extends State<Converter>
                     },
                   ),
                 ),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: "Unit Converter",
-                    style: TextStyle(
-                        fontFamily: 'Trajan Pro',
-                        color: Theme.of(context).colorScheme.onSurface,
-                        // color: Color(0xff7C797A),
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+                widget.ads != null
+                    ? Align(
+                        alignment: Alignment.topCenter,
+                        child: SizedBox(
+                          width: widget.ads!.size.width.toDouble(),
+                          height: widget.ads!.size.height.toDouble(),
+                          child: AdWidget(ad: widget.ads!),
+                        ),
+                      )
+                    : RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "Unit Converter",
+                          style: TextStyle(
+                              fontFamily: 'Trajan Pro',
+                              color: Theme.of(context).colorScheme.onSurface,
+                              // color: Color(0xff7C797A),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                 const SizedBox(
                   width: 10,
                 ),

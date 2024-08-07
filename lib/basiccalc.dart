@@ -1,5 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 // import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -7,11 +7,10 @@ import 'dart:math';
 class BasicCalcClass extends StatefulWidget {
   final VoidCallback toggleTheme;
   // final BannerAd bannerAd;
-  const BasicCalcClass({
-    super.key,
-    required this.toggleTheme,
-    // required this.bannerAd
-  });
+  final BannerAd? ads;
+
+  const BasicCalcClass(
+      {super.key, required this.toggleTheme, required this.ads});
 
   @override
   State<BasicCalcClass> createState() => _BasicCalcClassState();
@@ -70,9 +69,9 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
   @override
   Widget build(BuildContext context) {
     // Get the insets from MediaQuery
-    EdgeInsets padding = MediaQuery.of(context).viewPadding;
+    // EdgeInsets padding = MediaQuery.of(context).viewPadding;
     // Remove the top padding
-    padding = padding.copyWith(top: 0);
+    // padding = padding.copyWith(top: 0);
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         key: scaffoldkey,
@@ -124,8 +123,9 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
           ),
         ),
         // use SafeArea
-        body: Padding(
-          padding: padding,
+        body: SafeArea(
+          // body: Padding(
+          // padding: padding,
           child: Column(children: [
             // Container(
             //   padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 10),
@@ -144,18 +144,27 @@ class _BasicCalcClassState extends State<BasicCalcClass> {
                     },
                   ),
                 ),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: "Calculator",
-                    style: TextStyle(
-                        fontFamily: 'Trajan Pro',
-                        color: Theme.of(context).colorScheme.onSurface,
-                        // color: Color(0xff7C797A),
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+                widget.ads != null
+                    ? Align(
+                        alignment: Alignment.topCenter,
+                        child: SizedBox(
+                          width: widget.ads!.size.width.toDouble(),
+                          height: widget.ads!.size.height.toDouble(),
+                          child: AdWidget(ad: widget.ads!),
+                        ),
+                      )
+                    : RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "Calculator",
+                          style: TextStyle(
+                              fontFamily: 'Trajan Pro',
+                              color: Theme.of(context).colorScheme.onSurface,
+                              // color: Color(0xff7C797A),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                 Container(
                   decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,

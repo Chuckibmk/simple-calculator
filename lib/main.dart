@@ -107,14 +107,17 @@ class _HomeState extends State<Home> {
       adUnitId: Adhelper.bannerAdUnitId,
       request: const AdRequest(),
       size: AdSize.banner,
-      listener: BannerAdListener(onAdLoaded: (ad) {
-        setState(() {
-          _bannerAd = ad as BannerAd;
-        });
-      }, onAdFailedToLoad: (ad, err) {
-        print('Failed to load a banner ad: ${err.message}');
-        ad.dispose();
-      }),
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        },
+      ),
     ).load();
   }
 
@@ -139,21 +142,18 @@ class _HomeState extends State<Home> {
       // appBar: AppBar(title: Text('Bottom '))
       body: Column(
         children: [
-          if (_bannerAd != null)
-            Align(
-              alignment: Alignment.topCenter,
-              child: SizedBox(
-                width: _bannerAd!.size.width.toDouble(),
-                height: _bannerAd!.size.height.toDouble(),
-                child: AdWidget(ad: _bannerAd!),
-              ),
-            ),
           Expanded(
             child: PageView(
               controller: _controller,
               children: [
-                BasicCalcClass(toggleTheme: widget.toggleTheme),
-                Converter(toggleTheme: widget.toggleTheme),
+                BasicCalcClass(
+                  toggleTheme: widget.toggleTheme,
+                  ads: _bannerAd,
+                ),
+                Converter(
+                  toggleTheme: widget.toggleTheme,
+                  ads: _bannerAd,
+                ),
               ],
               onPageChanged: (index) {
                 currentIndex = index;
@@ -171,8 +171,8 @@ class _HomeState extends State<Home> {
           if (_interstitialAd != null) {
             _interstitialAd?.show();
           } else {
-            _loadInterstitialAd(index);
-            // _controller.jumpToPage(index);
+            // _loadInterstitialAd(index);
+            _controller.jumpToPage(index);
           }
         },
         items: const [
