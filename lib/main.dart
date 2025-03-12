@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'basiccalc.dart';
@@ -5,7 +6,10 @@ import 'converter.dart';
 import 'package:flutter/material.dart';
 import 'ad_helper.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MainApp());
 }
 
